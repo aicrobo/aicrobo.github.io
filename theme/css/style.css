@@ -1,0 +1,487 @@
+/* GENERAL
+=============================================================================*/
+body {
+    color: #555;
+    background: #ebebe4;
+    padding-top: 50px;
+}
+
+.ybs-background-color-layer1 {
+    background: #F1FAFA;
+}
+
+body a:hover {
+    color: #ea4c88;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Yanone Kaffeesatz', Microsoft YaHei, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 a, h2 a, h3 a {
+    color: #555;
+    text-decoration: none;
+}
+
+ul.list-group {
+    margin-bottom: 5px;
+}
+
+ul.pagination {
+    margin: 5px 5px;
+}
+
+a.ybs-black {
+    color: #555;
+    text-decoration: none;
+}
+
+/* HEADER
+=============================================================================*/
+header .navbar-inverse {
+    background: #444 url(../img/header.png) bottom left repeat-x;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+#ybs-bar-hearder-botom {
+    background: url(../img/oblique-lines.png) repeat-x;
+    margin-top: -20px;
+    height: 8px;
+}
+
+/* MAIN
+ =============================================================================*/
+#ybs-main {
+    margin-bottom: 10px;
+}
+
+.ybs-bar-back-mid {
+    padding-left: 30px;
+    background: url(../img/div-line.png) repeat-x center center;
+}
+
+.ybs-bar-back-mid span {
+    background: #ebebe4;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ybs-shadow {
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+ul.ybs-info-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ul.ybs-info-list > li {
+    padding: 8px;
+}
+
+/* TAGS
+=============================================================================*/
+.tag-0 {
+    font-size: 20pt;
+}
+
+.tag-1 {
+    font-size: 16pt;
+}
+
+.tag-2 {
+    font-size: 12pt;
+}
+
+.tag-4 {
+    font-size: 8pt;
+}
+
+/* FOOTER
+=============================================================================*/
+
+footer {
+    background: url(../img/footer.png) repeat-x top center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* ARTICLE
+=============================================================================*/
+/* General
+------------------------------------------------------------*/
+div.post-content {
+    border: 1px solid #DDDDDD;
+    padding: 10px;
+}
+
+.post-content a:target, .post-content div:target {
+    padding-top: 60px;
+	margin-top: -60px;
+}
+
+.post-content div {
+    padding: 1px;
+    margin: 5px auto;
+}
+
+.post-content p {
+    line-height: 1.3em;
+    margin: 1.0em 0px;
+}
+
+.post-content ul {
+    padding-left: 20px;
+    list-style: disc inside;
+}
+
+.post-content ol {
+    padding-left: 20px;
+    list-style: decimal inside;
+}
+
+.post-content ul li,
+.post-content ol li {
+    margin: 0.6em 0;
+}
+
+.post-content ul li > :first-child,
+.post-content ol li > :first-child,
+.post-content ul li ul:first-of-type,
+.post-content ol li ol:first-of-type,
+.post-content ul li ol:first-of-type,
+.post-content ol li ul:first-of-type {
+    margin-top: 0px;
+}
+
+.post-content ul ul, .post-content ul ol, .post-content ol ol, .post-content ol ul {
+    margin-bottom: 0;
+}
+
+dl {
+    padding: 0;
+}
+
+dl dt {
+    padding: 0;
+    margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+    padding: 0;
+}
+
+dl dt > :first-child {
+    margin-top: 0px;
+}
+
+dl dt > :last-child {
+    margin-bottom: 0px;
+}
+
+dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+}
+
+dl dd > :first-child {
+    margin-top: 0px;
+}
+
+dl dd > :last-child {
+    margin-bottom: 0px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    color: #222;
+    font-style: italic;
+}
+
+/* Summary
+------------------------------------------------------------*/
+
+div.summary:before {
+    content: "Summary: ";
+    font-weight: bold;
+}
+
+div.summary {
+    padding: 10px 10px 1px 10px;
+    background-color: #ccf;
+    border-radius: 8px;
+}
+
+div.copyright:before {
+    content: "Copyright 2014 by yuanboshe:";
+    font-weight: bold;
+}
+
+div.copyright {
+    padding: 10px 10px 1px 10px;
+    background-color: #ffe4e4;
+    border-radius: 8px;
+}
+
+/* CODE
+------------------------------------------------------------*/
+
+pre {
+    line-height: 19px;
+    padding: 8px 8px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.highlight pre {
+    background: #202020;
+    color: #D0D0D0;
+    border: none;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+tt {
+    padding: 1px 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+}
+
+/* QUOTES
+------------------------------------------------------------*/
+
+.post-content blockquote {
+    border-left: 6px solid #DDD;
+    padding: 6px 15px;
+    color: #777;
+    background-color: #f7f7f7;
+    border-radius: 0 8px 8px 0;
+}
+
+.post-content blockquote > :first-child {
+    margin-top: 0px;
+}
+
+.post-content blockquote > :last-child {
+    margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+------------------------------------------------------------*/
+
+hr {
+    clear: both;
+    margin: 5px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 4px solid #ddd;
+    padding: 0;
+}
+
+/* TABLES
+------------------------------------------------------------*/
+
+table th {
+    font-weight: bold;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+}
+
+table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+}
+
+table.highlighttable tr, table.highlighttable td {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+}
+
+/* hyperlink styles
+------------------------------------------------------------*/
+
+.post-content a {
+    color: #355f7c;
+    text-decoration: none;
+}
+
+.post-content a:hover {
+    color: #EA4C88;
+    text-decoration: underline;
+}
+
+/* sphinx style
+------------------------------------------------------------*/
+p.admonition-title + p {
+    display: inline;
+}
+
+p.admonition-title {
+    display: inline;
+    font-weight: bold;
+}
+
+p.admonition-title:after {
+    content: ":";
+}
+
+div.note {
+    background-color: #eef;
+}
+
+div.tip {
+    background-color: #dfd;
+}
+
+div.topic {
+    background-color: #f8f8f8;
+}
+
+div.warning {
+    background-color: #ffe4e4;
+}
+
+div.warning, div.note, div.tip, div.topic {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+div.topic .topic-title {
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+/* Images
+------------------------------------------------------------*/
+.empty .figure {
+    max-width: 650px;
+    margin: 10px auto;
+    text-align: center;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    -o-box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.post-content .figure {
+    max-width: 650px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.post-content .figure img {
+    max-width: 90%;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    -o-box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 10px;
+}
+
+.post-content .figure p.caption {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .3);
+}
+
+/* pygments.css
+=============================================================================*/
+.highlight .hll { background-color: #404040 }
+.highlight  { background: #202020; color: #d0d0d0 }
+.highlight .c { color: #999999; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .g { color: #d0d0d0 } /* Generic */
+.highlight .k { color: #6ab825; font-weight: bold } /* Keyword */
+.highlight .l { color: #d0d0d0 } /* Literal */
+.highlight .n { color: #d0d0d0 } /* Name */
+.highlight .o { color: #d0d0d0 } /* Operator */
+.highlight .x { color: #d0d0d0 } /* Other */
+.highlight .p { color: #d0d0d0 } /* Punctuation */
+.highlight .cm { color: #999999; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #cd2828; font-weight: bold } /* Comment.Preproc */
+.highlight .c1 { color: #999999; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #e50808; font-weight: bold; background-color: #520000 } /* Comment.Special */
+.highlight .gd { color: #d22323 } /* Generic.Deleted */
+.highlight .ge { color: #d0d0d0; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #d22323 } /* Generic.Error */
+.highlight .gh { color: #ffffff; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #589819 } /* Generic.Inserted */
+.highlight .go { color: #cccccc } /* Generic.Output */
+.highlight .gp { color: #aaaaaa } /* Generic.Prompt */
+.highlight .gs { color: #d0d0d0; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #ffffff; text-decoration: underline } /* Generic.Subheading */
+.highlight .gt { color: #d22323 } /* Generic.Traceback */
+.highlight .kc { color: #6ab825; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #6ab825; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #6ab825; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #6ab825 } /* Keyword.Pseudo */
+.highlight .kr { color: #6ab825; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #6ab825; font-weight: bold } /* Keyword.Type */
+.highlight .ld { color: #d0d0d0 } /* Literal.Date */
+.highlight .m { color: #3677a9 } /* Literal.Number */
+.highlight .s { color: #ed9d13 } /* Literal.String */
+.highlight .na { color: #bbbbbb } /* Name.Attribute */
+.highlight .nb { color: #24909d } /* Name.Builtin */
+.highlight .nc { color: #447fcf; text-decoration: underline } /* Name.Class */
+.highlight .no { color: #40ffff } /* Name.Constant */
+.highlight .nd { color: #ffa500 } /* Name.Decorator */
+.highlight .ni { color: #d0d0d0 } /* Name.Entity */
+.highlight .ne { color: #bbbbbb } /* Name.Exception */
+.highlight .nf { color: #447fcf } /* Name.Function */
+.highlight .nl { color: #d0d0d0 } /* Name.Label */
+.highlight .nn { color: #447fcf; text-decoration: underline } /* Name.Namespace */
+.highlight .nx { color: #d0d0d0 } /* Name.Other */
+.highlight .py { color: #d0d0d0 } /* Name.Property */
+.highlight .nt { color: #6ab825; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #40ffff } /* Name.Variable */
+.highlight .ow { color: #6ab825; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #666666 } /* Text.Whitespace */
+.highlight .mf { color: #3677a9 } /* Literal.Number.Float */
+.highlight .mh { color: #3677a9 } /* Literal.Number.Hex */
+.highlight .mi { color: #3677a9 } /* Literal.Number.Integer */
+.highlight .mo { color: #3677a9 } /* Literal.Number.Oct */
+.highlight .sb { color: #ed9d13 } /* Literal.String.Backtick */
+.highlight .sc { color: #ed9d13 } /* Literal.String.Char */
+.highlight .sd { color: #ed9d13 } /* Literal.String.Doc */
+.highlight .s2 { color: #ed9d13 } /* Literal.String.Double */
+.highlight .se { color: #ed9d13 } /* Literal.String.Escape */
+.highlight .sh { color: #ed9d13 } /* Literal.String.Heredoc */
+.highlight .si { color: #ed9d13 } /* Literal.String.Interpol */
+.highlight .sx { color: #ffa500 } /* Literal.String.Other */
+.highlight .sr { color: #ed9d13 } /* Literal.String.Regex */
+.highlight .s1 { color: #ed9d13 } /* Literal.String.Single */
+.highlight .ss { color: #ed9d13 } /* Literal.String.Symbol */
+.highlight .bp { color: #24909d } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #40ffff } /* Name.Variable.Class */
+.highlight .vg { color: #40ffff } /* Name.Variable.Global */
+.highlight .vi { color: #40ffff } /* Name.Variable.Instance */
+.highlight .il { color: #3677a9 } /* Literal.Number.Integer.Long */

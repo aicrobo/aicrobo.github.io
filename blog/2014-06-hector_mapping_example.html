@@ -1,0 +1,433 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first last&#34;&gt;本文介绍如何在Ubuntu for ROS中配置Hokuyo（或者是rplidar），运行hector slam中的mapping示例代码。示例代码包含在exbot_xi开发包中，Ubuntu for ROS开发版已经包含此开发包。&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>用hector mapping构建地图 | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>用hector mapping构建地图</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-06-13T00:00:00"> 2014-06-13</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first last">本文介绍如何在Ubuntu for ROS中配置Hokuyo（或者是rplidar），运行hector slam中的mapping示例代码。示例代码包含在exbot_xi开发包中，Ubuntu for ROS开发版已经包含此开发包。</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#lidar" id="id6">安装配置LiDar</a><ul>
+<li><a class="reference internal" href="#rplidar" id="id7">rplidar的配置</a></li>
+<li><a class="reference internal" href="#id2" id="id8">通用配置</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3" id="id9">测试LiDar</a><ul>
+<li><a class="reference internal" href="#id4" id="id10">rplidar接入</a></li>
+<li><a class="reference internal" href="#hokuyo" id="id11">Hokuyo接入</a></li>
+<li><a class="reference internal" href="#id5" id="id12">启动测试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hector-slam" id="id13">hector slam</a><ul>
+<li><a class="reference internal" href="#lidarmapping" id="id14">手持LiDar做mapping</a></li>
+<li><a class="reference internal" href="#exbot-ximapping" id="id15">用ExBot XI平台做mapping</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="lidar">
+<h2><a class="toc-backref" href="#id6">安装配置LiDar</a></h2>
+<p>exbot_xi内置了Hokuyo和rplidar的启动程序，可以根据自己的LiDar型号来选择。其中Hokuyo不需要进行任何设置即可驱动，如果使用的是rplidar，需要编译rplidar的驱动程序。</p>
+<div class="section" id="rplidar">
+<h3><a class="toc-backref" href="#id7">rplidar的配置</a></h3>
+<p>rplidar的ROS端配置可以参考 <a class="reference external" href="https://github.com/yuanboshe/exbot_sensors">https://github.com/yuanboshe/exbot_sensors</a> 的相关配置说明，或者直接看本网接下来的流程说明。</p>
+<p>rplidar的ROS端驱动封装放在exbot_sensors开发包内，需要先下载exbot_sensors包。打开terminal，输入下面的代码即可：</p>
+<div class="highlight"><pre>cd ~/catkin_ws/src/
+git clone https://github.com/yuanboshe/exbot_sensors.git
+</pre></div>
+<p>要使用rplidar还需要编译rplidar的sdk，从rplidar官方网站下载sdk（<a class="reference external" href="http://rplidar.robopeak.com/download.html">http://rplidar.robopeak.com/download.html</a>），如 <em>rplidar_sdk_v1.4.2.7z</em> 解压并拷贝到Ubuntu for ROS中，如拷贝后为 <em>/home/exbot/rplidar_sdk_v1.4.2</em> 。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">sdk的版本号请根据实际情况加以修改，本文以老版本的驱动号为例。</p>
+</div>
+<p>然后执行下面的命令对rplidar的sdk进行编译：</p>
+<div class="highlight"><pre>cd ~/rplidar_sdk_v1.4.2/sdk/sdk/
+make
+</pre></div>
+<p>执行命令 <tt class="docutils literal">gedit ~/catkin_ws/src/exbot_sensors/rplidar/CMakeLists.txt</tt> 打开rplidar ROS端封装的编译配置文件，找到 <em>set(RPLIDAR_DIR /home/exbot/rplidar_sdk_v1.4.1/sdk)</em> 一行，将路径改正确（如版本号改为1.4.2）。</p>
+<p>接下来使用下面的命令编译rplidar的ROS端驱动：</p>
+<div class="highlight"><pre>cd ~/catkin_ws/
+catkin_make --pkg rplidar
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id8">通用配置</a></h3>
+<p>exbot_xi开发包选择使用的LiDar型号是通过环境中的 <em>SENSOR_2D</em> 参数进行选择的，<em>SENSOR_2D</em> 参数可以是 <tt class="docutils literal">rplidar</tt> 或者是 <tt class="docutils literal">hokuyo</tt> 。设置方法如下：</p>
+<p>输入命令 <tt class="docutils literal">gedit <span class="pre">~/.bashrc</span></tt> 打开 <strong>.bashrc</strong> 文件，在最下面添加 <tt class="docutils literal">export SENSOR_2D=rplidar</tt> 一行即可将参数设置为 <tt class="docutils literal">rplidar</tt> 。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id9">测试LiDar</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id10">rplidar接入</a></h3>
+<p>将rplidar接入Ubuntu for ROS开发版系统内部，输入命令 <tt class="docutils literal">ls /dev/ttyUSB*</tt> 查看USB端口占用情况，结果可能如下所示：</p>
+<blockquote>
+<a class="reference external" href="mailto:exbot&#64;ubuntu">exbot&#64;ubuntu</a>:~$ ls /dev/ttyUSB*
+/dev/ttyUSB0
+<a class="reference external" href="mailto:exbot&#64;ubuntu">exbot&#64;ubuntu</a>:~$</blockquote>
+<p>如果只有一个USB接入设备，那么rplidar的接入端口就是上面显示的 <strong>/dev/ttyUSB0</strong>，记录下来。</p>
+<p>输入命令 <tt class="docutils literal">gedit catkin_ws/src/exbot_xi/exbotxi_bringup/launch/include/rplidar_2d_sensor.launch.xml</tt> 打开rplidar的配置文件，找到 <em>&lt;param name=&quot;com_path&quot; type=&quot;string&quot; value=&quot;/dev/ttyUSB1&quot; /&gt;</em> 一行，将其中的 <em>value</em> 值改为刚才找到的端口路径 <strong>/dev/ttyUSB0</strong> 然后保存。</p>
+</div>
+<div class="section" id="hokuyo">
+<h3><a class="toc-backref" href="#id11">Hokuyo接入</a></h3>
+<p>hokuyo的端口默认是 <strong>/dev/ttyACM0</strong> 一般不会出现冲突，接入系统即可使用。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id12">启动测试</a></h3>
+<p>打开4个terminal，分别输入下面的命令：</p>
+<div class="highlight"><pre>roscore
+roslaunch exbotxi_bringup fake_exbotxi.launch
+roslaunch exbotxi_bringup 2dsensor.launch
+roslaunch exbotxi_rviz view_mobile.launch
+</pre></div>
+<p>其中第3条命令用于启动LiDar设备，并从设备中获取数据。第4条命令用于启动rviz观察数据。</p>
+<p>rviz启动后将看到图形界面，勾选左边的 <em>LaserScan</em> 选框，将可以看到LiDar中的点云数据，如图中的红色点。</p>
+<img alt="lidar" src="http://aicrobo.github.io/images/2014-06-13_hector_mapping_example/lidar.jpg" />
+</div>
+</div>
+<div class="section" id="hector-slam">
+<h2><a class="toc-backref" href="#id13">hector slam</a></h2>
+<p>hector slam 已经可以直接通过ROS远程源安装，在Ubuntu for ROS中执行下面的命令即可：</p>
+<div class="highlight"><pre>sudo apt-get install ros-hydro-cmake-modules ros-hydro-hector-slam
+</pre></div>
+<div class="section" id="lidarmapping">
+<h3><a class="toc-backref" href="#id14">手持LiDar做mapping</a></h3>
+<p>依次输入下面的命令，保持LiDar水平移动即可在rviz窗口中看到构建地图的过程。</p>
+<div class="highlight"><pre>roscore
+roslaunch exbotxi_bringup fake_exbotxi.launch
+roslaunch exbotxi_bringup 2dsensor.launch
+roslaunch exbotxi_nav hector_mapping_demo.launch
+roslaunch exbotxi_rviz view_navigation.launch
+</pre></div>
+</div>
+<div class="section" id="exbot-ximapping">
+<h3><a class="toc-backref" href="#id15">用ExBot XI平台做mapping</a></h3>
+<p>与手持LiDar类似，只需要将 <em>fake_exbotxi</em> 改为真实机器人的启动命令即可。输入下面的命令：</p>
+<div class="highlight"><pre>roscore
+roslaunch exbotxi_bringup minimal.launch
+roslaunch exbotxi_bringup 2dsensor.launch
+roslaunch exbotxi_nav hector_mapping_demo.launch
+roslaunch exbotxi_rviz view_navigation.launch
+roslaunch exbotxi_teleop keyboard_teleop.launch
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果使用的是rplidar，由于rplidar与机器人底盘都是使用ttyUSB？端口，所以需要按照前面的步骤将端口号修改正确，建议先将底盘的USB接入计算机，然后再接入rplidar，这样机器人底盘的端口就是 <em>ttyUSB0</em>，rplidar的端口就是默认的 <em>ttyUSB1</em>。</p>
+</div>
+<p>将键盘焦点放在键盘控制的terminal窗口中，然后通过键盘控制机器人移动，并可以从rviz中观察机器人构建的地图。此地图只需要LiDar设备即可，不需要其他传感器输入，如下图是rplidar的效果，如果使用频率更高的hokuyo，能够得到更好的地图：</p>
+<img alt="map" src="http://aicrobo.github.io/images/2014-06-13_hector_mapping_example/map.jpg" />
+</div>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2014-06-hector_mapping_example.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-open-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first&#34;&gt;本文通过一系列问题，解释ROS里面node, package, workspace, source setup.bash, build system, overlay等概念。并以最常用的workspace搭配方式，记录如何配置一个catkin和一个rosbuild工作空间，并overlay它们。&lt;/p&gt;
+&lt;p class=&#34;last&#34;&gt;环境：ROS Hydro。&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>配置ROS工作空间catkin+rosbuild | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>配置ROS工作空间catkin+rosbuild</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-20T00:00:00"> 2013-12-20</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first">本文通过一系列问题，解释ROS里面node, package, workspace, source setup.bash, build system, overlay等概念。并以最常用的workspace搭配方式，记录如何配置一个catkin和一个rosbuild工作空间，并overlay它们。</p>
+<p class="last">环境：ROS Hydro。</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id8">概念</a><ul>
+<li><a class="reference internal" href="#node" id="id9">node</a></li>
+<li><a class="reference internal" href="#package" id="id10">package</a></li>
+<li><a class="reference internal" href="#workspace" id="id11">workspace</a></li>
+<li><a class="reference internal" href="#build-system" id="id12">build system</a></li>
+<li><a class="reference internal" href="#source-setup-bash" id="id13">source setup.bash</a></li>
+<li><a class="reference internal" href="#overlay" id="id14">overlay</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overlay-rosbuild-ws-catkin-ws-ros" id="id15">overlay rosbuild_ws-&gt;catkin_ws-&gt;ROS库</a><ul>
+<li><a class="reference internal" href="#overlay-catkin-ws-ros" id="id16">overlay catkin_ws-&gt;ROS库</a></li>
+<li><a class="reference internal" href="#overlay-rosbuild-ws-catkin-ws" id="id17">overlay rosbuild_ws-&gt;catkin_ws</a></li>
+<li><a class="reference internal" href="#id4" id="id18">source setup.bash</a></li>
+<li><a class="reference internal" href="#id5" id="id19">检查overlay路径</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference" id="id20">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id8">概念</a></h2>
+<p>ROS里面有一系列概念，作为初学者，最先接触的概念非node, package和workspace莫属了。</p>
+<div class="section" id="node">
+<h3><a class="toc-backref" href="#id9">node</a></h3>
+<p>node是ROS里面最小的执行单位，你可以把node看成是一个main函数，当你启动一个node，就相当于启动了一个main函数，通常这个main函数会不停循环监听某个消息，或者执行一系列操作，直至你关闭它，或者执行完退出。</p>
+</div>
+<div class="section" id="package">
+<h3><a class="toc-backref" href="#id10">package</a></h3>
+<p>package是ROS里面最小的编译单位，也是ROS里面的搜索单位，你可以把package看成是一个有结构的文件夹，它包含多个node以及一些结构性质文件。ROS里面的node，是以package为单位进行编译的，一次编译package里面多个node。</p>
+<p>通常一条ROS的node执行命令具有以下结构：</p>
+<div class="highlight"><pre>rosrun &lt;package_name&gt; &lt;node_name&gt;
+</pre></div>
+<p>即执行某个node的时候，要标识这个node是属于哪个package的，ROS会先通过package的名字检索到package，再通过node名字找这个package下对应的node去执行。</p>
+</div>
+<div class="section" id="workspace">
+<h3><a class="toc-backref" href="#id11">workspace</a></h3>
+<p>首先思考一个问题：package都被放在什么地方？</p>
+<p>package存在于两个地方。一个是ROS库，即当你安装ROS的地方，通常在 <em>opt/ros/&lt;distro&gt;/share/</em> (&lt;distro&gt;指你的ROS版本，如hydro, groovy)里面（hydro以前的版本还会有stack），你无需关心，这些都是从ROS远程仓库下载下来的。另外一个地方，就是我们自己建的workspace了，我们自己的package，或者网上下载的别人的package都必须放在workspace里面编译，才可以使用。</p>
+<p>workspace是ROS里面最小环境配置单位，你可以把workspace看成是一个有结构的文件夹，它包含多个package以及一些结构性质文件。一次将一个workspace配置进环境变量里面，你才能使用ROS命令执行与这个workspace里面的package相关的操作。</p>
+</div>
+<div class="section" id="build-system">
+<h3><a class="toc-backref" href="#id12">build system</a></h3>
+<p>前面提到的package和workspace都是有结构的，那么这些结构到底是怎么规定的呢？</p>
+<p>这些结构，就是由build system（编译系统）规定的。当你运行workspace相关的命令，它会在一个你指定的空文件夹下面放很多功能性质的文件，并将这个空文件夹变成一个workspace。当你运行package相关的命令，它会在你指定的路径下面创建出package。</p>
+<p>目前，ROS的build system有两种，一种叫做catkin，另外一种叫做rosbuild。利用不同的build system创建出来的workspace和package因此也分为两种。</p>
+<p>rosbuild是ROS传统的编译系统，从最初沿用至今，但面临被抛弃的状态。catkin源于ROS fuerte，当时只是被一小部分人使用，在fuerte的下一个版本groovy开始被正式使用，用于取代rosbuild。为什么要用catkin取代rosbuild？当然是因为catkin比rosbuild好很多，在实际应用过程中会感受到的，具体理由可以看看这个 <a class="citation-reference" href="#catkin-conceptual-overview" id="id3">[catkin_conceptual_overview]</a> 。基于catkin编写的package叫做wet package，基于rosbuild编写的package叫做dry package，在ROS相关的问答里面会常常看到这种说法的。</p>
+</div>
+<div class="section" id="source-setup-bash">
+<h3><a class="toc-backref" href="#id13">source setup.bash</a></h3>
+<p>在workspace部分介绍了package存在的两个地方，那么，是不是我们打开terminal，就能使用ROS命令，系统就能找到那些package呢？</p>
+<p>这里，就要了解 <tt class="docutils literal">source setup.bash</tt> 的功能。 <tt class="docutils literal">source setup.bash</tt> 就是执行 <tt class="docutils literal">setup.bash</tt> 脚本，而这个脚本，就会在环境中配置一些数据。</p>
+<p>通常我们安装完ROS后，要先 <tt class="docutils literal">source <span class="pre">/opt/ros/&lt;distro&gt;/setup.bash</span></tt> ，这条语句的目的就是将ROS相关的命令配置在当前terminal工作的环境中，我们在这个环境中就能使用ROS命令了，否则系统是无法知道ROS命令的存在的。同时，这条语句也会让ROS库中的package能够被找到。</p>
+<p>当我们创建一个workspace后，同样系统也是不会知道这个workspace存在的，一切与这个workspace相关的ROS命令都会失效——这个workspace里面的package不会被ROS命令发现。要想将这个workspace的信息配置到环境里面，就必须执行这个workspace里面的 <tt class="docutils literal">setup.bash</tt> 脚本，例如catkin的就是 <tt class="docutils literal">source ~/catkin_ws/devel/setup.bash</tt> ，rosbuild的就是 <tt class="docutils literal">source ~/rosbuild_ws/setup.bash</tt> 。</p>
+</div>
+<div class="section" id="overlay">
+<h3><a class="toc-backref" href="#id14">overlay</a></h3>
+<p>再来思考一个问题：你有一个或者多个catkin workspace，同时你也有一个或者多个rosbuild workspace；而某个名字叫example_package的package在ROS库，在每个workspace里面都存在，当你运行 <tt class="docutils literal">rosrun example_package example_package</tt> 的时候，到底会运行哪个位置的example_package呢？</p>
+<p>这就关系到overlay的概念。overlay就是一种操作，可以让不同的workspace层层覆盖，最底层的是ROS库。通过这种覆盖关系，当寻找某个package的时候，ROS会先从顶层的workspace找，如果找不到再依次往下找。也可以看成是一个路径链条，当我们想把通过overlay链接起来的workspace和ROS库的路径配入环境的时候，我们只需要source overlay链条顶层的workspace的setup.bash脚本即可。</p>
+</div>
+</div>
+<div class="section" id="overlay-rosbuild-ws-catkin-ws-ros">
+<h2><a class="toc-backref" href="#id15">overlay rosbuild_ws-&gt;catkin_ws-&gt;ROS库</a></h2>
+<p>最常见的配置是一个rosbuild workspace和一个catkin workspace了（对应的文件夹分别为 <strong>rosbuild_ws</strong> 和 <strong>catkin_ws</strong> ）。因为有时候我们需要使用这两种workspace里面的package，而往往是自己的package优先于ROS库里面自带的package的。</p>
+<div class="section" id="overlay-catkin-ws-ros">
+<h3><a class="toc-backref" href="#id16">overlay catkin_ws-&gt;ROS库</a></h3>
+<div class="highlight"><pre>mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws/
+catkin_make
+</pre></div>
+<p>第一条语句创建catkin_ws文件夹，以及src文件夹；第二条和第三条语句是在src路径下初始化catkin workspace，并指定src路径是package存放的路径；第四条和最后一条语句是在catkin_ws路径下编译整个workspace，将会生成catkin workspace的结构，以及编译src下所有的package。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">上面的操作会自动overlay ROS库，即catkin_ws-&gt;ROS库。如果不需要再加入rosbuild workspace，则执行 <tt class="docutils literal">echo &quot;source ~/catkin_ws/devel/setup.bash&quot; &gt;&gt; <span class="pre">~/.bashrc</span></tt> 就行了，跳过后面的所有步骤。</p>
+</div>
+</div>
+<div class="section" id="overlay-rosbuild-ws-catkin-ws">
+<h3><a class="toc-backref" href="#id17">overlay rosbuild_ws-&gt;catkin_ws</a></h3>
+<div class="highlight"><pre>sudo apt-get install python-rosinstall
+</pre></div>
+<p>在新装的系统第一次运行rosbuild相关操作前，还要先安装一下rosinstall。</p>
+<div class="highlight"><pre>mkdir ~/rosbuild_ws
+cd ~/rosbuild_ws
+rosws init . ~/catkin_ws/devel
+mkdir ~/rosbuild_ws/sandbox
+rosws set ~/rosbuild_ws/sandbox
+</pre></div>
+<p>前两条语句创建并进入rosbuild_ws文件夹；第三条语句初始化rosbuild_ws并overlay前面创建的catkin workspace；第四条和最后一条语句创建文件夹sandbox并将其设置为package存放的文件夹。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id18">source setup.bash</a></h3>
+<div class="highlight"><pre>echo &quot;source ~/rosbuild_ws/setup.bash&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</pre></div>
+<p>每次打开terminal，都将会执行 <em>~/.bashrc</em> 脚本。因此，第一条语句将引号内的内容写入 <em>~/.bashrc</em> 后，每次打开terminal，overlay顶层的rosbuild_ws的setup.bash都会被source，就不用我们手动source了。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id19">检查overlay路径</a></h3>
+<div class="highlight"><pre>echo $ROS_PACKAGE_PATH
+</pre></div>
+<p>确认是否显示了下面4个路径：</p>
+<blockquote>
+/home/&lt;user&gt;/rosbuild_ws/sandbox:/home/&lt;user&gt;/catkin_ws/src:/opt/ros/&lt;distro&gt;/share:/opt/ros/&lt;distro&gt;/stacks</blockquote>
+<p>如果不全，说明之前的overlay出了问题。再进一步做检查：</p>
+<div class="highlight"><pre>gedit ~/rosbuild_ws/.rosinstall
+</pre></div>
+<p>看看有没有下面的内容：</p>
+<pre class="literal-block">
+- setup-file: {local-name: /home/&lt;user&gt;/catkin_ws/devel/setup.sh}
+- other: {local-name: sandbox}
+</pre>
+<p>第一条指被overlay的catkin workspace路径，第二条指该rosbuild workspace的package存放目录。</p>
+<p>更多的overlay概念，可以参考 <a class="citation-reference" href="#catkin-workspace-overlaying" id="id6">[catkin_workspace_overlaying]</a> 和 <a class="citation-reference" href="#using-rosbuild-with-catkin" id="id7">[using_rosbuild_with_catkin]</a> 。</p>
+</div>
+</div>
+<div class="section" id="reference">
+<h2><a class="toc-backref" href="#id20">Reference</a></h2>
+<table class="docutils citation" frame="void" id="catkin-conceptual-overview" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[catkin_conceptual_overview]</a></td><td><a class="reference external" href="http://wiki.ros.org/catkin/conceptual_overview">http://wiki.ros.org/catkin/conceptual_overview</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="catkin-workspace-overlaying" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[catkin_workspace_overlaying]</a></td><td><a class="reference external" href="http://wiki.ros.org/catkin/Tutorials/workspace_overlaying">http://wiki.ros.org/catkin/Tutorials/workspace_overlaying</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="using-rosbuild-with-catkin" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[using_rosbuild_with_catkin]</a></td><td><a class="reference external" href="http://wiki.ros.org/catkin/Tutorials/using_rosbuild_with_catkin">http://wiki.ros.org/catkin/Tutorials/using_rosbuild_with_catkin</a></td></tr>
+</tbody>
+</table>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2013-12-overlay_catkin_and_rosbuild.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-open-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first last&#34;&gt;搞IT应用技术的人大多喜欢写博客，有搞个人web站点的需求。写博客有很多好处：一是可以帮助自己整理技术细节，遗忘后还能回过头来查阅，整理完就能安心干其他活了；二是可以分享自己的经验给他人，有成就感。干过web开发的人大多有类似的经历：用博客服务商提供的免费博客系统（博客园，CSDN）发布个人博客，用免费或者付费空间（服务器）建立个人web站点，个人站点又分为动态站点（WordPress + VPS...）和静态站点（Nanoc, Pelican + GitHub...)。从开始要写技术博客到现在两年多了，尝试过几种方案，最终决定在GitHub上生根，搭建个人静态站点，而静态站点生成工具选定为Pelican，编辑方式选定为reStructuredText。也许以后还会变，但目前来说这套方案是最符合我的需求的。&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>从文档整理看个人web站点方案的选择 | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>从文档整理看个人web站点方案的选择</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-10-10T00:00:00"> 2013-10-10</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">WEB前端&Code</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/github.html">github</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first last">搞IT应用技术的人大多喜欢写博客，有搞个人web站点的需求。写博客有很多好处：一是可以帮助自己整理技术细节，遗忘后还能回过头来查阅，整理完就能安心干其他活了；二是可以分享自己的经验给他人，有成就感。干过web开发的人大多有类似的经历：用博客服务商提供的免费博客系统（博客园，CSDN）发布个人博客，用免费或者付费空间（服务器）建立个人web站点，个人站点又分为动态站点（WordPress + VPS...）和静态站点（Nanoc, Pelican + GitHub...)。从开始要写技术博客到现在两年多了，尝试过几种方案，最终决定在GitHub上生根，搭建个人静态站点，而静态站点生成工具选定为Pelican，编辑方式选定为reStructuredText。也许以后还会变，但目前来说这套方案是最符合我的需求的。</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id11">1. 为什么要搭建个人站点？</a><ul>
+<li><a class="reference internal" href="#id3" id="id12">1.1. 归档的需求</a></li>
+<li><a class="reference internal" href="#id4" id="id13">1.2. 分享的需求</a></li>
+<li><a class="reference internal" href="#restructuredtext" id="id14">1.3. 轻文本标记语言reStructuredText</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5" id="id15">2. 被我弃用的两种方案</a><ul>
+<li><a class="reference internal" href="#id6" id="id16">2.1. 方案一，使用空间服务商提供的模板系统</a><ul>
+<li><a class="reference internal" href="#id7" id="id17">2.1.1. 博客系统定制化程度低</a></li>
+<li><a class="reference internal" href="#id8" id="id18">2.1.2. 写技术博客是件痛苦的事情，只实现了分享而无法解决归档问题</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vps-virtual-private-server" id="id19">2.2. 方案二，在VPS(Virtual Private Server)上搭建动态博客</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#github" id="id20">3. 基于GitHub的个人静态站点</a><ul>
+<li><a class="reference internal" href="#id9" id="id21">3.1. 静态站点生成工具</a></li>
+<li><a class="reference internal" href="#id10" id="id22">3.2. GitHub页面服务</a></li>
+<li><a class="reference internal" href="#pelican" id="id23">3.3. Pelican</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">1. 为什么要搭建个人站点？</a></h2>
+<p>像我这种记忆力差的热衷应用技术的人，博客就是生活，不做记录，隔段时间就会把探索过的事忘得一干二净。写博客不是为了炫耀自己做了什么会什么，而是对做过的事情的整理和总结，写给以后的自己或者分享给别人。因为有了需求，才有做某件事情的动力，服务商提供的博客系统也好，基于VPS的动态站点也好，免费的静态站点也好，没有哪个更好，只有不同的方案满足不同人的需求，如果想要搭建个人站点，先想好自己有什么需求，问问自己为什么要搭建。</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id12">1.1. 归档的需求</a></h3>
+<p>什么是归档？</p>
+<blockquote>
+同义词为存档，指将处理完毕且具有保存价值的事情或文件经系统整理后交档案室（馆）保存备案（备查）的过程。</blockquote>
+<p>归档包括存放和备查两个方面，提出的问题包括：我们写的东西保存在哪，如何存放？当我们回过头来查找时是否能够很轻松地找到？</p>
+<p>我们通常的做法就是将文档整理成Word，然后存放在自己定义的分类文件夹内。这样对于文档少的人不是问题，而对于文档多的人，要从众多分类中找到某份文档还是比较麻烦的事情，特别是忘记文档名字或者不能使用内容检索的文档。而归档功能做得好的个人站点，不仅可以依据分类来查找，还可以依据建档时间，标签，关键词等来查找，大大减少了检索时间开销。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id13">1.2. 分享的需求</a></h3>
+<p>搞应用技术的人，经常会遇到别人问你要一份XXX文档，或者问你XXX问题怎么解决。接下来的流程就是，打开对应的文件夹-&gt;找到对应的文档-&gt;发送给对方。文档多了，或者自己的分类结构不够好，找文档就会花费很多时间，整个交流过程也比较麻烦。如果自己的文档发布在个人站点上，那么只需要告诉别人你的站点地址，将搜索的工作交给别人，而归档功能做得好的站点通常能够很容易找到自己想要找的文档。不仅如此，个人站点还能发布到搜索引擎上面，让更多的人能够分享你的经验。</p>
+</div>
+<div class="section" id="restructuredtext">
+<h3><a class="toc-backref" href="#id14">1.3. 轻文本标记语言reStructuredText</a></h3>
+<p>综合上面两个需求，建立个人站点发布自己的文档似乎是最完美的解决方案，但同样，遇到的问题也是多方面的。这里只讨论第一个大问题 <em>选择何种原始存档格式保存文档内容</em> 。原始存档格式问题关系到是否能够很方便地转换为其他格式，如转换为排版优美的HTML发布出去，转换为PDF传送，转换为带索引的HTML方便别人检索等等。原始存档的格式越通用（容易地转换为其它格式，应用在其他场合），这种格式越有价值。</p>
+<p>Word是我们最常用的本地富文本存档工具，虽然可以转换为PDF等查阅格式，但它没有依照比较通行的格式标准，目前转换为HTML还是显得杂乱。网络文档格式，在纯文本TXT和富文本HTML之间，还有众多的轻文本，如Markdown, reStructuredText, LaTeX等等。看过《社交网络》的人也许还记得里面有一幕——Facebook创始人马克郁闷地写博客，用的竟然是HTML——用富文本写博客的好处就是可以排版出各种想要的样式，坏处就是样式太丰富，写起来复杂，而且还有各种开关标签的操作，一不留神忘了关标签格式就乱套了，还不容易发现错误。也许是类似写博客的文档写手们发起的，在纯文本和富文本之间折中，推行轻文本：有一定的格式限制，写起来很方便，几乎可以不用鼠标（富文本里要点来点去开关标签），原始文档也具有一定的可读性（富文本因为有各种标签用于排版，源文档格式比较杂乱）。</p>
+<p>轻文本有很多种，这里只说常见的Markdown, reStructuredText, LaTeX。通常语言标记越丰富，排版样式能够做得越丰富，语法也越复杂，源文档可读性越差。按照标记的丰富程度排序是LaTeX &gt; reStructuredText &gt; Markdown。他们都能很容易地被转换为其他格式，被转换为HTML发布成博文还是很轻松的事情。</p>
+<p>LaTeX在学术界很流行，原因在于它丰富的标记，强大的公式标记支持，能够很容易应用模板转换为目标paper样式。它的缺点显而易见，就是写起来复杂，源文档可读性差，似乎只是HTML的轻文本版本。</p>
+<p>Markdown是最近很火热的轻文本标记语言，似乎是因为GitHub对其的大力支持而使它广为代码写手们使用。它的优点就是可读性强，写起来很容易，没有太多额外的标记；缺点显然就是标记不太丰富，最后能够生成的效果有限，当然借助一些扩展，它也能支持更多的标记。我的上一版博客站点就是Nanoc + Markdown来维护的，Markdown确实是很方便的轻文本标记语言。</p>
+<p>reStructuredText (reST)算是上述两个轻文本标记语言的折中，不像LaTex那么复杂难用难以阅读，也比Markdown拥有更丰富的标记。reST获得了Python的大力支持，通过Python工具Sphinx可以很容易转换为带结构信息的技术文档（手册）供别人索引。</p>
+<p>这3种轻文本标记语言没有谁比谁更好，只有根据什么需求使用哪种标记语言更合适。这里有一篇Markdown和reStructuredText的对比，写得比较中肯（<a class="reference external" href="http://ieqi.net/2012/04/13/markdown-%E8%BF%98%E6%98%AF-restructuredtext">Markdown还是reStructuredText</a>）。我现在决定使用reStructuredText作为原始文档格式，就是因为我不仅有生成HTML博文的需求，还有生成结构丰富的文档手册的需求。因为方便编辑，我选择了轻文本，因为上述需求，我选择了reST。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id15">2. 被我弃用的两种方案</a></h2>
+<p>方案一，使用空间服务商提供的模板系统；方案二，在VPS(Virtual Private Server)上搭建动态博客。同样，没有哪种方案更好，只有哪种方案适合哪种需求的人。</p>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id16">2.1. 方案一，使用空间服务商提供的模板系统</a></h3>
+<p>恐怕没有做技术的人用QQ空间来整理文档吧，花哨冗余，在归档功能上无法满足技术人员的需求。百度空间，新浪博客等不是有类似QQ空间的毛病，就是有烦人的广告，网易博客相比下稍微好些。技术类博客，国内最好的并且在IT界最有名的要数博客园，CSDN之类的了，不仅是因为上面聚集的技术人员多，有丰富的推介功能，增强了社区式互动性，还因为他们在归档功能上做得干净，也比较完善。技术类博客比较看重归档功能，最基础的如“分类”，“标签”，“时间归档”等。用了很长时间的博客园，感觉还是很不错的，不用自己操心外围的事情，只要登陆后台写博客就行了，而且广告在最下面，不影响阅读，甚至还能通过自定义CSS去掉广告。</p>
+<p>后来为什么我放弃了博客园呢？因为我有更多的需求。</p>
+<div class="section" id="id7">
+<h4><a class="toc-backref" href="#id17">2.1.1. 博客系统定制化程度低</a></h4>
+<p>空间服务商提供的博客系统不可能无顾忌地开放js，否则谁都可以利用服务商的空间和域名资源做别人服务范围以外的事情了，比如GitHub就曾被火车刷票的js拖垮过，何况国内的服务商还得受ZF备案的限制呢。除了js，还有很多web前端的东西都不能完全开放。虽然博客园和其他博客系统相比，定制化功能已经很开放了——自定义部分CSS，部分位置添加自己的HTML，自制模板等。但作为有web开发经验的人，这些定制化程度还是太低，依照它的框架改起来也很麻烦，不如自己重写web前端来得直接。</p>
+</div>
+<div class="section" id="id8">
+<h4><a class="toc-backref" href="#id18">2.1.2. 写技术博客是件痛苦的事情，只实现了分享而无法解决归档问题</a></h4>
+<p>在空间服务商提供的博客系统里面写技术类博客，是件痛苦的事情。写技术类博客的初衷就是归档整理，对格式，可阅读性，内容丰富性都有较高要求，不同于一般人的生活记事。技术类博客往往还需要贴图，表格，代码块，超链接等富文本内容，使用一般的编辑器费时费力。登陆博客系统后台写博客，还得提心吊胆——万一浏览器崩溃没保存草稿，就的重新写。使用博客系统后台编辑器编写文档的工作量，远大于使用定义好模板的Office Word编写文档的工作量。</p>
+<p>好在成熟的博客系统并不都是只能通过浏览器登陆博客后台编辑，他们还提供了多种博客发布接口，可以通过一些本地编辑工具，在本地编辑好文档后，发布到远程博客系统里。这里最有名的就是 <strong>Windows Live Writer</strong> ，配置好远程博客地址和账户之类信息后，可以直接在本地编辑博客然后一键发布到远程博客系统里，连图片都能发布过去。但在WLW里面编辑博客，排版上不如Word编辑的效率高，美观。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">于是有这样一种WLW与Word交叉编辑的方法——先在Word里面编辑文档，排版好，再复制，源格式粘贴到WLW里面。</p>
+</div>
+<p>但这种方法同样存在问题:</p>
+<ol class="arabic simple">
+<li>大量冗余的排版标签，造成网页博文的传输数据量几倍甚至十几倍增加（排版格式越丰富，冗余数据量越大），直接结果就是最后发布出来的博文，浏览时候加载缓慢。</li>
+<li>Word里面没法代码高亮，还得单独在WLW利用应用代码高亮工具编辑。</li>
+<li>图片无法粘贴过去，不知道现在的版本这个问题解决了没有。</li>
+</ol>
+<p>利用一些WLW里面的插件，还能实现自动添加当前时间，添加copyright等信息的动态模板功能，还能实现自动添加图片水印等，这应该算是让写博客变得轻松的一件事情了吧。</p>
+<p>但即使是这样，只是解决了方便共享的问题，还是没有解决我们写技术博客的初衷——归档问题。我们还是得自己保留一份Word，或者WLW版本的文档，然后自己做归类存档。除非你认为博客上面发布出来的东西就是你的原始文档，当然，如果它能再次很方便地被转换为某种标准格式的存档，我们也能认为它就是原始文档。但没有任何工具也几乎不可能有任何工具（博客系统里的存档格式在你发布的时候就已经乱了）能把HTML格式的博客内容转换成为某种标准格式。</p>
+</div>
+</div>
+<div class="section" id="vps-virtual-private-server">
+<h3><a class="toc-backref" href="#id19">2.2. 方案二，在VPS(Virtual Private Server)上搭建动态博客</a></h3>
+<p>由于空间服务商提供的博客系统无法满足web极客们，对于博客系统，他们需要更多的自由。于是很多人转而去建立自己的个人站点系统，由自己来维护。这比起使用服务商的模板系统，要面临的问题复杂得多，而好处就是 <strong>自由</strong> 。这里先讨论拥有虚拟空间使用权的情况。</p>
+<dl class="docutils">
+<dt>首先是 <strong>系统框架选择</strong> 问题。</dt>
+<dd>不基于任何框架，纯手工打造HTML站点似乎太小儿科了，仿佛是用大金库存一袋米。用PHP, Java, C#中的专业web站点框架似乎太小题大作了，我们只是通过个人站点维护和发布自己的文档，不是专门做网站，没那个精力折腾。于是IT界出现了很多针对个人博客或者BBS站点应用的框架，更准确地说是 <strong>模板系统</strong> ，比通用框架更接近实际应用，如WordPress，Z-BLOG等。</dd>
+<dt>然后是 <strong>服务器空间选择和域名</strong> 问题。</dt>
+<dd>很少有人有条件拥有自己的服务器和稳定的IP来发布自己的站点，于是出现了很多虚拟服务器或者虚拟空间提供商提供虚拟空间服务，意思就是说，服务器是别人的，但你有虚拟空间的使用权。根据你确定的 <em>系统框架</em> 来选择使用何种虚拟空间，如语言支持，数据库支持，平台，访问接口等。很多虚拟空间服务商顺带提供域名服务，否则还要自己去找域名服务商要自己的域名。</dd>
+</dl>
+<p>现在最流行的方案，就是在VPS上基于WordPress模板系统搭建个人动态博客的方案了。WordPress是一款基于PHP的动态站点框架，是一套成熟的，专门针对个人博客站点的模板系统。你完全可以像使用空间服务商提供的博客系统服务那样使用WordPress来写博客，通过插件让WrodPress支持Markdown，reST，LaTex等轻文本。与第一个方案相比，方案二其实只解决了定制化的问题，可以自己自主的定制站点，定制样式，定制插件支持等。但也引入了其他麻烦，如找空间，挑域名，备案，改模板等。如果有插件能从WordPress方便地导出符合通行标准格式的源文档，归档问题才能很好解决，但整个方案似乎还是不那么优雅。</p>
+<p>搭建个人站点还有一些非主流方案，如在云服务器，国内的App Engin——BAE, SAE上建站；用实验室或身边拥有外网IP的机器建站，然后使用花生壳之类具有动态域名映射服务的软件关联自己的域名与IP。这些方案无法满足我的需求。</p>
+</div>
+</div>
+<div class="section" id="github">
+<h2><a class="toc-backref" href="#id20">3. 基于GitHub的个人静态站点</a></h2>
+<p>对于归档和共享需求来说，最优雅的方式是：直接从源文档生成发布文档，然后发布到站点共享出去；源文档当做存档，发布的文档当做索引供检索用，当需要其他格式的文档时，还能从源文档直接生成其他格式的文档。GitHub + Pelican搭建个人静态站点，似乎成为了满足我的需求的最佳方案。</p>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id21">3.1. 静态站点生成工具</a></h3>
+<p>静态站点就由纯HTML，CSS，js等文件组成的站点，用户请求的页面即是服务器端保存的页面，不存在服务器端的交互。而动态站点，是服务器端接收到用户请求后，通过解析请求生成动态页面，然后返回给用户的交互式站点，诸如常听到的PHP, JSP, ASP等就是这类技术，服务器端涉及页面解析，数据库查询，生成页面等过程。最初的WEB1.0时代，web站点都是由静态站点组成，静态站点只能展示生成好的东西；进入WEB2.0时代，实际上是说各种web站点都变成了动态站点，站点服务器能够根据用户信息，数据库实时更新的信息，为用户生成包含最新信息最符合用户需求的页面。现在似乎又有另外一种潮流，一些人不再一味追求强大的动态站点，而是去完善静态站点，使静态站点具备动态服务的功能，或者完善动态站点，让动态站点生成一些消息更新不频繁的静态页面展示给用户。</p>
+<p>静态站点有它的一些优势：静态页面响应快，不容易受到攻击，修改方便等。让静态站点出现动态服务，可以通过第三方动态站点服务商提供的服务实现，如国内的评论服务商友言，多说。原理很简单，静态站点嵌入第三方评论服务的js代码，用户从静态站点请求到静态页面后，通过解析js从第三方的动态站点获取动态内容，从而实现了动静分离。因为这种动态服务的出现，很多博客爱好者都弃动求静，他们需要的只是展示自己的文档，评论等动态内容交给第三方动态评论服务提供商就行了。</p>
+<p>这种潮流也推动了静态站点生成工具的发展。静态站点生成工具其实就和动态站点生成页面的过程类似，主要目的是 <strong>将内容和模板分离，让用户把工作重心放在内容上，</strong> 最后的展示页面通过工具套用模板生成。如果你是一个web高手，你也可以修改模板和生成工具，来定制自己的站点样式和控制生成过程。</p>
+<p>静态站点生成工具恰好满足了我的需求：我只需要用reST写文档，发布出去的页面让静态站点生成工具生成就行了，只需要一条命令。</p>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id22">3.2. GitHub页面服务</a></h3>
+<p>GitHub提供两种页面服务，一种是用户页面，每个用户只有一个，通过 &quot;xxx.github.io&quot; 和 &quot;xxx.github.com&quot;可以访问；另一种是项目页面，在用户页面链接后面加上 &quot;/xxxx&quot; 来访问。我们可以利用GitHub提供的用户页面挂载我们的博客，而项目页面用来挂载源码的说明文档（这是GitHub提供页面服务的初衷）。</p>
+<p>GitHub用户页面与静态站点生成工具几乎是天生的完美组合。</p>
+<ol class="arabic simple">
+<li>我们编写文档后，只需要一条命令就能生成静态站点。</li>
+<li>运用Git工具，我们可以很方便地从本地发布静态页面文件，发布过程只需要几行命令，甚至可以编写脚本一键发布。</li>
+</ol>
+<p>整个过程很简单轻松，我的源文档保存在本地，通过静态站点生成工具轻松生成静态页面，通过Git工具轻松将文档发布到GitHub个人主页。源文档的存档在本地，使用reST格式保存，可以方便地生成其他格式；检索查阅在个人主页进行就够了，放在个人主页也能将文档共享给他人。</p>
+</div>
+<div class="section" id="pelican">
+<h3><a class="toc-backref" href="#id23">3.3. Pelican</a></h3>
+<p>Pelican是一款Python下的静态站点生成工具，静态站点生成工具种类很多，各种语言的都有，如Python, Ruby, C/C++, C#, Java等。曾经我用过Ruby下的Nanoc，使用Nanoc + Markdown来维护站点，曾改过它的源码，写过插件，增加过功能，也改写过自己的HTML5模板，但似乎Ruby和Markdown都不是我的菜。喜欢Python胜过Ruby，Markdown也无法满足我的需求。后来探索过Python下的静态站点生成工具，对比过别人的评价，发现Pelican一直在更新维护，文档比较丰富，而且它支持reST，模板系统使用Jinja2似乎能满足我的需求。</p>
+<p>用过一段时间后，发现它确实很赞，它柔性没有Nanoc强大，但它的框架设计比Nanoc合理，符合博客站点的结构，可以省很多事情。于是，对应用框架来说，工作的重点就是设计自己的模板了。Jinja2模板系统远比Nanoc自定制的模板系统强大，通过PyCharm IDE还能很容易跟踪到Pelican源码内部，方便调试和修改增加新的功能。而且Pelican框架结构不复杂，很容易知道在哪里修改代码，增加自己需要的功能，虽然它提供插件系统，但不如改源码直接。</p>
+<p>现在，我的文档全部使用reST编写，存放在自己分类好的文件夹下面，满足了我存档的需求；通过几条简单命令，就能生成好静态页面并发布到GitHub个人主页，满足了我查阅和共享的需求。如果不出意外，也没有更多需求，GitHub + Pelican也许是我个人站点探索的最后一站了吧。</p>
+</div>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2013-10-select_personal_websit_solution.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-open-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

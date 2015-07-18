@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first&#34;&gt;可以用于ROS开发的IDE很多（可以参考 &lt;a class=&#34;reference external&#34; href=&#34;http://wiki.ros.org/IDEs&#34;&gt;http://wiki.ros.org/IDEs&lt;/a&gt; )，ROS的调试依赖环境变量，与外部程序有通讯，因此要求启动IDE的时候加载ROS环境参数，其他方面并无太多限制。身为编译语言的C++，常常需要IDE的辅助，否则难以完成编写和调试；而身为脚本语言的Python，随写随测，很多写手不需要IDE辅助，只是用GDB除错器就能完成调试。为了可视化的调试，以及设置断点（breakpoint），使用IDE还是很有必要的。在ROS社区，讨论最多的IDE恐怕就是eclipse了，不仅可以作为C++项目的IDE，也可以结合pydev来调试python项目。PyCharm是本人最喜欢的python IDE，不仅有Windows版本，还有Linux版本，但在ROS社区暂时还没发现有人讨论PyCharm，本文介绍用PyCharm调试ROS配置流程。&lt;/p&gt;
+&lt;p class=&#34;last&#34;&gt;环境：ROS Hydro, PyCharm 3.0.2, Ubuntu 12.04.&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>ROS开发环境之PyCharm (python) | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>ROS开发环境之PyCharm (python)</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-31T00:00:00"> 2013-12-31</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/python.html">python</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first">可以用于ROS开发的IDE很多（可以参考 <a class="reference external" href="http://wiki.ros.org/IDEs">http://wiki.ros.org/IDEs</a> )，ROS的调试依赖环境变量，与外部程序有通讯，因此要求启动IDE的时候加载ROS环境参数，其他方面并无太多限制。身为编译语言的C++，常常需要IDE的辅助，否则难以完成编写和调试；而身为脚本语言的Python，随写随测，很多写手不需要IDE辅助，只是用GDB除错器就能完成调试。为了可视化的调试，以及设置断点（breakpoint），使用IDE还是很有必要的。在ROS社区，讨论最多的IDE恐怕就是eclipse了，不仅可以作为C++项目的IDE，也可以结合pydev来调试python项目。PyCharm是本人最喜欢的python IDE，不仅有Windows版本，还有Linux版本，但在ROS社区暂时还没发现有人讨论PyCharm，本文介绍用PyCharm调试ROS配置流程。</p>
+<p class="last">环境：ROS Hydro, PyCharm 3.0.2, Ubuntu 12.04.</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#pycharm" id="id8">PyCharm安装</a><ul>
+<li><a class="reference internal" href="#id2" id="id9">下载安装</a></li>
+<li><a class="reference internal" href="#id3" id="id10">设置快捷方式</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pycharmpython" id="id11">用PyCharm调试Python工程</a><ul>
+<li><a class="reference internal" href="#catkin" id="id12">新建catkin工作空间</a></li>
+<li><a class="reference internal" href="#id4" id="id13">向catkin工作空间添加源码包</a></li>
+<li><a class="reference internal" href="#id5" id="id14">向PyCharm里添加工程</a></li>
+<li><a class="reference internal" href="#python2-7pycharminterpreter" id="id15">设置python2.7为PyCharm工程的Interpreter</a></li>
+<li><a class="reference internal" href="#id6" id="id16">调试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7" id="id17">最后</a></li>
+</ul>
+</div>
+<div class="section" id="pycharm">
+<h2><a class="toc-backref" href="#id8">PyCharm安装</a></h2>
+<p>PyCharm是个多平台的python IDE，还支持Javascript, HTML, Jinja2, reStructuredText 等语言的编辑。我在PyCharm的支持下修改基于Pyhon的Pelican静态站点生成器，制作自己的Jinja2模板，才完成了github博客系统，因此对PyCharm情有独钟。</p>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id9">下载安装</a></h3>
+<p>从PyCharm官网下载安装程序：<a class="reference external" href="http://www.jetbrains.com/pycharm/download/">http://www.jetbrains.com/pycharm/download/</a>。选择Linux版本，目前有Professional和Community两个Linux版本，前者是付费版，30天免费试用期限，后者是免费版，阉割部分功能。一般使用免费版就行了，我比较喜欢折腾，用的付费版，本文以Professional版本为例，下载后的文件名为 <em>pycharm-professional-3.0.2.tar.gz</em>。（付费版激活码自行Google:)）</p>
+<p>打开terminal，进入 <em>pycharm-professional-3.0.2.tar.gz</em> 所在路径。我习惯将程序装在 <em>~/programs/</em> 路径下，如果没有 <em>~/programs/</em> 先用 <cite>mkdir ~/programs</cite> 命令创建之。然后运行下面的命令：</p>
+<div class="highlight"><pre>tar xfz pycharm-professional-3.0.2.tar.gz -C ~/programs
+cd ~/programs/pycharm-3.0.2/bin/
+./pycharm.sh
+</pre></div>
+<p>第一条命令将 <em>pycharm-3.0.2</em> 解压到 <em>~/programs/</em> 路径下；第二条命令进入 <em>~/programs/pycharm-3.0.2/bin/</em> 路径；第三条命令则启动PyCharm，如果是第一次启动，则自动进入安装步骤，按照安装步骤完成安装即可。</p>
+<p>安装完成后点左上角的 <em>Dash home</em>，输入“py”如果看到 <em>PyCharm</em> 图标则安装成功。</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/pycharm1.jpg" />
+</div>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id10">设置快捷方式</a></h3>
+<p>这一步将要修改PyCharm快捷方式，使从快捷方式启动PyCharm的同时加载ROS环境变量。</p>
+<p>打开terminal，输入下面的命令：</p>
+<div class="highlight"><pre>gedit ~/.local/share/applications/jetbrains-pycharm.desktop
+</pre></div>
+<p>这条命令将打开jetbrains-pycharm.desktop快捷方式文件，可以看到文件内容如下：</p>
+<pre class="literal-block">
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PyCharm
+Icon=/home/viki/programs/pycharm-3.0.2/bin/pycharm.png
+Exec=bash -i -c &quot;/home/viki/programs/pycharm-3.0.2/bin/pycharm.sh&quot; %f
+Comment=Develop with pleasure!
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-pycharm
+</pre>
+<p>修改 <em>Exec</em> 变量一行，在中间添加 <tt class="docutils literal">bash <span class="pre">-i</span> <span class="pre">-c</span></tt> 即改为 <tt class="docutils literal">Exec=bash <span class="pre">-i</span> <span class="pre">-c</span> <span class="pre">&quot;/home/viki/programs/pycharm-3.0.2/bin/pycharm.sh&quot;</span> %f</tt> ，保存并退出。添加 <tt class="docutils literal">bash <span class="pre">-i</span> <span class="pre">-c</span></tt> 是为了在通过快捷方式启动PyCharm的同时加载ROS环境变量（ROS环境变量加载脚本配置在 <em>~/.bashrc</em> 文件内）。</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">如果打开的文件是空，则表示没有找到jetbrains-pycharm.desktop文件，可能是安装路径不在本地用户目录下，或者版本不同导致的文件名不一致。可以在 <em>~/.local/share/applications/</em> 和 <em>/usr/share/applications/</em> 两个路径下用 <tt class="docutils literal">ls *pycharm*</tt> 命令找找看。</p>
+</div>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">如果没有上述快捷方式文件，自己新建一个，只要文件内容类似上面的类容，路径正确即可。快捷方式可以放在 <em>~/.local/share/applications/</em> 和 <em>/usr/share/applications/</em> 两个位置。当然也可以放在任意其他位置，功能跟放在上面两个位置一样，但左边的任务栏不会正确显示图标。</p>
+</div>
+</div>
+</div>
+<div class="section" id="pycharmpython">
+<h2><a class="toc-backref" href="#id11">用PyCharm调试Python工程</a></h2>
+<p>可以自己建立包做实验，为求简洁，这里直接从GitHub下载现有的源码包，即大家熟悉的 <em>ros_tutorials</em> 包。</p>
+<div class="section" id="catkin">
+<h3><a class="toc-backref" href="#id12">新建catkin工作空间</a></h3>
+<p>如果已经有自己的catkin工作空间则跳过，否则新建catkin工作空间：</p>
+<div class="highlight"><pre>mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws/
+catkin_make
+echo &quot;source ~/catkin_ws/devel/setup.bash&quot; &gt;&gt; ~/.bashrc
+</pre></div>
+<p>对应解释参照《<a class="reference external" href="http://aicrobo.github.io/blog/2013-12-overlay_catkin_and_rosbuild.html">配置ROS工作空间catkin+rosbuild</a>》。关闭所有的terminal在重新打开，使环境变量生效。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id13">向catkin工作空间添加源码包</a></h3>
+<p>这里添加 <em>ros_tutorials</em> 源码包。</p>
+<div class="highlight"><pre>cd ~/catkin_ws/src
+git clone git@github.com:ros/ros_tutorials.git -b hydro-devel
+ls
+</pre></div>
+<p>可以看到下面的信息，表示 <em>ros_tutorials</em> 已经被下载到了 <em>~/catkin_ws/src</em> 目录下。</p>
+<pre class="literal-block">
+viki&#64;ROS:~/catkin_ws/src$ ls
+CMakeLists.txt  ros_tutorials
+</pre>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id14">向PyCharm里添加工程</a></h3>
+<p>从 <em>Dash home</em> 里启动PyCharm，将看到下面的Welcome界面：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/pycharm2.jpg" />
+<p>这里我们导入 <em>rospy_tutorials</em> 包，使之成为PyCharm的python工程。点击 <strong>Open Directory</strong> 按钮，在弹出的对话框中选择 <em>~/catkin_ws/src/ros_tutorials/rospy_tutorials/</em> 路径，如下图：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/pycharm3.jpg" />
+<p>点击 <em>OK</em>，工程将被创建，如下图：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/pycharm4.jpg" />
+</div>
+<div class="section" id="python2-7pycharminterpreter">
+<h3><a class="toc-backref" href="#id15">设置python2.7为PyCharm工程的Interpreter</a></h3>
+<p>PyCharm默认将Python 3.2设置为工程的interpreter，而ROS使用的是Python 2.7，这里需要设置一下，使用Python 2.7，否则无法运行ROS相关的Python库。</p>
+<p><em>File</em> 菜单 -&gt; <em>Settings</em> 项，打开设置对话框，选择 <em>Project Interpreter</em> -&gt; <em>Python Interpreters</em> 如下图：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/setting1.jpg" />
+<p>点击右边选框的加号，增加 <em>Python 2.7 Interpreter</em>，并将其设置为工程默认，结果如下图：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/setting2.jpg" />
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id16">调试</a></h3>
+<p>先打开一个terminal，输入 <tt class="docutils literal">roscore</tt> 命令启动ROS Master。</p>
+<p>在PyCharm左边的 <em>Project</em> 树形框中，找到 <em>talker.py</em> 文件，打开。然后找到 “hello world” 所在的位置，修改为 “hello I'm yuanboshe”，并设置断点，如下图：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/test1.jpg" />
+<p>保存后，右键左边的 <em>talker.py</em> 文件，弹出右键菜单，选择 <em>Debug 'talker'</em> 项：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/test2.jpg" />
+<p>启动调试后，<em>talker</em> 程序就会运行，并会运行到断点处停下来：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/test3.jpg" />
+<p>在下面的变量栏能够看到变量值。取消断点，按 <strong>F9</strong> 继续运行，将下面的显示窗口切换到 <em>Console</em> 窗口，能够看到修改后的信息，如下：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/test4.jpg" />
+<p>回到桌面，再开一个terminal窗口，输入 <tt class="docutils literal">rosrun rospy_tutorials listener</tt> 命令，可以看到正确的监听消息，如下图：</p>
+<img alt="PyCharm" src="http://aicrobo.github.io/images/2013-12-31_ros_ide_for_python_pycharm/test5.jpg" />
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id17">最后</a></h2>
+<p>作为脚本语言的Python，debug要比作为编译语言的C++方便简单得多，其他的Python IDE也可以使用类似方式使之能够用来调试ROS工程。由于缺少了编译环节，不需要CMake的参与，无论是catkin工程还是rosbuild工程都一样的设置，没有差异。</p>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2013-12-ros_ide_for_python_pycharm.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-open-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

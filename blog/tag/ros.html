@@ -1,0 +1,648 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Tag: ros">
+    <meta name="author" content="Yuanbo She">
+    <title>ros | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>Tag: ros</span></h2>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2014-06-hector_mapping_example.html">用hector mapping构建地图</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first last">本文介绍如何在Ubuntu for ROS中配置Hokuyo（或者是rplidar），运行hector slam中的mapping示例代码。示例代码包含在exbot_xi开发包中，Ubuntu for ROS开发版已经包含此开发包。</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-06-13T00:00:00"> 2014-06-13</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2014-05-play_exbotxi_with_kinect.html">用Kinect玩ExBot XI移动机器人平台</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first">ExBot XI原生支持ASUS Xtion pro live摄像头，但是用Kinect也能玩，只需要做稍微的参数设置即可。因为驱动方面的问题，Kinect可能会出现卡顿现象，实际效果不如ASUS Xtion pro live摄像头。</p>
+<p class="last">环境：Ubuntu for ROS 开发版 (h2), Kinect摄像头.</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-05-17T00:00:00"> 2014-05-17</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2014-03-install_ros_in_10mins_pc.html">10分钟安装ROS（U盘/CD刻录盘 + 裸机）</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first">无论你是ROS新手还是ROS老鸟，重新安装ROS都是一件很头疼的事情。完全版有2G多内容需要更新，网络状况不好时可能一两天才能装完，而对于新手来说钻研几个月也不见得能配出完美的开发环境，毕竟官方wiki的资料并不完善，还有很多细节需要处理。而Ubuntu for ROS正是解决这些问题的好办法，下载完Ubuntu for ROS后，10分钟即可完成安装，安装完成后可以立即做ROS学习，开发。本文简介裸机中安装Ubuntu for ROS的方法，虚拟机中安装Ubuntu for ROS请参考《10分钟安装ROS（Windows + 虚拟机）》教程。</p>
+<p class="last">工具：UltraISO 9.5.3.2901.</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-03-31T00:00:00"> 2014-03-31</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2014-03-install_ros_in_10mins_vm.html">10分钟安装ROS（Windows + 虚拟机）</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first">无论你是ROS新手还是ROS老鸟，重新安装ROS都是一件很头疼的事情。完全版有2G多内容需要更新，网络状况不好时可能一两天才能装完，而对于新手来说钻研几个月也不见得能配出完美的开发环境，毕竟官方wiki的资料并不完善，还有很多细节需要处理。而Ubuntu for ROS正是解决这些问题的好办法，下载完Ubuntu for ROS后，10分钟即可完成安装，安装完成后可以立即做ROS学习，开发。本文以VMWare Workstation 10.0.0为例记录虚拟机中安装Ubuntu for ROS的流程，裸机中安装Ubuntu for ROS请参考《10分钟安装ROS（U盘/CD刻录盘 + 裸机）》</p>
+<p class="last">环境：Windows 8.1, VMWare Workstation 10.0.0.</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-03-31T00:00:00"> 2014-03-31</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2014-03-sim_exbotxi_play_in_10_mins.html">10分钟上手玩ROS仿真机器人</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first">没钱买ROS移动机器人平台？那就玩玩免费的ROS仿真机器人平台吧！ROS里面玩仿真机器人是很容易的事情，但从0开始配置到能玩ROS仿真机器人是很麻烦的，新手想凭自己的Search能力玩起来，先磨几个月再考虑吧。10分钟上手玩不是玩笑，下载好Ubuntu for ROS开发版后，如果使用虚拟机预览模式进入系统，10分钟都不要就能上手玩！</p>
+<p class="last">环境：Windows, VMWare Workstation 10.0, Ubuntu for ROS h2-140330.</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-03-31T00:00:00"> 2014-03-31</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2013-12-ros_ide_for_python_pycharm.html">ROS开发环境之PyCharm (python)</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <a href="/images/2013-12-31_ros_ide_for_python_pycharm/test3.jpg" class="thumbnail">
+                                    <img src="/images/2013-12-31_ros_ide_for_python_pycharm/test3.jpg" alt="ROS开发环境之PyCharm (python)"/>
+                                </a>
+                            </div>
+                            <div><p class="first">可以用于ROS开发的IDE很多（可以参考 <a class="reference external" href="http://wiki.ros.org/IDEs">http://wiki.ros.org/IDEs</a> )，ROS的调试依赖环境变量，与外部程序有通讯，因此要求启动IDE的时候加载ROS环境参数，其他方面并无太多限制。身为编译语言的C++，常常需要IDE的辅助，否则难以完成编写和调试；而身为脚本语言的Python，随写随测，很多写手不需要IDE辅助，只是用GDB除错器就能完成调试。为了可视化的调试，以及设置断点（breakpoint），使用IDE还是很有必要的。在ROS社区，讨论最多的IDE恐怕就是eclipse了，不仅可以作为C++项目的IDE，也可以结合pydev来调试python项目。PyCharm是本人最喜欢的python IDE，不仅有Windows版本，还有Linux版本，但在ROS社区暂时还没发现有人讨论PyCharm，本文介绍用PyCharm调试ROS配置流程。</p>
+<p class="last">环境：ROS Hydro, PyCharm 3.0.2, Ubuntu 12.04.</p>
+</div>
+                        </div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-31T00:00:00"> 2013-12-31</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/python.html">python</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2013-12-ros_ide_qtcreator.html">ROS开发环境之Qt Creator</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <a href="/images/2013-12-29_ros_ide_qtcreator/test1.jpg" class="thumbnail">
+                                    <img src="/images/2013-12-29_ros_ide_qtcreator/test1.jpg" alt="ROS开发环境之Qt Creator"/>
+                                </a>
+                            </div>
+                            <div><p class="first">可以用于ROS开发的IDE很多（可以参考 <a class="reference external" href="http://wiki.ros.org/IDEs">http://wiki.ros.org/IDEs</a> )，ROS的调试依赖环境变量，与外部程序有通讯，因此要求启动IDE的时候加载ROS环境参数，其他方面并无太多限制。最常用的IDE是eclipse，本人也是如此，eclipse调试环境的配置可以参照作者旧博客 <a class="reference external" href="http://www.cnblogs.com/freedomshe/archive/2013/05/16/configure_eclipse_in_catkin.html">Configure Eclipse IDE in catkin of Ros Groovy</a> ，Qt Creator比Eclipse要轻量级，配置起来也更方便简洁。本文记录ROS开发环境，Qt Creator的配置过程。</p>
+<p class="last">环境：ROS Hydro, Qt Creator 5.2.0.</p>
+</div>
+                        </div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-29T00:00:00"> 2013-12-29</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/qt.html">qt</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2013-12-create_low_cost_turtlebot_in_30mins.html">30分钟搭建自己的TurtleBot</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <a href="/images/2013-12-25_create_low_cost_turtlebot_in_30mins/main.jpg" class="thumbnail">
+                                    <img src="/images/2013-12-25_create_low_cost_turtlebot_in_30mins/main.jpg" alt="30分钟搭建自己的TurtleBot"/>
+                                </a>
+                            </div>
+                            <div><p class="first last">玩ROS的人应该都知道TurtleBot，它是ROS官方最流行的机器人平台，很多地方都是以TurtleBot为ROS教学平台。TurtleBot包含移动机器人硬件和ROS软件包两个部分，ROS学习者没有一台自己的TurtleBot实验平台是很可惜的事情，本文介绍如何利用iRobot Create底盘打造自己的TurtleBot移动机器人平台，希望各位手头拮据的ROS爱好者也能拥有自己的ROS机器人。</p>
+</div>
+                        </div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-25T00:00:00"> 2013-12-25</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2013-12-use_xtion_pro_in_ros.html">Use ASUS Xtion pro (no RGB) in ROS</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first">本文介绍如何在turtlebot上应用ASUS Xtion pro (no RGB)，注意Xtion pro (no RGB)和Xtion pro Live (RGB-D)是不同的两款深度摄像头，前者缺少一个RGB摄像头，无色彩信息，而有者是带RGB的深度摄像头。Xtion pro在ROS圈里似乎已经没有什么市场了，网络上没看到有人讨论它在ROS里面的驱动问题。我先前就是把这名字弄混了，一不小心坑别人买了Xtion pro，在这里就解决一下它的驱动问题。</p>
+<p class="last">环境：ROS Hydro，Xtion pro (no RGB)</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-23T00:00:00"> 2013-12-23</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a>,
+        </li>
+</ul>                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2><a href="http://aicrobo.github.io/blog/2013-12-overlay_catkin_and_rosbuild.html">配置ROS工作空间catkin+rosbuild</a></h2>
+                </div>
+                <div class="panel-body">
+                        <div><p class="first">本文通过一系列问题，解释ROS里面node, package, workspace, source setup.bash, build system, overlay等概念。并以最常用的workspace搭配方式，记录如何配置一个catkin和一个rosbuild工作空间，并overlay它们。</p>
+<p class="last">环境：ROS Hydro。</p>
+</div>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-12-20T00:00:00"> 2013-12-20</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>                </div>
+            </div>
+
+            <!-- pagers -->
+                <ul class="pagination">
+                        <li class="previous disabled"><a>&larr; Previous</a></li>
+
+                            <li class="disabled"><a>1</a></li>
+                            <li class="active"><a href="http://aicrobo.github.io/blog/tag/ros2.html">2</a>
+                            </li>
+                        <li class="next">
+                            <a href="http://aicrobo.github.io/blog/tag/ros2.html">Next &rarr;</a>
+                        </li>
+                </ul>
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

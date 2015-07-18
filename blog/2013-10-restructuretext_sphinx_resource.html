@@ -1,0 +1,438 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first last&#34;&gt;一些reStructuredText &amp;amp; Sphinx的学习资源，备查。&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>reStructuredText + Sphinx的一些学习资源 | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>reStructuredText + Sphinx的一些学习资源</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-10-15T00:00:00"> 2013-10-15</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">WEB前端&Code</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first last">一些reStructuredText &amp; Sphinx的学习资源，备查。</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#restructuredtext" id="id15">reStructuredText</a><ul>
+<li><a class="reference internal" href="#id2" id="id16">reStructuredText学习资源</a><ul>
+<li><a class="reference internal" href="#id3" id="id17">Docutils上的reST教程（传送）</a></li>
+<li><a class="reference internal" href="#id4" id="id18">Sphinx上的reST教程（传送）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5" id="id19">在线reStructuredText编辑工具</a><ul>
+<li><a class="reference internal" href="#id6" id="id20">Online reStructuredText editor（传送）</a></li>
+<li><a class="reference internal" href="#id7" id="id21">reST to HTML conversion（传送）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id22">离线reStructuredText编辑器</a><ul>
+<li><a class="reference internal" href="#id9" id="id23">ReText（传送）</a></li>
+<li><a class="reference internal" href="#id10" id="id24">PyCharm（传送）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sphinx" id="id25">Sphinx</a><ul>
+<li><a class="reference internal" href="#id11" id="id26">一些文档</a><ul>
+<li><a class="reference internal" href="#id13" id="id27">Sphinx官网文档（传送）</a></li>
+<li><a class="reference internal" href="#id14" id="id28">OpenAlea的Sphinx文档（传送）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="restructuredtext">
+<h2><a class="toc-backref" href="#id15">reStructuredText</a></h2>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id16">reStructuredText学习资源</a></h3>
+<div class="section" id="id3">
+<h4><a class="reference external" href="http://docutils.sourceforge.net/rst.html">Docutils上的reST教程（传送）</a></h4>
+<blockquote>
+Docutils is an open-source text processing system for processing plaintext documentation into useful formats, such as HTML, LaTeX, man-pages, open-document or XML. It includes reStructuredText, the easy to read, easy to use, what-you-see-is-what-you-get plaintext markup language.</blockquote>
+<p><em>Docutils: Documentation Utilities</em> 上面有解释，可以把它看成是Python下的文档处理库，reStructuredText是Docutils项目的一部分，想学reStructuredText去官网（Docutils）没错，里面有详细的上手教程和指令参考等。</p>
+<p><strong>User Documentation</strong> 里面 <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickstart.html">A ReStructuredText Primer</a> 和 <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">Quick reStructuredText</a>
+分别是入门教程和快速参考手册，看完就能写出比较完美的文档了。<a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickstart.txt">text source</a> 是 <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickstart.html">A ReStructuredText Primer</a>
+的 <tt class="docutils literal">.rst</tt> 格式文档，对照一下能够帮助理解reST各种标记的效果。</p>
+<p><strong>Reference Documentation</strong> 里面的内容可以当成是速查手册，比如需要用到什么指令的时候，可以来这里 <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html">reStructuredText Directives</a></p>
+</div>
+<div class="section" id="id4">
+<h4><a class="reference external" href="http://sphinx-doc.org/rest.html">Sphinx上的reST教程（传送）</a></h4>
+<blockquote>
+Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.</blockquote>
+<p>这里的Sphinx不是同名的搜索引擎的那个Sphinx，而是一款Python Documentation Generator，它通过Docutils使用reST，能够方便地将reST存档转换为HTML，PDF等格式的用户手册，支持用户自定义和修改样式，功能强大。
+大多reST的使用者都会使用Sphinx工具制作自己的文档，Sphinx提供的reST教程虽然没有Docutils上的丰富，但排版美观，让人更愿意在这里看。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id19">在线reStructuredText编辑工具</a></h3>
+<div class="section" id="id6">
+<h4><a class="reference external" href="http://rst.ninjs.org/">Online reStructuredText editor（传送）</a></h4>
+<div class="figure">
+<img alt="Online reStructuredText editor" src="http://aicrobo.github.io/images/2013-10-15_restructuretext_sphinx_resource/Online_reStructuredText_editor.jpg" />
+<p class="caption">Online reStructuredText editor</p>
+</div>
+<p>所见即所得的在线reST转换工具，转换并不是那么实时，但凑合着初学用用吧。写熟悉后，这种工具就完全没必要使用了。</p>
+</div>
+<div class="section" id="id7">
+<h4><a class="reference external" href="http://www.tele3.cz/jbar/rest/rest.html">reST to HTML conversion（传送）</a></h4>
+<p>Docutils官网推荐的一个在线工具，有最大字数限制，而且不是实时预览——要点“Render”才可以得到预览页面，不太方便。</p>
+<div class="figure">
+<img alt="reST to HTML conversion" src="http://aicrobo.github.io/images/2013-10-15_restructuretext_sphinx_resource/online_rest2html.jpg" />
+<p class="caption">reST to HTML conversion</p>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id22">离线reStructuredText编辑器</a></h3>
+<div class="section" id="id9">
+<h4><a class="reference external" href="http://sourceforge.net/projects/retext">ReText（传送）</a></h4>
+<p>ReText可以离线编辑reStructuredText和Markdown，有点类似著名的Markdown编辑器MarkdownPad 2。ReText跟MarkdownPad 2一样有个烦人的问题——编码问题——当保存中文的时候，即使选择了utf-8编码，
+也会在Python解析的时候出现“非utf-8编码”的提示，导致无法对中文进行转换。ReText新版本是Python3.x下的，也许是我的Windows + Python2.7导致的水土不服，也许在Ubuntu下面或者Python3.x下面会
+好些，总之，现在对我来说用处不大了，直接使用PyCharm编辑，虽然没有实时预览的功能，但有高亮提示，转换方便，用起来没什么麻烦的。</p>
+<p><a class="reference external" href="http://sourceforge.net/p/retext/wiki/Windows%20Install%20of%20ReText">ReText Windows安装说明</a> 如果想在Windows下面这条ReText，可以参考这个流程，安装起来比较麻烦，中间也许会遇到一些问题。
+如无法加载PySide模块的问题，使用 <tt class="docutils literal">easy_install</tt> 可以解决。
+而后也许会遇到 <tt class="docutils literal">error: Unable to find vcvarsall.bat</tt> 的错误，需要先在控制台执行一下 <tt class="docutils literal">SET <span class="pre">VS90COMNTOOLS=%VS110COMNTOOLS%</span></tt> （VS2008对应90，VS2010对应100，VS2012对应110），如果你没有VS2008的编译器就会出现这个问题，
+这条命令的意思是将默认的VS2008的编译器改成使用VS2012的编译器（如果你装了VS2012），参考&lt;<a class="reference external" href="http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat">http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat</a>&gt;。</p>
+</div>
+<div class="section" id="id10">
+<h4><a class="reference external" href="http://www.jetbrains.com/pycharm/index.html">PyCharm（传送）</a></h4>
+<p>PyCharm是款很不错的Python IDE，在我的Pelican项目中，不仅可以方便调试Pelican源码，跟踪到源码内部，还支持模板Jinja2的语法格式，提供高亮，动态提示等功能。源码 + 调试，是学习别人代码
+最重要的方式。</p>
+<div class="figure">
+<img alt="PyCharm IDE" src="http://aicrobo.github.io/images/2013-10-15_restructuretext_sphinx_resource/pycharm.jpg" />
+<p class="caption">PyCharm IDE</p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果希望Pelican + PyCharm做调试，项目不能放在中文路径下（但Pelican项目的子目录可以有中文路径），否则出现非utf-8编码错误，导致无法调试。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sphinx">
+<h2><a class="toc-backref" href="#id25">Sphinx</a></h2>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id26">一些文档</a></h3>
+<div class="section" id="id13">
+<h4><a class="reference external" href="http://sphinx-doc.org/contents.html">Sphinx官网文档（传送）</a></h4>
+<p>想上手Sphinx，从头开始看文档吧，几条命令即可生成自己的HTML版本用户手册。其中 <a class="reference external" href="http://sphinx-doc.org/theming.html">HTML theming support</a> 教你如何快速生成不同样式的HTML文档。</p>
+<p>想看中文版的来这里
+<a class="reference external" href="http://sphinx-doc-zh.readthedocs.org/en/latest/contents.html">中文版的Sphinx文档1</a> 和
+<a class="reference external" href="http://zh-sphinx-doc.readthedocs.org/en/latest/contents.html">中文版的Sphinx文档2</a> 样式不同内容一样，不知道它们是什么关系。都只有部分汉化了。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">用Sphinx生成的HTML文档，如果按照内建模板生成的，点旁边的 <em>Show Source</em> 链接就能看到 <tt class="docutils literal">.rst</tt> 的源文档，方便做比对学习。</p>
+</div>
+</div>
+<div class="section" id="id14">
+<h4><a class="reference external" href="http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/sphinx.html">OpenAlea的Sphinx文档（传送）</a></h4>
+<p>OpenAlea里面的文档就是用Sphinx组织的，里面也有一些Sphinx使用方面的教程，排版什么都都不错。</p>
+</div>
+</div>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2013-10-restructuretext_sphinx_resource.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-open-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

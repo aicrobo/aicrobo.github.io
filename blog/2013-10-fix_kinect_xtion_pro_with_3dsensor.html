@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first&#34;&gt;忘了是从哪里看来的消息，说ROS里面的openni已经不能用来驱动Kinect和Xtion pro Live摄像头了，究其原因，说是openni驱动更新出现了问题，而且官方也不再更新了。当前Ubuntu某个摄像头包已经包含了Kinect驱动，新版Xtion pro Live也不能用以前的openni驱动。那么现在的Kinect和Xtion pro Live用什么驱动呢？玩turtlebot免不了使用3dsensor.launch来启动深度摄像头相关的nodes但3dsensor.launch里面依旧使用的openni驱动，大部分玩家都是买的现成turtlebot，不明白为什么他们的Kinect还能用得起来而我的Kinect却无法用openni驱动起来，也许是他们没有更新openni包吧。对于我这种没买turtlebot的，只有自己fix 3dsensor.launch的摄像头驱动问题了。&lt;/p&gt;
+&lt;p class=&#34;last&#34;&gt;环境：ROS Groovy + Kinect / Xtion pro Live&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>Fix 3dsensor.launch兼容Kinect和ASUS Xtion pro Live | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>Fix 3dsensor.launch兼容Kinect和ASUS Xtion pro Live</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2013-10-29T00:00:00"> 2013-10-29</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first">忘了是从哪里看来的消息，说ROS里面的openni已经不能用来驱动Kinect和Xtion pro Live摄像头了，究其原因，说是openni驱动更新出现了问题，而且官方也不再更新了。当前Ubuntu某个摄像头包已经包含了Kinect驱动，新版Xtion pro Live也不能用以前的openni驱动。那么现在的Kinect和Xtion pro Live用什么驱动呢？玩turtlebot免不了使用3dsensor.launch来启动深度摄像头相关的nodes但3dsensor.launch里面依旧使用的openni驱动，大部分玩家都是买的现成turtlebot，不明白为什么他们的Kinect还能用得起来而我的Kinect却无法用openni驱动起来，也许是他们没有更新openni包吧。对于我这种没买turtlebot的，只有自己fix 3dsensor.launch的摄像头驱动问题了。</p>
+<p class="last">环境：ROS Groovy + Kinect / Xtion pro Live</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#kinect" id="id11">Kinect</a><ul>
+<li><a class="reference internal" href="#id2" id="id12">准备工作</a></li>
+<li><a class="reference internal" href="#fixe-kinect-3dsensor-launch" id="id13">Fixe Kinect 3dsensor.launch</a></li>
+<li><a class="reference internal" href="#id5" id="id14">启动测试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xtion-pro-live" id="id15">Xtion pro Live</a><ul>
+<li><a class="reference internal" href="#id6" id="id16">准备工作</a></li>
+<li><a class="reference internal" href="#fix-xtion-pro-live-3dsensor-launch" id="id17">Fix Xtion pro Live 3dsensor.launch</a></li>
+<li><a class="reference internal" href="#id10" id="id18">启动测试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference" id="id19">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="kinect">
+<h2><a class="toc-backref" href="#id11">Kinect</a></h2>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id12">准备工作</a></h3>
+<p>安装 <tt class="docutils literal">turtlebot</tt> 工具包（refer <a class="citation-reference" href="#turtlebot" id="id3">[turtlebot]</a> ）：</p>
+<div class="highlight"><pre>&gt; sudo apt-get install ros-groovy-turtlebot ros-groovy-turtlebot-apps ros-groovy-turtlebot-viz
+</pre></div>
+<p>之后可能还需要禁用Ubuntu内建的Kinect驱动：</p>
+<div class="highlight"><pre>&gt; sudo modprobe -r gspca_kinect
+&gt; echo &#39;blacklist gspca_kinect&#39; | sudo tee -a /etc/modprobe.d/blacklist.conf
+</pre></div>
+<p>安装 <tt class="docutils literal">freenect</tt> 驱动包（refer <a class="citation-reference" href="#freenect" id="id4">[freenect]</a>  )：</p>
+<div class="highlight"><pre>&gt; sudo apt-get install ros-groovy-freenect-stack
+</pre></div>
+</div>
+<div class="section" id="fixe-kinect-3dsensor-launch">
+<h3><a class="toc-backref" href="#id13">Fixe Kinect 3dsensor.launch</a></h3>
+<p>Kinect的Fix很简单，只需要修改 <tt class="docutils literal">3dsensor.launch</tt> 即可。
+进入到3dsensor路径，对其进行编辑：</p>
+<div class="highlight"><pre>&gt; roscd turtlebot_bringup/launch/
+&gt; sudo gedit 3dsensor.launch
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">可以先用 <tt class="docutils literal">sudo cp 3dsensor.launch 3dsensor_back.launch</tt> 将以前的launch文件备份一份，以防万一。</p>
+</div>
+<p>找到下面的代码：</p>
+<div class="highlight"><pre><span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;nodelet&quot;</span> <span class="na">type=</span><span class="s">&quot;nodelet&quot;</span> <span class="na">name=</span><span class="s">&quot;openni_camera_loader&quot;</span> <span class="na">args=</span><span class="s">&quot;load openni_camera/driver $(arg manager)&quot;</span> <span class="na">respawn=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">file=</span><span class="s">&quot;$(find turtlebot_bringup)/param/3dsensor.yaml&quot;</span> <span class="na">command=</span><span class="s">&quot;load&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;depth_registration&quot;</span> <span class="na">value=</span><span class="s">&quot;$(arg depth_registration)&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/node&gt;</span>
+</pre></div>
+<p>将 <tt class="docutils literal">openni</tt> 改为 <tt class="docutils literal">freenect</tt> 即可，即：</p>
+<div class="highlight"><pre> <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;nodelet&quot;</span> <span class="na">type=</span><span class="s">&quot;nodelet&quot;</span> <span class="na">name=</span><span class="s">&quot;freenect_camera_loader&quot;</span> <span class="na">args=</span><span class="s">&quot;load freenect_camera/driver $(arg manager)&quot;</span> <span class="na">respawn=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">file=</span><span class="s">&quot;$(find turtlebot_bringup)/param/3dsensor.yaml&quot;</span> <span class="na">command=</span><span class="s">&quot;load&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;depth_registration&quot;</span> <span class="na">value=</span><span class="s">&quot;$(arg depth_registration)&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/node&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id14">启动测试</a></h3>
+<p>依次启动 <tt class="docutils literal">minimal.launch</tt>，<tt class="docutils literal">3dsensor.launch</tt> 和 <tt class="docutils literal">rviz</tt>：</p>
+<div class="highlight"><pre>&gt; roslaunch turtlebot_bringup minimal.launch
+&gt; roslaunch turtlebot_bringup 3dsensor.launch
+&gt; roslaunch turtlebot_rviz_launchers view_robot.launch
+</pre></div>
+<p>rviz启动后，勾选“Registered DepthCloud”和“LaserScan”，即可看到深度摄像头利用深度信息重建的3D点云图像，如下图：</p>
+<img alt="Kinect 3dsensor" src="http://aicrobo.github.io/images/2013-10-29_fix_kinect_xtion_pro_with_3dsensor/kinect1.jpg" />
+<p>场景中红色点线即为从点云中提取的模拟2D激光雷达的信息。</p>
+</div>
+</div>
+<div class="section" id="xtion-pro-live">
+<h2><a class="toc-backref" href="#id15">Xtion pro Live</a></h2>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id16">准备工作</a></h3>
+<p>安装 <tt class="docutils literal">turtlebot</tt> 工具包（refer <a class="citation-reference" href="#turtlebot" id="id7">[turtlebot]</a> ）：</p>
+<div class="highlight"><pre>&gt; sudo apt-get install ros-groovy-turtlebot ros-groovy-turtlebot-apps ros-groovy-turtlebot-viz
+</pre></div>
+<p>安装 <tt class="docutils literal">openni2_camera</tt> 驱动包：</p>
+<div class="highlight"><pre>&gt; sudo apt-get install ros-groovy-openni2-camera
+</pre></div>
+<p>安装 <tt class="docutils literal">openni2_launch</tt> 文件包（refer <a class="citation-reference" href="#openni2-launch" id="id8">[openni2_launch]</a> )：</p>
+<div class="highlight"><pre>&gt; cd ~/catkin_ws/src/
+&gt; git clone https://github.com/ros-drivers/openni2_launch.git
+&gt; cd openni2_launch
+&gt; git checkout groovy-devel
+</pre></div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">如果对 <a class="citation-reference" href="#catkin" id="id9">[catkin]</a> 和 git 不熟悉，还是先预习一下相关知识吧。目前官方的Ubuntu更新源里没有 <tt class="docutils literal">openni2_launch</tt> 包，只能下载源码到自己的catkin workspace里。</p>
+</div>
+</div>
+<div class="section" id="fix-xtion-pro-live-3dsensor-launch">
+<h3><a class="toc-backref" href="#id17">Fix Xtion pro Live 3dsensor.launch</a></h3>
+<p>Xtion pro Live的Fix稍微复杂点，进入到3dsensor路径，对其进行编辑：</p>
+<div class="highlight"><pre>&gt; roscd turtlebot_bringup/launch/
+&gt; sudo gedit 3dsensor.launch
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">可以先用 <tt class="docutils literal">sudo cp 3dsensor.launch 3dsensor_back.launch</tt> 将以前的launch文件备份一份，以防万一。</p>
+</div>
+<p>用下面的内容替换到整个 <tt class="docutils literal">3dsensor.launch</tt> 的内容：</p>
+<div class="highlight"><pre><span class="c">&lt;!-- Modified for Xtion pro Live camera. --&gt;</span>
+<span class="nt">&lt;launch&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;camera&quot;</span> <span class="na">default=</span><span class="s">&quot;camera&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;publish_tf&quot;</span> <span class="na">default=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;depth_registration&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;rgb_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;ir_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;depth_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;depth_registered_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;disparity_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;disparity_registered_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;scan_processing&quot;</span> <span class="na">default=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;num_worker_threads&quot;</span> <span class="na">default=</span><span class="s">&quot;4&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;scan_topic&quot;</span> <span class="na">default=</span><span class="s">&quot;scan&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;include</span> <span class="na">file=</span><span class="s">&quot;$(find openni2_launch)/launch/openni2.launch&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;camera&quot;</span> <span class="na">value=</span><span class="s">&quot;$(arg camera)&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">&quot;publish_tf&quot;</span> <span class="na">value=</span><span class="s">&quot;$(arg publish_tf)&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/include&gt;</span>
+
+  <span class="nt">&lt;group</span> <span class="na">if=</span><span class="s">&quot;$(arg scan_processing)&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;nodelet&quot;</span> <span class="na">type=</span><span class="s">&quot;nodelet&quot;</span> <span class="na">name=</span><span class="s">&quot;depthimage_to_laserscan_loader&quot;</span> <span class="na">args=</span><span class="s">&quot;load depthimage_to_laserscan/DepthImageToLaserScanNodelet camera_nodelet_manager&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;scan_height&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;output_frame_id&quot;</span> <span class="na">value=</span><span class="s">&quot;/camera_depth_frame&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;range_min&quot;</span> <span class="na">value=</span><span class="s">&quot;0.45&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">&quot;image&quot;</span> <span class="na">to=</span><span class="s">&quot;/camera/depth/image_raw&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">&quot;scan&quot;</span> <span class="na">to=</span><span class="s">&quot;/scan&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/node&gt;</span>
+  <span class="nt">&lt;/group&gt;</span>
+<span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id18">启动测试</a></h3>
+<p>依次启动 <tt class="docutils literal">minimal.launch</tt>，<tt class="docutils literal">3dsensor.launch</tt> 和 <tt class="docutils literal">rviz</tt>：</p>
+<div class="highlight"><pre>&gt; roslaunch turtlebot_bringup minimal.launch
+&gt; roslaunch turtlebot_bringup 3dsensor.launch
+&gt; roslaunch turtlebot_rviz_launchers view_robot.launch
+</pre></div>
+<p>rviz启动后，勾选“DepthCloud”和“LaserScan”，展开“DepthCloud”，选择“Color Image Topic”为“/camera/rgb/image”即可看到深度摄像头利用深度信息重建的3D点云图像，如下图：</p>
+<img alt="Xtion pro Live 3dsensor" src="http://aicrobo.github.io/images/2013-10-29_fix_kinect_xtion_pro_with_3dsensor/xtion1.jpg" />
+<p>场景中红色点线即为从点云中提取的模拟2D激光雷达的信息。</p>
+</div>
+</div>
+<div class="section" id="reference">
+<h2><a class="toc-backref" href="#id19">Reference</a></h2>
+<table class="docutils citation" frame="void" id="turtlebot" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[turtlebot]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> turtlebot statck, <a class="reference external" href="http://wiki.ros.org/turtlebot/Tutorials/groovy/Installation">http://wiki.ros.org/turtlebot/Tutorials/groovy/Installation</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="freenect" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[freenect]</a></td><td>freenect driver statck, <a class="reference external" href="http://wiki.ros.org/freenect_stack">http://wiki.ros.org/freenect_stack</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="catkin" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[catkin]</a></td><td>catkin/Tutorials/create_a_workspace <a class="reference external" href="http://wiki.ros.org/catkin/Tutorials/create_a_workspace">http://wiki.ros.org/catkin/Tutorials/create_a_workspace</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="openni2-camera" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[openni2_camera]</td><td>openni2_camera driver files github, <a class="reference external" href="https://github.com/ros-drivers/openni2_camera/tree/groovy-devel">https://github.com/ros-drivers/openni2_camera/tree/groovy-devel</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="openni2-launch" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[openni2_launch]</a></td><td>openni2_launch launch files github, <a class="reference external" href="https://github.com/ros-drivers/openni2_launch/tree/groovy-devel">https://github.com/ros-drivers/openni2_launch/tree/groovy-devel</a></td></tr>
+</tbody>
+</table>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2013-10-fix_kinect_xtion_pro_with_3dsensor.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-open-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>

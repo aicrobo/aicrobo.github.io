@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first&#34;&gt;没钱买ROS移动机器人平台？那就玩玩免费的ROS仿真机器人平台吧！ROS里面玩仿真机器人是很容易的事情，但从0开始配置到能玩ROS仿真机器人是很麻烦的，新手想凭自己的Search能力玩起来，先磨几个月再考虑吧。10分钟上手玩不是玩笑，下载好Ubuntu for ROS开发版后，如果使用虚拟机预览模式进入系统，10分钟都不要就能上手玩！&lt;/p&gt;
+&lt;p class=&#34;last&#34;&gt;环境：Windows, VMWare Workstation 10.0, Ubuntu for ROS h2-140330.&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>10分钟上手玩ROS仿真机器人 | Yuanbo She</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/others.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Others
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/webqian-duan-code.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                WEB前端&Code
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-9'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1>Yuanbo She</h1>
+                            </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="http://lamda.nju.edu.cn">
+                                <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                            <li><a href="http://www.nju.edu.cn/">
+                                <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>10分钟上手玩ROS仿真机器人</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2014-03-31T00:00:00"> 2014-03-31</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first">没钱买ROS移动机器人平台？那就玩玩免费的ROS仿真机器人平台吧！ROS里面玩仿真机器人是很容易的事情，但从0开始配置到能玩ROS仿真机器人是很麻烦的，新手想凭自己的Search能力玩起来，先磨几个月再考虑吧。10分钟上手玩不是玩笑，下载好Ubuntu for ROS开发版后，如果使用虚拟机预览模式进入系统，10分钟都不要就能上手玩！</p>
+<p class="last">环境：Windows, VMWare Workstation 10.0, Ubuntu for ROS h2-140330.</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id9">准备工作</a></li>
+<li><a class="reference internal" href="#id4" id="id10">示例程序</a><ul>
+<li><a class="reference internal" href="#id5" id="id11">显示模型</a></li>
+<li><a class="reference internal" href="#id6" id="id12">键盘控制</a></li>
+<li><a class="reference internal" href="#rqt-gui" id="id13">rqt GUI控制</a></li>
+<li><a class="reference internal" href="#interactive-marker" id="id14">Interactive Marker控制</a></li>
+<li><a class="reference internal" href="#id7" id="id15">代码控制</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id16">真实机器人</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id9">准备工作</a></h2>
+<p>在电脑里面装好虚拟机，这里以VMWare Workstation 10.0为例。</p>
+<p>从 <a class="reference external" href="http://blog.exbot.net/archives/702">Ubuntu for ROS官网</a> 下载Ubuntu for ROS开发版，这里下载的是 <strong>ubuntu12.04-ros-exbot-h2-140330</strong> 。</p>
+<p>要想看到底最快几分钟能玩起来，请参照Ubuntu for ROS虚拟机安装教程的 <a class="reference external" href="http://blog.exbot.net/archives/762#id4">预览方式试用Ubuntu for ROS</a> 。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id10">示例程序</a></h2>
+<p>进入正题，快捷命令来了。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">在terminal中输入命令的时候，输入一半按一下 <em>Tab</em> 键可以自动补全命令，如果没有自动补全，连按两下 <em>Tab</em> 键可以显示候选。</p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">输入下面例子中的命令后回车将执行命令，在terminal窗口按下 <strong>Ctrl + C</strong> 组合键可以退出正在运行的程序。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id11">显示模型</a></h3>
+<p>打开terminal，输入命令：</p>
+<div class="highlight"><pre>roslaunch exbotxi_rviz view_model.launch
+</pre></div>
+<p>将会打开rviz，并加载查看机器人模型的配置，如下图：</p>
+<img alt="view model" src="http://aicrobo.github.io/images/2014-03-31_sim_exbotxi_play_in_10_mins/view1.jpg" />
+<p>这里加载的是ExBot XI移动机器人平台模型，在该配置里面只能简单地查看模型，无法做控制等操作。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">鼠标左键点住机器人拖动，可以旋转视图；鼠标中键点住机器人拖动，可以平移视图；鼠标右键点住机器人拖动，或者滚动滚轮，可以放大缩小视图。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id12">键盘控制</a></h3>
+<p>早说过ExBot XI移动机器人平台兼容turtlebot了，这里就用turtlebot包的键盘控制node来控制机器人移动。</p>
+<p><strong>Ctrl + C</strong> 结束掉前面的程序，关闭terminal，然后再打开3个terminal，分别输入下面的3个命令：</p>
+<div class="highlight"><pre>roslaunch exbotxi_bringup fake_exbotxi.launch
+roslaunch turtlebot_teleop keyboard_teleop.launch
+roslaunch exbotxi_rviz view_mobile.launch
+</pre></div>
+<p>第1条命令用于启动ExBot XI仿真机器人，启动成功后显示信息如下：</p>
+<img alt="view robot" src="http://aicrobo.github.io/images/2014-03-31_sim_exbotxi_play_in_10_mins/sim.jpg" />
+<p>第2条命令用于启动键盘控制node。第3条命令用于打开ROS可视化工具rviz，并加载移动机器人视图配置。</p>
+<p>现在将光标focus在第2条命令的terminal窗口，便可以通过键盘控制仿真机器人了：</p>
+<img alt="view control" src="http://aicrobo.github.io/images/2014-03-31_sim_exbotxi_play_in_10_mins/control1.jpg" />
+<p>控制方式在terminal窗口上有提示，<strong>i</strong>, <strong>k</strong> 为前后，<strong>j</strong>, <strong>l</strong> 为左右转向。</p>
+<p>turtlebot的keyboard_teleop.launch键盘控制，自带速度平滑功能，加减速平滑过渡，当不按键盘的时候会停下。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">打开一个terminal后，如果想再开一个terminal，可以在前面那个terminal窗口内区域鼠标右键，选择 <strong>Open Tab</strong> 打开，这样可以避免多个terminal独立窗口切换麻烦。</p>
+</div>
+</div>
+<div class="section" id="rqt-gui">
+<h3><a class="toc-backref" href="#id13">rqt GUI控制</a></h3>
+<p>现在换ROS里面的便民工具rqt，用GUI来控制机器人。</p>
+<p><strong>Ctrl + C</strong> 结束掉前面第2个terminal（运行keyboard_teleop.launch的terminal）运行的程序，换成执行下面的命令：</p>
+<div class="highlight"><pre>rosrun rqt_robot_steering rqt_robot_steering
+</pre></div>
+<p>运行成功后用rqt的Robot Steering GUI控制机器人的界面如下：</p>
+<img alt="view control" src="http://aicrobo.github.io/images/2014-03-31_sim_exbotxi_play_in_10_mins/control2.jpg" />
+<p>将光标focus在Robot Steering GUI上面，两个进度条的作用很明显，就是前后速度和转向速度。你可以用鼠标直接拖动，也可以用键盘来调整，按键是 <strong>wsad</strong>, <strong>zx</strong> 分别用于转向和前后速度的归零，空格用于所有速度的归零。</p>
+</div>
+<div class="section" id="interactive-marker">
+<h3><a class="toc-backref" href="#id14">Interactive Marker控制</a></h3>
+<p>现在体验下rviz的Interactive Marker控制移动机器人。
+<strong>Ctrl + C</strong> 结束掉前面第2个terminal（运行rqt_robot_steering的terminal）运行的程序，然后...然后没有然后了，不用输入什么命令了。</p>
+<p>Focus在rviz界面，选择最上面 <strong>Interact</strong> 工具，勾上左边 <em>Displays</em> 栏的 <em>InteractiveMarkers</em> 显示项。将会看到下面的界面：</p>
+<img alt="view control" src="http://aicrobo.github.io/images/2014-03-31_sim_exbotxi_play_in_10_mins/control3.jpg" />
+<p>现在可以直接用鼠标在rviz界面上操作机器人了，红色箭头用来操作前进后退，蓝色圈圈用来操作转弯...</p>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id15">代码控制</a></h3>
+<p>不管用什么控制方式控制机器人都只是玩玩，手柄控制，Android手机控制，等等在后面的exbot_xi包中会更新，作为一个ROS移动机器人的开发者，最需要知道的是如何使用代码控制。</p>
+<p>现在先测试exbotxi_example package中的示例代码，前面第2个terminal还空着，在这个terminal中输入启动示例代码的命令：</p>
+<div class="highlight"><pre>rosrun exbotxi_example move
+</pre></div>
+<p>机器人开始转圈了，效果如图：</p>
+<img alt="view program" src="http://aicrobo.github.io/images/2014-03-31_sim_exbotxi_play_in_10_mins/program1.jpg" />
+<p><strong>Ctrl + C</strong> 结束掉 <em>move</em> 例程，机器人便会停止运行，换成下面的命令：</p>
+<div class="highlight"><pre>rosrun exbotxi_example move.py
+</pre></div>
+<p>可以看到效果一样。不同的是 <em>move</em> 例程是用cpp写的，<em>move.py</em> 例程是用python写的，代码在解释放在后面的教程中说明，源码放在 <em>~/catkin_ws/src/exbot_xi/exbotxi_example/nodes</em> 路径下。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id16">真实机器人</a></h2>
+<p>前面说过 <em>roslaunch exbotxi_bringup fake_exbotxi.launch</em> 是启动仿真ExBot XI机器人平台的命令，如果在真实机器人上面试验，换成另外一条启动命令即可，同时电脑里面的可视化界面会同步显示机器人运行轨迹，效果跟使用仿真机器人一样，只不过多了一个真实的机器人在现实环境中运行。</p>
+<p>ExBot将不断丰富exbot_xi移动机器人开发包功能，提供更多移动机器人控制示例代码，如果对移动机器人感兴趣，请关注 ExBot ROS版，<a class="reference external" href="http://blog.exbot.net/archives/category/ros">http://blog.exbot.net/archives/category/ros</a> 。ExBot XI移动机器人平台请参考 <a class="reference external" href="http://item.taobao.com/item.htm?spm=a230r.1.14.5.dcOLJj&amp;id=37550412891&amp;_u=v10nmj0b411">ExBot XI移动机器人平台</a> 。</p>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'su': 'blog/2014-03-sim_exbotxi_play_in_10_mins.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/others.html" title="Others">
+                            <i class="fa fa-folder-o fa-lg"></i> Others
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-open-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/webqian-duan-code.html" title="WEB前端&Code">
+                            <i class="fa fa-folder-o fa-lg"></i> WEB前端&Code
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ren-sheng.html">人生</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/others.html">others</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="FreedomShe's blog">
+                        <i class="fa fa-external-link fa-lg"></i> FreedomShe's blog</a></li>
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+				<li>
+				<div class="bdsharebuttonbox"><A class=bds_more href="http://share.baidu.com/code#" data-cmd="more"></A><A title=分享到QQ空间 class=bds_qzone href="http://share.baidu.com/code#" data-cmd="qzone"></A><A title=分享到新浪微博 class=bds_tsina href="http://share.baidu.com/code#" data-cmd="tsina"></A><A title=分享到腾讯微博 class=bds_tqq href="http://share.baidu.com/code#" data-cmd="tqq"></A><A title=分享到人人网 class=bds_renren href="http://share.baidu.com/code#" data-cmd="renren"></A><A title=分享到微信 class=bds_weixin href="http://share.baidu.com/code#" data-cmd="weixin"></A></div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>
