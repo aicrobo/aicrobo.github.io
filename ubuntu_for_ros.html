@@ -122,112 +122,98 @@
 
 <h2>关于Ubuntu for ROS</h2>
 
-发行版说明：本Ubuntu iso发行版是装好ROS，做好升级和优化等工作后的定制化Ubuntu发行版，可以按照安装Ubuntu的方式进行安装。装好后的用户名和密码均为<span style="color: #ff0000;"><strong>exbot</strong></span>，安装过程中设置的用户名和密码均无效，可以随便填写。
-<p class="topic-title first">目录</p>
-
-<ul class="simple">
-	<li><a class="reference internal" id="id9" href="#id1">啰嗦几句</a></li>
-	<li><a class="reference internal" id="id10" href="#id2">版本</a>
-<ul>
-	<li><a class="reference internal" id="id11" href="#hydro-dev">Hydro开发版</a></li>
-	<li><a class="reference internal" id="id12" href="#hydro-base">Hydro基础版</a></li>
-	<li><a class="reference internal" id="id13" href="#groovy-base">Groovy基础版</a></li>
-	<li><a class="reference internal" id="id13" href="#others">历史版本</a></li>
-</ul>
-</li>
-</ul>
-<div class="section" id="id1">
-<h1>啰嗦几句</h1>
-<span style="color: #0000ff;"><strong>ROS新手需要明白和注意的：</strong></span>
-<ul>
-	<li>ROS是开源框架，ROS wiki是全世界爱好者共同维护的知识库，它代表了ROS爱好者探索的结果。</li>
-	<li>在ROS wiki上，有人有了更好的解决方案，就联系负责人把自己的方案更新在wiki上面。有人有了自己不错的包，也可以去那里发布。</li>
-	<li>所谓的ROS官网，就是世界各位爱好者共同智慧的结晶，一直在完善，一直在优化，当你使用别人探索成果的时候，应该心怀感激。ROS包通常遵循比较开放的License，当你使用和修改别人的源码时候，要附上原作者声明，不是说可以改个名字就声称是自己的东西的，至少也要对原作者表示感谢，这是做人的基本！</li>
-</ul>
-<strong><span style="color: #0000ff;">Ubuntu for ROS的优点：</span></strong>
-<ul>
-	<li>对一个玩ROS的老鸟来说，要裸机配置ROS步骤不难，但是得耗费很长时间，如果网络状况不好，2G多的安装包，恐怕得等一整天才能更新完毕。</li>
-	<li>对一个玩ROS的老鸟来说，要裸机配置ROS开发环境，需要做很多工作，网上资料并不完善，不是每个老鸟都能配出完美开发环境，中间的很多细节问题不是每个人都能解决的。</li>
-	<li>对于一个玩ROS的菜鸟来说，你是想花几个月搜集各种资料解决安装，配置，Bug等等问题，还是想10分钟装完Ubuntu for ROS马上上手玩ROS，或者做开发呢？</li>
-</ul>
-<strong><span style="color: #0000ff;">使用方法如下：</span></strong>
-<ul>
-	<li>如果是Windows用户，请安装虚拟机，如VMWare，笔者使用的是 VMWare Workstation 10.0.0，然后参考《<a title="10分钟安装ROS（Windows + 虚拟机）" href="http://blog.exbot.net/archives/762" target="_blank">10分钟安装ROS（Windows + 虚拟机）</a>》教程进行安装。</li>
-	<li>如果是Ubuntu用户，在裸机中安装，请参考《<a title="10分钟安装ROS（U盘/CD刻录盘 + 裸机）" href="http://blog.exbot.net/archives/818" target="_blank">10分钟安装ROS（U盘/CD刻录盘 + 裸机）</a>》。</li>
-</ul>
-<strong><span style="color: #0000ff;">Ubuntu for ROS 版本代号及说明如下：</span></strong>
-<ul>
-	<li>ubuntu12.04-amd64, ubuntu12.04-i386：amd64表示基于64bit版本Ubuntu制作，i386表示基于32bit版本Ubuntu制作。</li>
-	<li>g1-140520, h1-140520, h2-140520：g1表示Groovy基础版，h1表示Hydro基础版，h2表示Hydro开发版，140520表示2014年5月20日制作。</li>
-	<li>基础版Ubuntu for ROS配置好ROS基础和应用环境，你可以下载别人的catkin/rosbuild包，在系统里面顺利编译，可以安装任何ROS包，可以运行任何ROS包。</li>
-	<li>开发版Ubuntu for ROS在基础版的基础上配置好了开发环境，以及移动机器人运行和开发包，支持各种ROS文件的编辑，可以立即做ROS开发，可以立即运行移动机器人平台。</li>
-	<li>基础版的安装需要1G内存，<span style="color: #ff0000;">开发版的安装需要1.5G或者以上内存，</span>否则安装过程中会报错而无法继续。</li>
-</ul>
-Copyright 2014 by ExBot
-@group ExBot <a href="http://blog.exbot.net">http://blog.exbot.net</a>
-@author Yuanbo She <a href="http://my.phirobot.com">http://yuanboshe.github.io</a>
-@email <a href="mailto:yuanboshe@126.com">yuanboshe@126.com</a>
-
+<div class='col-md-12'>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="glyphicon glyphicon-exclamation-sign"></i>南京大学LAMDA组声明：</h3>
+        </div>
+        <div class="panel-body">
+            <h4>佘元博（Yuanbo She）已从南大LAMDA研究组毕业，得到LAMDA的授权组建了本ROS技术团队，全职推进相关工作进程，愿同各位智能机器人爱好者一起走得更远！</h4>
+        </div>
+    </div>
 </div>
-<div class="section" id="id2">
-<h1>版本</h1>
-<span style="color: #ff0000;">2014-04-16：360云盘突然自动给所有文件增加了“访问密码”，而且无法取消，后面会增加其他云盘下载渠道。感谢各位朋友提醒，访问密码已经贴上。
-2014-05-26：360云盘再出状况，被审查无法分享了，现在改为百度云分享，无需密码。多谢网友 @Sundae90 的提醒！
-2014-06-03：百度云无故屏蔽部分分享链接，现已更新，如果有不能下载情况请留言！</span>
-<div class="section" id="hydro-dev">
-<h2><span style="color: #0000ff;">hydro开发版</span></h2>
-<strong>ubuntu12.04-amd64-ros-exbot-h2-140520 [<a href="http://pan.baidu.com/s/1dDeloXV" target="_blank">下载iso</a>] MD5 [a871fc780a624ff4f69b594ca8a79b5c]</strong>
-<strong>ubuntu12.04-i386-ros-exbot-h2-140520 [<a href="http://pan.baidu.com/s/1dD5qkE1" target="_blank">下载iso</a>] MD5 [9ec87ffeafec5e836bced58bf1da3413]</strong>
-<span style="color: #ff0000;">（注意：此版本如果在虚拟机上面安装，需要设置虚拟机内存为1.5G或者以上。）</span>
 
-* 安装 ros-hydro-desktop-full
-* 配置 catkin_ws (所有catkin类型包放在 ~/catkin_ws/src/ 目录下编译或者运行)
-* 配置 rosbuild_ws (所有rosbuild类型包放在 ~/rosbuild_ws/sandbox/ 目录下编译或者运行)
-* 配置 overlay: rosbuild_ws -&gt; catkin_ws -&gt; hydro
-* 安装 jdk8
-* 安装 Eclipse for C/C++ (Kepler)
-* 安装 turtlebot包
-* 安装 exbot_xi包
-* 安装 Kinect &amp; ASUS Xtion pro Live驱动
-* 配置 Eclipse，支持 C/C++ &amp; Python 开发环境
-* 优化 Eclipse，支持多种ROS文件类型：*.launch, *.concert, *.xacro, *.urdf, *.xml, *.yaml, *.rviz, cmake.
-* 配置 x11vnc远程服务
-
+<div class='col-md-6'>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> 历史：</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="simple">
+                <li>2013年，Ubuntu for ROS诞生于<span style="color: #ff0000;"><strong>南京大学计算机软件新技术国家重点实验室机器学习与数据挖掘研究组（LAMDA）</strong></span>，由负责智能机器人系统架构与开发的佘元博（Yuanbo She）同学设计制作完成。</li>
+                <li>设计制作Ubuntu for ROS的初衷，是节约ROS开发团队的开发环境部署时间。</li>
+                <li>2014年1月30日，作为ExBot网上机器人兴趣小组的创始人之一，Yuanbo She以ExBot小组的名义通过ExBot机器人社区（http://blog.exbot.net/archives/702）对外发布分享Ubuntu for ROS，并编写初级使用教程，让广大ROS爱好者受益。</li>
+                <li>2014年5月20日，发布完520版本后，Ubuntu for ROS的维护工作停止，其他版本以及其他团队的类似定制版Ubuntu与本ROS技术团队无关。</li>
+                <li>2015年7月，设计制作Ubuntu for ROS的原班人马正式全职，重新为大家维护ROS定制版Ubuntu iso，并推出更完善的使用教程。</li>
+            </ul>
+        </div>
+    </div>
 </div>
-<div class="section" id="hydro-base">
-<h2><span style="color: #0000ff;">hydro基础版</span></h2>
-<strong>ubuntu12.04-amd64-ros-exbot-h1-140520 [<a href="http://pan.baidu.com/s/16Il0y" target="_blank">下载iso</a>] MD5 [f6c044e5c01154f9920229c5a8b2b11e]</strong>
-<strong>ubuntu12.04-i386-ros-exbot-h1-140520 [<a href="http://pan.baidu.com/s/1c0xkIGC" target="_blank">下载iso</a>] MD5 [f3f4059fbc91201ca5d9fb4a43e6508e]</strong>
 
-* 安装 ros-hydro-desktop-full
-* 配置 catkin_ws (所有catkin类型包放在 ~/catkin_ws/src/ 目录下编译或者运行)
-* 配置 rosbuild_ws (所有rosbuild类型包放在 ~/rosbuild_ws/sandbox/ 目录下编译或者运行)
-* 配置 overlay: rosbuild_ws -&gt; catkin_ws -&gt; hydro
+<div class='col-md-6'>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>说明：</h3>
+        </div>
+        <div class="panel-body">
+            <p>Ubuntu for ROS是一款基于ROS开发的定制版Ubuntu系统，按照常规的方式部署和配置ROS学习与开发环境需要有经验的开发者花费数小时甚至一两天（网络不好的情况下）完成，而使用Ubuntu for ROS对于一个完全没有经验的开发者来说，也只需要10分钟即可开始进行ROS学习与开发。</p>
 
+            <p>2014年6月，团队停止Ubuntu for ROS的维护工作原因有以下几点：</p>
+
+            <ul class="simple">
+                <li>Ubuntu系统的定制打包很简单，但内容功能的优化与完善需要倾注制作者的经验和心血。而Ubuntu for ROS的发布与推广让一些商业化团队看到商机，伸手党之余还各种信息叨扰让制作者不甚其烦，没底线地进行商业忽悠也让作者感到厌恶。</li>
+                <li>团队成员对外分享经验、答疑解难，但很多劳动被商业化团队无偿利用，内部商定就此封笔停止对外分享。团队外的使用者遇到疑问常常得到错误的回答，被误导导致Ubuntu for ROS名声受损，也使团队感到烦闷。</li>
+            </ul>
+        </div>
+    </div>
 </div>
-<div class="section" id="groovy-base">
-<h2><span style="color: #0000ff;">groovy基础版</span></h2>
-<strong>ubuntu12.04-ros-exbot-g1-140330 [<a href="http://pan.baidu.com/s/1jG3Kr8E" target="_blank">下载iso</a>] MD5 [afa6066e009fbbdef4c0ae01bab2365a]:</strong>
 
-* 安装 ros-groovy-desktop-full
-* 配置 catkin_ws (所有catkin类型包放在 ~/catkin_ws/src/ 目录下编译或者运行)
-* 配置 rosbuild_ws (所有rosbuild类型包放在 ~/rosbuild_ws/sandbox/ 目录下编译或者运行)
-* 配置 overlay: rosbuild_ws -&gt; catkin_ws -&gt; groovy
+<h2>安装方法与下载地址</h2>
+<ul>
+	<li>如果是Windows用户，请安装虚拟机，如VMWare，笔者使用的是 VMWare Workstation 10.0.4，然后参考《<a title="10分钟安装ROS（Windows + 虚拟机）" href="http://aicrobo.github.io/blog/2014-03-install_ros_in_10mins_vm.html" target="_blank">10分钟安装ROS（Windows + 虚拟机）</a>》教程进行安装。</li>
+	<li>如果是Ubuntu用户，在裸机中安装，请参考《<a title="10分钟安装ROS（U盘/CD刻录盘 + 裸机）" href="http://aicrobo.github.io/blog/2014-03-install_ros_in_10mins_pc.html" target="_blank">10分钟安装ROS（U盘/CD刻录盘 + 裸机）</a>》。</li>
+</ul>
 
+<div class='col-md-6'>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>基础版(Ubuntu 14.04 + Indigo)</h3>
+        </div>
+        <div class="panel-body">
+            <h4>64位</h4>
+            <ul class="simple">
+                <li><p><strong>UROS1404I64BASE_aicrobo_150714 [<a href="http://pan.baidu.com/s/1eQIY8Ye" target="_blank">下载iso</a>]</strong></p>
+                <p>MD5 [46366f2d412c1c2090bdf1783fff6d19]</p></li>
+            </ul>
+            <hr/>
+            <h4>32位</h4>
+            <ul class="simple">
+                <li><p><strong>UROS1404I32BASE_aicrobo_150714 [<a href="http://pan.baidu.com/s/1sjn4j7n" target="_blank">下载iso</a>]</strong></p>
+                <p>MD5 [c9b34c14997718eae31d1938188554d3]</p></li>
+            </ul>
+        </div>
+    </div>
 </div>
-<div class="section" id="others">
-<h2>其他版本</h2>
-<del datetime="2014-05-22T13:40:53+00:00"><strong>ubuntu12.04-ros-exbot-h2-140330 [下载iso] 密码 [c5df] MD5 [0ce2f0f9f302b2218f6b60fa8c2c6e19]</strong></del>
-<del datetime="2014-05-22T13:40:53+00:00"><strong>ubuntu12.04-ros-exbot-h1-140330 [下载iso] 密码 [0349] MD5 [04e95f2057f1166c8a714649fde2ac6d]:</strong></del>
-<del><strong>ubuntu12.04-ros-by-exbot-h140317 [下载iso] MD5 [95e51c45cfe5ae0688b720aedcd7ffb2]:</strong></del>
-<del><strong>ubuntu12.04-ros-by-exbot-h140315 [下载iso] MD5 [0273afc83897ed9638c485724ea6e866]:</strong></del>
-<del><strong>ubuntu12.04-ros-by-exbot-h140224 [下载iso] MD5 [4ca75c8562622c106be080c6d1e458fb]:</strong></del>
-<del><strong>ubuntu12.04-ros-by-exbot-g140224 [下载iso] MD5 [f6bf48cc4fdf8e6d2d9348f93c7bc6b1]:</strong></del>
-（转入新版本命名规范，旧规范不再提供下载）
-<del><strong>ubuntu12.04-ros-by-exbot-v140130 [下载iso] MD5 [d12d2ea014d03badbcd04324a1b136c0]:</strong></del>
-（该版本为最初的Ubuntu for ROS发行版，是 Hydro + Groovy 双版本ROS的 Ubuntu for ROS，后来发现两个版本切换使用，对ROS新手来说容易混乱，产生一系列问题，而且双版本实用性不大，不再维护，如果需要双版本请留言，笔者后期制作后补上）
 
-</div>
+<div class='col-md-6'>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>开发版(Ubuntu 14.04 + Indigo)</h3>
+        </div>
+        <div class="panel-body">
+            <h4>64位</h4>
+            <ul class="simple">
+                <li><p><strong>UROS1404I64DEV_aicrobo_150715 [<a href="http://pan.baidu.com/s/1jGjE918" target="_blank">下载iso</a>]</strong></p>
+                <p>MD5 [8e4a47fbb80c54cb1d4b0b094dac7947]</p></li>
+            </ul>
+            <hr/>
+            <h4>32位</h4>
+            <ul class="simple">
+                <li><p><strong>UROS1404I32DEV_aicrobo_150715 [<a href="http://pan.baidu.com/s/1bnuImCJ" target="_blank">下载iso</a>]</strong></p>
+                <p>MD5 [fe5f62cc1684879b06c88bcd7a564ff8]</p></li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <!-- UY BEGIN -->
