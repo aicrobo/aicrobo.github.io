@@ -1,0 +1,390 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;p class=&#34;first&#34;&gt;距离上次写这篇经验分享帖已经16个月了，玩ROS的熟手越来越多，但过时和不负责的转载依旧对新手造成困扰。总结这十几个月朋友们遇到的问题，更新本贴！废话少说，旧帖参考《&lt;a class=&#34;reference external&#34; href=&#34;2014-03-install_ros_in_10mins_pc.html&#34;&gt;10分钟安装ROS（U盘/CD刻录盘 + 裸机）&lt;/a&gt;》，本文简介裸机中安装Ubuntu for ROS的方法，虚拟机中安装Ubuntu for ROS请参考《&lt;a class=&#34;reference external&#34; href=&#34;2015-07-install_ros_in_10mins_vm_new.html&#34;&gt;10分钟安装ROS（Windows + 虚拟机）2015-07-19更新&lt;/a&gt;》教程。&lt;/p&gt;
+&lt;p class=&#34;last&#34;&gt;工具：UltraISO 9.6.2.3059, Ubuntu for ROS iso.&lt;/p&gt;
+">
+    <meta name="author" content="Yuanbo She">
+    <title>10分钟安装ROS（U盘/CD刻录盘 + 裸机）2015-07-19更新 | AICRobotics</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://aicrobo.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Yanone+Kaffeesatz:400,300">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://aicrobo.github.io/theme/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body lang="zh">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aicrobo.github.io/index.html">Navigation</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-nav">
+                <!-- main nav bar -->
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="http://aicrobo.github.io/blog/index.html">Blog </a>
+                    </li>
+                    <li >
+                        <a href="http://aicrobo.github.io/ubuntu_for_ros.html">Ubuntu for ROS </a>
+                    </li>
+                </ul>
+                <p class="navbar-text"><i class="fa fa-ellipsis-v fa-lg"></i></p>
+                <!-- sub nav items -->
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/coding.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Coding
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/cv.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/machine-learning.html">
+                                <i class="fa fa-folder fa-lg"></i>
+                                Machine Learning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://aicrobo.github.io/blog/category/ros.html">
+                                <i class="fa fa-folder-open fa-lg"></i>
+                                ROS
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-6'>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-groups">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-groups">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://aicrobo.github.io/index.html">
+                                <h1><img src="http://aicrobo.github.io/theme/img/logo_horiz.png" alt="logo"></h1>
+                            </a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <div class='col-md-4'>
+                    <div class="row">
+                        <div class='col-md-12'>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="http://lamda.nju.edu.cn">
+                                    <img src="http://aicrobo.github.io/theme/img/lamda.png" alt="Lamda Lab"></a></li>
+                                <li><a href="http://www.nju.edu.cn/">
+                                    <img src="http://aicrobo.github.io/theme/img/nju.png" alt="Nanjing University"></a></li>
+                                <li>
+                                <div class=""></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='col-md-12'>
+                            <!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style_32x32">
+                            <a class="jiathis_button_weixin"></a>
+                            <a class="jiathis_button_cqq"></a>
+                            <a class="jiathis_button_tsina"></a>
+                            <a class="jiathis_button_ydnote"></a>
+                            <a class="jiathis_button_renren"></a>
+                            <a class="jiathis_button_evernote"></a>
+                            <a href="http://www.jiathis.com/share?uid=1803538" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+                            <a class="jiathis_counter_style"></a>
+                            </div>
+                            <script type="text/javascript" >
+                            var jiathis_config={
+                                data_track_clickback:true,
+                                sm:"tqq,tieba,douban,fb,googleplus,qingbiji",
+                                summary:"",
+                                shortUrl:false,
+                                hideMore:false
+                            }
+                            </script>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1803538" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="ybs-bar-hearder-botom"></div>
+</header>
+
+<!-- MAIN -->
+<div class="container" id="ybs-main">
+    <div class='row'>
+        <div class='col-md-9'>
+            <!-- post main -->
+            <h2 class="ybs-bar-back-mid"><span>10分钟安装ROS（U盘/CD刻录盘 + 裸机）2015-07-19更新</span></h2>
+    <article>
+<ul class="list-group list-inline ybs-info-list">
+    <!-- date -->
+    <li class="list-group-item">
+        <i class="fa fa-calendar-o fa-lg"></i>
+        <abbr class="published" title="2015-07-19T00:00:00"> 2015-07-19</abbr>
+    </li>
+
+    <!-- author -->
+        <li class="list-group-item">
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://aicrobo.github.io/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li class="list-group-item">
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li class="list-group-item">
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/aicroboxi.html">aicroboxi</a>,
+                <a class="ybs-black" href="http://aicrobo.github.io/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>        <div class="post-content ybs-background-color-layer1" id="post-content">
+            <div class="summary">
+                <p class="first">距离上次写这篇经验分享帖已经16个月了，玩ROS的熟手越来越多，但过时和不负责的转载依旧对新手造成困扰。总结这十几个月朋友们遇到的问题，更新本贴！废话少说，旧帖参考《<a class="reference external" href="2014-03-install_ros_in_10mins_pc.html">10分钟安装ROS（U盘/CD刻录盘 + 裸机）</a>》，本文简介裸机中安装Ubuntu for ROS的方法，虚拟机中安装Ubuntu for ROS请参考《<a class="reference external" href="2015-07-install_ros_in_10mins_vm_new.html">10分钟安装ROS（Windows + 虚拟机）2015-07-19更新</a>》教程。</p>
+<p class="last">工具：UltraISO 9.6.2.3059, Ubuntu for ROS iso.</p>
+
+            </div>
+		    <div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+			</div>
+            <div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id6">准备工作</a></li>
+<li><a class="reference internal" href="#ubuntu-u" id="id7">制作Ubuntu U盘启动盘</a></li>
+<li><a class="reference internal" href="#id4" id="id8">裸机安装</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id6">准备工作</a></h2>
+<p>所谓“裸机”安装，是指在PC机中安装全新的操作系统，可以在PC机中作为独立的操作系统存在，也可以与Windows等操作系统组成双系统/多系统。</p>
+<p>Ubuntu for ROS 发行版下载后是iso文件，可以按照安装Ubuntu的方式进行安装，例如制作成Live CD在没有操作系统的计算机上安装，或者直接导入虚拟机进行安装，非常方便。本文在虚拟机VMWare中安装只需要10分钟即可完成，这里介绍U盘安装方法，刻录CD安装类似。虚拟机中安装请参考《<a class="reference external" href="2015-07-install_ros_in_10mins_vm_new.html">10分钟安装ROS（Windows + 虚拟机）2015-07-19更新</a>》。</p>
+<p>准备材料：</p>
+<ul class="simple">
+<li>下载Ubuntu for ROS，例如下载UROS1404I64DEV_aicrobo_150715，下载后是UROS1404I64DEV_aicrobo_150715.iso文件。正式Ubuntu for ROS发行版集合页面《<a class="reference external" href="http://aicrobo.github.io/ubuntu_for_ros.html">Ubuntu for ROS</a>》。</li>
+<li>下载UltraISO并安装，本文使用的是UltraISO 9.6.2.3059。</li>
+</ul>
+</div>
+<div class="section" id="ubuntu-u">
+<h2><a class="toc-backref" href="#id7">制作Ubuntu U盘启动盘</a></h2>
+<p>打开UltraISO，文件 -&gt; 打开 -&gt; 选择下载的Ubuntu for ROS iso文件：</p>
+<img alt="iso1" src="http://aicrobo.github.io/images/2015-07-19_install_ros_in_10mins_pc_new/iso1.jpg" />
+<p>插入U盘，启动 -&gt; 写入硬盘印象...，写入方式选择“USB-ZIP+ v2”，格式化U盘，然后写入即可：</p>
+<img alt="iso2" src="http://aicrobo.github.io/images/2015-07-19_install_ros_in_10mins_pc_new/iso2.jpg" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>经常有人问制作的U盘启动盘在自己的机器上无法启动，主要原因是制作的启动盘与主板BIOS兼容性问题，解决方案如下。</p>
+<ol class="last arabic simple">
+<li>使用8G或者以上的U盘制作（8G，16G试验均可），不要使用4GU盘制作（兼容太差）。</li>
+<li>写入方式选择USB-HDD+ v2，或者USB-ZIP+ v2，这两种方式的兼容性比较强。</li>
+</ol>
+</div>
+<p>至此，将会看到名为“UROS1404I64”的U盘启动盘，制作完成。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id8">裸机安装</a></h2>
+<p>将U盘启动盘插入PC机，然后开机。PC机主板上电后按下快捷键进入启动介质选择界面，选择对应的U盘启动。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">不同的主板BIOS设置一般不同，快捷键位（一般在F1~F12里面）也不一样，多尝试几个按键。快捷键通常会有两个功能：一个用于进入BIOS，一个用于进入启动介质选择界面。</p>
+</div>
+<p>完成后，将U盘插入要装Ubuntu for ROS的计算机，重启。如果没有从U盘启动，就需要设置一下BIOS启动顺序，进入BIOS，第一启动项设置为USB方式启动。</p>
+<p>后面的安装过程参考《<a class="reference external" href="2015-07-install_ros_in_10mins_vm_new.html">10分钟安装ROS（Windows + 虚拟机）2015-07-19更新</a>》，基本上一样。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">笔记本安装时卡在选择头像的地方无法继续，此问题在新版本中已经解决。填写用户名和密码可以随便填（不会生效），但主机名会生效，所有发布版本默认用户名和密码均为 <strong>aicrobo</strong> 。</p>
+</div>
+</div>
+
+        </div>
+    </article>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript">
+    var uyan_config = {
+        'du': 'my.phirobot.com',
+        'su': 'blog/2015-07-install_ros_in_10mins_pc_new.html'
+    };
+</script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+<!-- UY END -->
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+            <!-- pagers -->
+        </div>
+
+        <!-- sidebar -->
+        <div class='col-md-3'>
+<aside>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/categories.html" title="Categories">
+                <i class="fa fa-folder-open-o fa-lg"></i> Categories
+            </a></h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/coding.html" title="Coding">
+                            <i class="fa fa-folder-o fa-lg"></i> Coding
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/cv.html" title="CV">
+                            <i class="fa fa-folder-o fa-lg"></i> CV
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/machine-learning.html" title="Machine Learning">
+                            <i class="fa fa-folder-o fa-lg"></i> Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ybs-black" href="http://aicrobo.github.io/blog/category/ros.html" title="ROS">
+                            <i class="fa fa-folder-open-o fa-lg"></i> ROS
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/tags.html" title="Tags">
+                <i class="fa fa-tags fa-lg"></i> Tags
+            </a></h3>
+        </div>
+        <div class="panel-body">
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/github.html">github</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/qt.html">qt</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/exbotxi.html">exbotxi</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/sphinx.html">sphinx</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/cv.html">cv</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/aicroboxi.html">aicroboxi</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/turtlebot.html">turtlebot</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/kinect.html">kinect</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/opencv.html">opencv</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/web.html">web</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/mapreduce.html">mapreduce</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/python.html">python</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/xtion.html">xtion</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/hadoop.html">hadoop</a></span> ,
+                <span class="fa fa-tag tag-4"><a href="http://aicrobo.github.io/blog/tag/big-data.html">big data</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/restructuredtext.html">reStructuredText</a></span> ,
+                <span class="fa fa-tag tag-3"><a href="http://aicrobo.github.io/blog/tag/pcduino.html">pcduino</a></span> ,
+                <span class="fa fa-tag tag-1"><a href="http://aicrobo.github.io/blog/tag/ros.html">ros</a></span> ,
+                <span class="fa fa-tag tag-2"><a href="http://aicrobo.github.io/blog/tag/pelican.html">pelican</a></span> ,
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://aicrobo.github.io/blog/dates.html" title="Dates">
+                <i class="fa fa-calendar fa-lg"></i> Dates
+            </a></h3>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-external-link fa-lg"></i> Links</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a class="ybs-black" href="http://my.phirobot.com" title="Yuanbo She's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Yuanbo She's blog</a></li>
+                    <li><a class="ybs-black" href="http://roboturing.com/blog/index.html" title="Fuqiang Liu's blog">
+                        <i class="fa fa-external-link fa-lg"></i> Fuqiang Liu's blog</a></li>
+                    <li><a class="ybs-black" href="http://www.cnblogs.com/freedomshe" title="Old blog">
+                        <i class="fa fa-external-link fa-lg"></i> Old blog</a></li>
+            </ul>
+        </div>
+    </div>
+</aside>        </div>
+    </div>
+</div>
+<!-- ENDS MAIN -->
+
+<footer>
+    <div class="container">
+        <div>
+            <p>Copyright 2014 by Yuanbo She</p>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5866946'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D5866946%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            Powered by Pelican ...
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36220570-3', 'phirobot.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+</body>
+</html>
