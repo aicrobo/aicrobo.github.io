@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="AICRobo,ROS,智能机器人,人工智能,机器人操作系统,计算机视觉">
+    <meta name="description" content="Articles">
+    <meta name="author" content="Yuanbo She">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="renderer" content="webkit">
+    <title>Articles | AICRobo</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+
+    <!--[if lt ie 9]>
+      <script type="text/javascript" src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+      <script type="text/javascript" src="//cdn.bootcss.com/selectivizr/1.0.2/selectivizr-min.js"></script>
+    <![endif]-->
+	
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+    <!--[if lte IE 8]>
+      <link type="text/css" href="http://www.aicrobo.com/theme/styles_forie.css" rel="stylesheet">
+      <script type="text/javascript" src="//cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://www.aicrobo.com/theme/img/favicon.ico" type="image/x-icon">
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//cdn.bootcss.com/jquery/1.8.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Users -->
+	<link type="text/css" href="http://www.aicrobo.com/theme/css/pack.built.d7a4735d.cache.css" rel="stylesheet" media="all">
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/blog_data.js"></script>    <script type="text/javascript">
+	if(navigator.appVersion.match(/MSIE [678]./i)==null){
+	document.writeln('<link type="text/css" href="http://www.aicrobo.com/theme/styles.css" rel="stylesheet">')
+	}
+	</script>
+</head>
+
+<body class="body_7qcIGG" data-c_tl_id="M_fdbf4fca884a4049c0a9f0f5758ca13b">
+	<header>
+<div class="container-fluid c-section section_2CGTQP" data-c_tl_id="M_c11f7cfd17d72ac5">
+	<div class="container c-container container_IwJriH">
+		<nav class="navbar c-navbar navbar_1q03Hb">
+			<div class="container-fluid navcontainer_Uhjg6c">
+				<div class="navbar-header c-navheader navheader_FY9sjX">
+					<button class="navbar-toggle c-navmenubutton navmenubutton_J4RzJu" data-target="#navmenu_755a1c6b9843c69b" data-toggle="collapse" type="button">
+						<span class="sr-only c-span span_zmeU34">
+							Toggle navigation
+						</span>
+						<span class="icon-bar c-nav-btn-span span_eujvK4">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_JZBDJ2">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_Qioh26">
+						</span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse c-navcollapse navcollapse_gzXDA4" id="navmenu_755a1c6b9843c69b">
+					<ul class="nav navbar-nav navbar-right c-navlist navlist_U1qhg4">
+						<li class="c-navlistitem navlistitem_0r3Vch">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/index.html">
+								首页
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_YgRLVb">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/news.html">
+								资讯
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_3KREzQ">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/business.html">
+								业务
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/blog/">
+								支持
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/about.html">
+								我们
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="c-div div_4EeF5x">
+			<img class="c-image image_2OVLQP" src="http://www.aicrobo.com/theme/files/5b331cc49c0aa557a34eec662d1d1204.png"/>
+		</div>
+	</div>
+</div>
+	</header>
+
+	<!-- MAIN -->
+<div class="container-fluid c-section section_0TxsTH navlist_U1qhg4" data-c_tl_id="M_f5a89589fa73388d">
+	<div class="container c-container container_NTlCsu">
+		<a class="c-textlink textlink_5qefPL" href="http://www.aicrobo.com/index.html">
+			首页
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			支持
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			技术博客
+		</a>
+	</div>
+</div>
+<div class="container-fluid c-section section_3egbpywzlbBKNR" data-c_tl_id="M_4096039ed3a9299c">
+	<div class="container c-container container_IDMIxJ">
+		<div class="row c-row row_RMwxv0">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_ScfXmQ">
+				<h1 class="c-heading heading_mj8l0L">
+					技术支持
+				</h1>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_J9TicW">
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/blog/" type="button">
+					技术博客
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/service.html" type="button">
+					咨询服务
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/feedback.html" type="button">
+					意见反馈
+				</a>
+			</div>
+		</div>
+	</div>
+	<article>
+		<div class="container c-container container_2ngLOL">
+			<div class="c-contentview contentview_FBo9Ir" data-c_e_id="contentview_d02e19b336306fb2">
+				<h2 class="c-heading heading_sHeIAC">
+					机器人烟雾
+				</h2>
+<ul class="list-inline">
+    <!-- date -->
+    <li>
+        <i class="fa fa-calendar-o fa-lg">C: </i>
+        <abbr class="published" title="2013-10-18"> 2013-10-18</abbr>
+    </li>
+	
+
+    <!-- author -->
+        <li>
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://www.aicrobo.com/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li>
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://www.aicrobo.com/blog/category/robot.html">Robot</a>
+    </li>
+
+    <!-- tags -->
+</ul>				<div class="paragraph_5GcJsW">
+					<p class="first last">Robot Smog</p>
+
+				</div>
+				<div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+				</div>
+				<div class="textblock_DZ9doZ">
+					<p>19</p>
+<p><strong>2040年4月，华盛顿特区，废物处理与公共安全参议院小组委员会...</strong></p>
+<p><em>[部分对话]</em></p>
+<p>霍布森：拉姆先生，这本来也是你的发明，不是吗？你和现在的CEO一样都是创始人。</p>
+<p>拉姆：是的，参议员先生，但市面上有很多类似的机器人玩具。我设计botigami的时候，我的同行们也在制造类似的飞行玩具。</p>
+<p>霍布森：在我看来，你的产品还是有所区别的。我们所能找到的其他正在销售的飞行玩具无一例外都是使用电池提供能源，而同类产品中，你的产品是唯一使用柔性太阳能材料供能的。</p>
+<p>拉姆：我们没有深入调查过别人的产品是如何工作的。</p>
+<p>霍布森：如果你的产品也是使用电池提供能源，那他们飞着飞着就会没电了，我们也没有必要举行这场会议来讨论你的产品造成的问题了，是吧？请告诉我们，为什么你当时选择使用柔性太阳能供能？</p>
+<p>拉姆：它太适合做飞行机器人了。太阳能材料非常薄而且电能转换效率高，给我们的机器人提供需要的功率，使用太阳能材料比使用电池更轻，而且，使用柔性太阳能材料，我们能够把周围的设备制作成可折叠结构的。当孩子们买botigami的时候，他们打开包装盒就能开始玩了——不需要买电池或者燃料电池，甚至都不用使用相应工具打开电池盒。对于作为工程师的我来说，在所有的供能方案中，这是最优雅的解决方案。</p>
+<p>20</p>
+<p>霍布森：就因为这种原因，电池天然地就限制了电子产品或者机器人的使用周期。当你选择使用太阳能供能的时候，你考虑过运行周期的问题吗？</p>
+<p>拉姆：事实上太阳能光电板是比电池更适合给机器人玩具供能的，正因为这样，孩子们的玩耍就不会因为电池耗尽而被迫中断。当太阳落山了，botigami就停下来——所以我们不必设计开关，这样也降低了生产成本。</p>
+<p>霍布森：是否需要设计开关这个问题我们一会儿再讨论，现在继续讨论对比你的产品和其他飞行机器人产品的问题。你给整个市场贡献了什么？</p>
+<p>拉姆：就数量而言，粗略估计我们的产品占有85%的网络销售份额。</p>
+<p>霍布森：那么，在过去的5年里，你们卖掉了多少台botigami呢？</p>
+<p>拉姆：在全世界不到1亿台，美国地区的大约就占了一半。</p>
+<p>霍布森：好的，我们回到先前那个问题，其他的同类竞争产品都有太阳能和开关？</p>
+<p>拉姆：不好意思，我无法回答这个问题，我还没有做过这种关于竞争产品的分析。但如果需要，我的市场团队可以做相关调查，然后反馈给你。</p>
+<p>霍布森：现在，我们来谈谈你的产品的第二个功能特性吧：说说视线追踪，怎么样？你知不知道，有没有任何其他的竞争产品有内置的眼神交流行为？</p>
+<p>21</p>
+<p>拉姆：我不知道其他哪个产品有这种功能。</p>
+<p>霍布森：为什么你要做这种功能呢？为什么要在飞行玩具里面设计这种通过眼神就能将其引过来的功能？</p>
+<p>拉姆：你曾经读过加西亚·马尔克斯的书吗？《百年孤独》？</p>
+<p>霍布森：没有读过。</p>
+<p>拉姆：这是一部非常优美的小说，充满了魔幻的现实主义，里面有这样一个场景：很多蝴蝶围绕在主人公周围飞舞，这种方式美妙得令人窒息。为了在孩子们身上创造出这种体验，眼神交流是一种非常优雅的解决方案。如果你有5个botigamis，将它们沿着墙排成一行，然后依次盯着它们看，它们就会依次起飞，并朝你飞过来。不一会儿，就有5个机器人在你周围飞舞了。除此以外，有实现了眼球检测和视线追踪的一体化视觉芯片，拿来即可使用，极少的额外重量，也几乎没多少额外电能损耗。给botigami增加这项功能后，机器人变得有趣多了，而且BOM花费没多少变化。</p>
+<p>霍布森：BOM?</p>
+<p>拉姆：就是物料清单，机器人的所有零部件的成本。</p>
+<p>霍布森：如果这种眼神交流功能很棒的话，为什么你的竞争对手们不在自己的产品里加入这种功能？</p>
+<p>拉姆：我不知道他们是怎么选择自己的产品的操作模式。</p>
+<p>霍布森：你们应该知道他们使用的是什么操作模式吧？</p>
+<p>拉姆：我见过的一两个是使用的远程控制，直接由孩子们遥控。</p>
+<p>霍布森：让我来确认一下：你使用眼神交流方式是因为你想为用户重现书中的体验？</p>
+<p>拉姆：并且我们无意中发现，这是一个很好的设计。我是指，这就是一个迷人的交互式体验。很显然，消费者们喜欢这种交互方式。</p>
+<p>22</p>
+<p>霍布森：交互式体验？好吧，请看看这张图，拉姆先生。你知道这里的中央公园有多少人带着墨镜吗？这些图片是上周监视器里面拍出来的。这儿，请注意附表5，把它调得清晰点。</p>
+<p>拉姆：嗯，我注意到了。</p>
+<p>霍布森：那好，那些没有戴墨镜的人在做什么呢？请你描述一下。</p>
+<p>拉姆：他们好像在低头看路。</p>
+<p>霍布森：不是的，他们走路的时候是在看自己的脚，拉姆。这里有个时间线，是从6年前到现在的。在你发明botigami的前一年，同样的公园，当年同一时间段，也是阴天，瞧瞧有什么不同？每个人都是直着身子走路，边走边与别人交谈，欢笑，很轻松。拉姆先生，你注意到当你走出去，在公园散步的时候有什么与以往不同的地方吗？</p>
+<p>拉姆：参议员先生，我管理一家很大的公司。很遗憾，我没什么时间去公园里溜达。</p>
+<p>霍布森：好吧，既然你不去路上走走，那我来告诉你那儿是些什么状况。每个人都害怕被你的某个机器人盯上，害怕与那些机器人有眼神交流。因为如果有眼神交流，那些机器人会飞过来，在你周围盘旋。每个人都避免与所有物体有眼神交流，因为不管在什么地方，那样做都有可能导致自己被botigami困住——在太阳落山前，那些飞行器就一直在那飞啊飞。没人再敢看周围的东西，拉姆先生。在5年时间里，你靠自己的力量，用30美元的小孩的玩具，就改变了人们在公园散步的习惯。我提问的时间到了，下面请雷穆斯提问。</p>
+<p>雷穆斯：谢谢。现在这场调查轮到了公共安全的环节。拉姆先生，你意识到有多少人通过改装botigamis而创造出新的机器人吗？</p>
+<p>23</p>
+<p>拉姆：嗯，我注意到了，是有一些这样的改装。</p>
+<p>雷穆斯：我的侄子以前在布里斯托尔的圣安德鲁公园玩的时候，看到过一种给跑步者训练用的机器狗。但实际上，这个机器狗就是botigami和训练机器人组合起来的新型机器人。当他与这个100磅的机器人发生眼神交流的时候，它以每小时10英里的速度向他跑去。那机器人和他一样高，围着他转了20分钟，这可怜的孩子就这样自己给自己找了麻烦。你注意到这种改装机器人了么？</p>
+<p>拉姆：没有，我从来没听说过这种东西。</p>
+<p>雷穆斯：好吧，我在网上查过了。有一个在线的教程，教人们如何使用botigami的视觉处理器，以及用botigami的控制器替换掉运动机器人的控制器。很显然，这两种机器人相似的架构使得人们一小时就能搞定。你觉得这可能吗？</p>
+<p>拉姆：大部分的机器人设备都是使用类似的部件，因为我们都是从相同的厂商那里购买一样的基础传感器和处理部件。一些部件可以互换是很自然的事情。</p>
+<p>雷穆斯：好吧，照这样下去，大家在公共安全问题上就会遇到麻烦了。你设计下一个版本的botigami的时候，能让它无法通过这种方式被改装吗？</p>
+<p>拉姆：无法被改装？我不明白你的意思。</p>
+<p>雷穆斯：我来说明一下：botigami广为公众诟病，而且现在它似乎威胁到了公共安全。我们坚持要求你在设计下一个版本的时候，让它无法被别人改装成其他机器人。</p>
+<p>拉姆：这不可能。如果你制造了某种东西——任何形式的机器人——那么它显然就能被山寨掉。没什么东西能被设计成可改造或不可改造的，任何东西都是能被修改的。那些人仅仅在造机器，毕竟不是像造一个生物那样。</p>
+<p>雷穆斯：这太荒谬了。这就好像是在告诉我，只要你发明了一些新东西，它就会把我们的城市再一次弄得一团乱，因为总有一些人通过改装将它用在不好的地方。在20世纪，那几十年里的那些发明，有多少是没有引发意料不到的灾难性后果的？你看到过我们现在所面临的垃圾填埋问题了吗？你是否知道维护费直线飙升了多少？每次我们来到户外，我们都能看见一些botigami，它依靠阳光充电，只要有阳光就起飞寻找人们的目光。拉姆先生，你见过废物处理站现在是个什么样子吗？我们几乎整夜地工作，就是为了避免引起那些机器人的注意。如果每个机器人都是可以被改装的，拉姆先生，你觉得我们该如何应对？</p>
+<hr class="docutils" />
+<p>24</p>
+<p>2004年，当过海兵的鲁弗斯·特里尔在美国亚特兰大市中心买下了一家酒吧，将其改名为特里尔酒馆，于是这个爱尔兰风格酒馆开始运营起来了。这个酒馆既靠近奢华公寓又靠近收容所，那些无家可归的流浪汉总是喜欢坐在酒馆附近的人行道上。对于这些充满流浪汉和毒品活动的环境，特里尔甚为苦恼，于是，2008年的时候他造了一台机器人来帮他清理路面。</p>
+<p>这个机器人的底盘就是用一个三轮电动滑板车改的，而躯干就是用烤肉架做的。机器人身上装了几个亮红色灯，那是用1987年产雪佛兰科迈罗汽车尾灯做的。通过一个配有对讲机的家庭警报扬声器系统，机器人身上能够传出特里尔的声音。机器人身上有个可移动的转台，装有高亮聚光灯和高压水枪。</p>
+<p>现在特里尔酒馆被标示为“BumBot之家”，特里尔在网上和酒馆里出售印有BumBot的T恤。用远程控制机器人，通过威胁恐吓的手段，赶走那些不受欢迎的人，这恐怕是当地第一个这样做的酒吧。</p>
+<p>25</p>
+<p>两种趋势使BumBot这样的机器人以及the reception it has received成为可能。第一个趋势是，定制一台可以远程控制的机器人所需要的技术复杂度以及成本与以往相比都降低了很多。几乎任何人利用周末都能够造出自己的机器人原型，而且当前可以用起来的构造设备能够让我们的第一台机器人更大，更沉，更强劲。第二个趋势是一种态度上的趋势。作为一种文化，我们通过火人节，制汇节，工艺节，等其它类似的途径举行生气勃勃的DIY（自己动手做）发明展会。在制造机器人的过程中，因缺乏一些基础零部件，特里尔参加了一个著名的俱乐部，这个俱乐部由一些狂热者组成，他们都热衷于通过改变回收再利用物品上的零件用途的方式，重新组合制作出新的设备。Even with a purpose as ethically troubling as the BumBot’s, the aura of Terrill being a modern-day inventor provides an afterglow that softens the concerns many have regarding the actual details of what he does with the robot.</p>
+<p>在未来的几十年，随着设备在复杂性和多样性方面的发展，各种先进设备将使DIY机器人改头换面。最大的变化就是，将会有越来越多的机器人产品出现在我们的生活空间里。未来将会有数百万的“特里尔”出现，而且每一个都有自己的议程，道德规范，愿景，他们将用钢铁和程序来实现自己的梦想，创造出人类大小的“生物”。这种人人都可以去创造的机器品种繁多，而且无所不在，我们有可能会被困在这样一个机器人乐园里面吗？“烟雾”是一个混合词，它兼有自然和人工的属性：“雾”只是降低了能见度，但“烟”和“雾”混合在一起，就降低了生活质量，如跑步运动员的咳嗽，网球运动员的肺炎，花季少年们的哮喘病例等。“机器人烟雾”是一个技术方面的混合词：人们的愿景以往总是通过书信和声音进行交流，而很快，这些愿景将会以入侵形式出现在我们现实世界里的街道和生活空间中。机器人梦想成为现实的时候，我们可能难以在世界上生存下去，这是很危险的。像太阳能玩具那样的商业机器人有可能变得既自主又容易被改装，这样，当我们发现公园里到处都是这样的机器人产品的时候，它们有可能不影响我们的生活吗？</p>
+<p>26</p>
+<p>纵观因特网的发展历史，也有类似的例子，虽然有些勉强，但也可以用来解释“机器人烟雾”的概念。在90年代末期，人人都想有一个自己的网站。但要建立一个自己的网站，意味着要写HTML——一种针对网站的计算机文本规范——这要求写网站的人拥有计算机语言知识，而这种复杂语言最初是面向计算机程序员的。这种状况随着Macromedia Flash技术的到来一下子就改变了，在这基础上发展起来的像FlashToGo那样的手把手交互式工具，专为那些非程序员的人设计，让他们能够在没有任何图形设计和计算机编程经验的前提下建立和发布自己的整个网站。</p>
+<p>在新工具的推动下，每周都有大批的新网站被发布出来。多亏了Flash技术，很多新网站上都充满了生动炫目的小插件：飞舞的蝴蝶，跳动的心脏，闪烁的文字，从屏幕上飘过的剪贴画等。当然，短短几年内，老套，缺乏设计，充满烦人音效的网站四处滋生，并且很快就被其他人复制出来，这样的东西并无法在审美上吸引人。但这些新站点的底层特效，容易发布的流程，是具有深远意义的。这使得因特网成为了每个人都能享有的舞台。就像市镇广场上的街头演说，但是通过使用扩音器，内容就能传到周围数百万人耳朵里，每个人花上一小时时间，都可以在线地拥护自己的世界观和政治观。这反过来又导致了因特网世界的巴尔干化，因为越来越多的极端思想吸引了那些志趣相投的听众，节制和妥协的美德在极端，排斥，夸大面前荡然无存。</p>
+<p>27</p>
+<p>机器人技术里类似的事情很明显。在未来的十年，科技将使人们定制化自己的机器人变得非常容易。那种令人烦恼的机器人乐园，一群怪异的新“生物”，将会因此而变成现实吗？在早些年，各种生动的新网站如雨后春笋般大爆发，它们都被限制在因特网内。你只要简单地起身离开你的电脑，你就能远离烦人的站点。即使是现在的智能手机应用大爆发，它们也被限制在一定的范围内——它们只存在于你的手机里，你可以选择下载哪个，使用哪个。但是未来的机器人，将是作为物质实体而无处不在的。当你的邻居走上街头，让他手里的机器人自由活动的时候，第二天你可能就不得不为了保护自己的菜园子而与之发生摩擦。在这种充满机器人的未来，个人意见不再只是通过沟通来传达，而是通过充满机器人仆人的混乱生态环境演绎出来。</p>
+<p>接下来的20年里，将会出现什么样的公众DIY机器人发明呢？为了做这一设想，我们需要先介绍一个机器人技术导引，这个导引描述了机器人体系的发展，和不久的将来机器人技术上最有可能也最容易出现的突破点。</p>
+<div class="section" id="id2">
+<h2>未来机器人导引</h2>
+<p>未来机器人上可能出现的突破点，我将其归为6大革新类别：结构，硬件，电子，软件，连通性，控制。下面的6小节将依次说明这6个类别，用来预测接下来20年的进展。</p>
+<div class="section" id="id3">
+<h3>导引1：结构</h3>
+<p>机器人的结构——底盘，几何结构，关节——不怎么受重视，但对机器人设计来说，这是非常重要的一个方面。在物理学上，机器人如何运动，有多重，以及重量如何分布在整个结构上的，这些问题的解决对于成功的机器人设计是至关重要的。机器人部件的活动范围毕竟还是有一定限度的。我们经常喜欢转动机器人的马达，而超过某一个限度就会导致马达损坏。一个机械臂的重量得由一个机械化的肩来承受，而这直接受到发动机技术的约束。这些依次主导机器人的最终成本。</p>
+<p>28</p>
+<p>几何结构和重量都非常重要，有一些研究项目专门针对这些问题进行研究，其中有一个课题叫做被动行走。在我们的祖父母辈那个时代，有这样一种木质玩具，不需要电池甚至不需要弹簧装置作临时能量存储，就能够从缓坡上面往下行走。现在的研究人员们已经开发出了一种人一样大小的自动机器，这种机器能够在没有任何净能力消耗的情况下沿着缓坡往下走。为了创造出高效节能的机器，这些先驱们研究重量和力学的边界，当那些机器需要上坡的时候，它们只需要耗费传统行走机器人一小部分的能量([McGeer 1990; Omer et al. 2009]_)。</p>
+<!-- [McGeer 1990; Omer et al. 2009] Mcgeer于1990年提出了被动行走的概念。 -->
+<p>在机器人结构上面做研究，曾经是非常具有挑战性的，因为实现一个新的设计意味着实验室得配备高端的机械加工和制造设备，包括车床，铣床和焊接设备。但是在过去的5年里，在低成本快速原型制造方面出现了一场小小的革命，这得归功于3D打印技术和激光切割技术的发展。3D打印机能够通过使加热的可塑材料沉淀的方式，每次循环沉淀一层，创造出任何立体形状。激光切割机能够将塑料，木制品，甚至是金属切割成复杂的零件模块，这些模块再被组装成新的机器人框架。现在，每个机器人实验室都有能力创造出新的造型，并在数小时或者数天内做出原型并对其进行测试。而且做这些花不了多少钱，他们负担得起，在数周内就能做出几十，甚至几百的实验用机器人部件。</p>
+<p>29</p>
+<p>昔日的机器人研究，每个实验室都充斥着看起来差不多的机器人，因为研究者们都是从那么几个制造商那里购买的机器人。而这些制造商都是大批量生产一样的圆形垃圾桶大小的机器人。现在，机器人实验室可选择的机器人方案多的是，甚至是自定制机器人。创造性的这种大爆发就像寒武纪时期出现的哺乳动物多样化那样：每个实验室都充满了各种大小，重量，形状的机器人——而且每个实验室的机器人看起来都跟周围其他实验室的不一样。</p>
+<p>在接下来的十年里，这种机器人多样性的寒武纪大爆发将使机器人结构上的两个特殊的领域受益：高自由度（DOF）机器人和飞行机器人。高自由度机器人有大量的关节和马达，这意味着，与那些只能简单地前进后退和转向的传统机器人小车相比，这种机器人能够以更为复杂的方式与物理环境进行交互。高自由度能够实现腿脚结构，而腿脚结构使机器人能够在楼梯上行走，活动能力覆盖我们生活环境的大部分区域；从电灯开关到冰箱，再到洗衣机，这些我们每天都会使用的设备，机械臂同样也能操作它们。更高的自由度甚至能实现更多的机械手，尾巴，以及像蛇一样灵活的结构。十年前，机器人能够像6岁孩子一样穿过猴架（供儿童攀爬游戏的器材）。现在，为军事侦察而设计的蛇形机器人能够摇摆着沿4英寸的间隙往上爬，类人型家庭服务机器人能够打开冰箱的门，查看里面的瓶子，移动四周的物品，将手伸进去，取出啤酒来。我们可以简单地设想一下那些我们人类做不到的事情，从爬树，穿过林冠，到蛇形穿过下水道系统，攀爬任何雨落水管，以及爬行穿过乱石堆对灾难现场进行搜索。</p>
+<p>30</p>
+<p>在蛇形机器人和其他一些高自由度机器人领域内，重量和马达强度是最主要的问题，而对于飞行机器人来说，这些问题更为关键。快速的结构仿真，原型制造，以及测试将会改变飞行机器人制作的游戏规则。去逛一下本地的电子市场，你就能看到一些这样的进展。十年前，一个小型远程控制直升机就得花上几百美元，并且一次充电只能飞两分钟。而现在，人人都能花上14美元买到一架手掌大小的直升机。</p>
+<p>机器人控制在飞行器上的应用，已经使这种新一代廉价直升机成为了一种全新的飞行器。视觉系统能够实时地检测直升机确切的方向，自动控制系统能够精确地控制直升机飞行，如控制直升机旋转上升，急转弯，在两边都只留有一英寸间隙的情况下穿过垂直的狭窄缺口。它们可以停在窗台上，着陆以便节省电力，稍后再起飞（Mellinger, Michael, and Kumar 2010）。做相关研究的实验室公开过一些视频，20架机器人直升机在空中做悬停并以紧凑的队形飞行，甚至能动态地改变队形成对地同步穿过窗户框（A Swarm of Nano Quadrotors 2012）。现在，这些展示效果依赖于天花板上的摄像头和外部计算机控制，但不久的将来，这些限制将会不复存在。空气动力学和控制——机器人的形状，重量分布，机械配置，自动控制——是支持飞行机器人飞行的关键技术，这些机器人将会变得很便宜，高机动性，并且只依靠很少的电力就能维持空中悬停。现在我们梦想中的飞行机器人，将随着先进的3D制造技术，特别是新型塑料和橡胶材料的应用而成为现实。我相信机器人的“寒武纪大爆发”现在只是一个开始，创造性的发展轨迹将在规模和形式上呈现出急剧上升的趋势。</p>
+<p>31</p>
+</div>
+<div class="section" id="id4">
+<h3>导引2：硬件</h3>
+<p>在机器人技术发展的分类中，硬件是最难以作出预测的。在硬件方面肯定要出现很重要的革新，但我们不能简单地依据最近的历史来预测未来硬件上出现的突破。在计算机设计中，摩尔定律可靠地预测出了处理器提速的比率——每18个月处理器速率翻一倍。但在硬件技术，如电池和电机中，没有这种摩尔定律。事实上电池和发动机研究已经陷入了多年的旱期，那段时间里，来之不易的研究成果并没有取得商业应用上的成功。</p>
+<p>然而，还是有新的进展出现，游戏规则也随之而改变。在机器人研究圈子里，本田公司的ASIMO机器人算是一个传奇，它激发了公众的想象力，它可能是机器人研究界里最上镜且最具有魅力的机器人了。领导过ASIMO项目的日本人工程师里，有一个人曾经在做过一次巡回旅行，在美国的各个大学展示自己的机器人并含糊其辞地回答一些问题。他在一个突发时刻坦诚道，他们必须克服的一个杀手级问题，就是马达。换句话说，只要他们能够解决如何制作机器人每个关节的马达的问题，相比之下，人形机器人开发的其他工作就简单多了。</p>
+<p>马达确实是一个能限制机器人发展的技术。有一部分关于马达的研究工作，就是搞清楚关节处的马达与生物系统里的肌肉的工作机制如何不同。我们人类的关节既轻又富有弹性。每个关节的柔韧度和肌肉的硬度是可以控制的。因此在击剑比赛中，你能够在招架的同时，保持肌肉的放松，挥舞手中的花剑；或者是在扳腕较量中使胳膊上的肌肉变硬，牢固不被扳倒。我们的关节活动得非常快，更不用说蜂鸟和蝴蝶了。</p>
+<p>32</p>
+<p>相比之下，电机历来就笨重，严重依赖能源，而且僵硬。如果你给电机增加齿轮箱，便能够增大输出扭矩，但同时降低了转动速率，而且使输出轴难以被转动——不花点力气你就无法用手扭动机械臂，无法用手转动齿轮箱的输出轴。如果你用内置小型电机制作了一个小型机械臂，它可能连一个咖啡杯都没办法举起来，即使机械臂的重量和人的胳膊一样。而对于那些能够在家里扶老人下床，协助他们去卫生间的机器人，它们的动作必须同时具备柔韧性，弹性，以及一定的力量强度，跟这些机器人相比，之前的那些例子都是小菜一碟。</p>
+<p>有一段时间，很多人认为机器人马达的未来将会变成像人的肌肉一样工作的系统，镍钛合金金属肌肉纤维技术被誉为下一个革命性的一步。这种金属纤维能够随着电流变化而伸展收缩，人们设计了巧妙的装置来使多簇同类的纤维平行工作，用来负重，或者从几毫米，几厘米以及更长距离上扩展其活动范围。然而，整体能源效率和疲劳度方面的挑战，限制了这种金属肌肉纤维在一些领域的应用，如医疗机器人，这种机器人要求控制环境非常精密，而金属肌肉纤维无法达到这一要求。</p>
+<p>然而，就高机动高可控马达而言，最近在新型马达设计方面的工作已经有所成就。研究者们正在开发一种将电机和可调节弹簧整合起来的关节，整套系统将能够优雅地应付外来冲击力。现在，马达构造越来越复杂，有些已经拥有了内置的压力感知能力，通过感知作用在马达上的外部压力以及对这些压力做出实时反馈，快速控制马达电流能够模拟出任何刚度和韧度的输出。总有一天，机器人将能够与人进行一次扎实而又安全的握手，机械手将能够折纸，甚至是在保持蛋黄完整的前提下打破鸡蛋。虽然马达技术并不遵循摩尔定律，但得益于不断进步的嵌入式控制电子技术和软件，马达技术依旧会进步，这是摩尔定律影响未来马达技术的另一条途径。</p>
+<p>33</p>
+<p>电池是硬件中的另一个类别，它有很大的潜力影响机器人技术的发展。可以确定，制造一款具有革命性意义的电池是不太现实的，不像计算机芯片的迭代式发展，其数年数十年的发展都已经被预测出来了，电池的发展建立在化学和材料合成领域的基本原理和颠覆性发现上。没人知道那些颠覆性的发现什么时候能够出现。在计算机领域，摩尔定律表明，每18个月处理器的处理速率将翻一倍。相比之下，我们再来看看电池技术的发展。1860年，第一块铅酸蓄电池被创造出来，这款电池的能量密度大约有每千克30瓦时（W·h/kg），也就是说每千克的电池内物质能够以30瓦的电力放电1个小时。直到1988年镍氢电池（NiMH）的出现，能量密度才翻倍，镍氢电池的能量密度达到了60W·h/kg。同一台机器，只需要0.5千克的镍氢电池，就能提供早些年1千克铅酸蓄电池提供的电力。到了1997年，锂聚合物电池达到了一个新的能量密度级别，180W·h/kg，但是直到现在，生产锂聚合物电池的成本任然比30年前就出现的镍氢电池高。现在让我们小小地震撼一下，用这些数字与汽油相比：13000W·h/kg，几滴汽油，总重2.5克，就能提供一千克铅酸蓄电池所能释放的能量。</p>
+<p>34</p>
+<p>简而言之，这就是电动汽车和小型机器人需要克服的挑战。再具体一点，假设有一个50千克大小与人相当的可行走机器人，它需要平均350瓦的能源供应。为了让这样一个机器人连续工作6个小时，需要使用70千克的铅酸蓄电池，或者是35千克的镍氢电池，或者是12千克的高端锂电池，或者仅仅是10匙的汽油。</p>
+<p>来自商业化的压力是很多的，既要求改进电池的能量供应，又要求降低移动产品的能量消耗。得益于平板电脑和智能手机产业，这些商业投资将使得未来的机器人在运算上消耗更少的能量，而且他们最终还会推出更轻，更便宜的电池。但是请记住，电池材料才是成本的主宰，因此规模经济虽然能使先进的锂电池的价格降低，但再怎么降低，也无法在实际意义上惠及小型飞行机器人。</p>
+<p>就跟马达方面的研究一样，对电池进行的研究也需要工程师们做出实实在在的创新，从来创造出全新一代的替代品。另一方面，燃料电池和光伏电池也需要有类似的革命性突破。所有的这些技术挑战，主要都是站在小型机器人角度来说的，这类机器人需要重量轻但又高能的电力供应。与之形成对比，在未来十年内即使电池技术只是渐进式发展，也足够满足那些重达数十数百磅的大型机器人的需求了。下一代的燃料电池，大型电池，甚至是汽油引擎，都足够让这些大型机器人在城镇里跑啊，跳啊，行走了。</p>
+<p>35</p>
+</div>
+<div class="section" id="id5">
+<h3>导引3：电子</h3>
+<p>在机器人技术里面，电子技术的发展趋势沿着一条迂回的路径进行，只有现在才有那种稳定的进展，这些进展指明了未来的趋势。机器人沙基，是第一批研究型机器人中的一个，由加利福尼亚州门洛帕克市的斯坦福研究院（现在被称为SRI国际）的人工智能中心建造（Wilber 1972; Nilsson 1984）。1971年，这个机器人所用的技术已经远远超越了它所处的时代：它能够在实验室的各个隔间之间导航，在视觉上给自己定位，以及识别障碍物。想象一下，在计算机的人机接口任然是电传打字机，没有文字显示的计算机显示器的时代，沙基机器人就已经能够使用视频摄像头进行视觉导航了！沙基机器人并不局限于它六英尺高的身躯，其实他的组件还包括了一个房间大小的PDP-10和PDP-15计算机，这些计算机不停地与其他硬件通讯。换句话说，这个机器人并不只是机器人躯体本身，它还依赖于自己身体外的各种计算资源。</p>
+<p>在20世纪80年代和90年代，可以看到一种趋势，即研究者们试图去实现他们梦寐以求的目的：独立的移动机器人。在研究者们眼里，这种挑就是让机器人不依赖于任何外部资源，也就是说将所有需要的资源全部塞进机器人身体里。在能源和重量的限制下，要求优良的电子工程设备做尽可能多的感知处理，多亏了前人的努力，在二十世纪末，机器人才开始真正成为一个自身独立的系统。</p>
+<p>后来，这样一个时代来临了：软件即服务，以及它在机器人技术上的应用，这种应用在架构上希望机器人能够使用尽可能多的利用互联网资源。例如，调用外部资源做人脸识别，这样机器人就能搭载更少的电子器件，而且还能够识别机器人实验室里的每个人，并对他们说“早安”。互联网随着数据传输速率不断增长，被认为是将机器人小型化同时又保持拥有高智能行为的解决方案。</p>
+<p>36</p>
+<p>仿佛是回到沙基机器人的理念扎了根，视频游戏有形的一面随之而来。Wii远程控制器，使得玩任天堂游戏机的视频游戏玩家在显示屏前面通过肢体动作就能玩游戏，这意味着视频游戏电子设备的开发者们已经开始生产手持电子设备了，这些设备对机器人研究者来说拿来即可使用。低成本高精度的加速度计和陀螺仪改变了游戏规则，因为现在只需要几美元，就能够将一堆传感器高密度地集成在小型机器人里面，这得益于先是由视频游戏，现在又由智能手机引导的规模经济效应。</p>
+<p>这种趋势随着微软的Kinect的推出而进入高速发展阶段。Kinect是一个电子摄像头系统，有了它，人们的手势，肢体动作能够通过Xbox游戏机与视频游戏关联起来。一大批机器人方面的研究文章显示，移动机器人现在能够通过可编程的Kinect传感器检测墙壁以及障碍物，并能实现以前实现起来非常困难的人机接口（HRI）——例如，人类对机器人的手势控制，或者使用了Kinect的舞蹈机器人与人类跳舞。这样看来，我们正在再次回到复杂的机载电子技术的时代，但现在与以往不同的是，大批量，低利润的交互式消费电子产品的时代已经到来了。随着这种交互性的复兴，任何新型电子设备的发明，都将直接可适用于机器人，并且如果需要，通过改装能使机器人更智能更先进。</p>
+<p>37</p>
+<p>设想一下未来的手机和游戏：从检测你是否正在开会，到感知你的位置，温度和湿度等环境数据，以及你是否昏昏入睡或者处于兴奋状态——所有这些物理感知电子设备，都将以零部件的形式安装在机器人体内。任何能让我们的手机更加迎合我们的日常活动的新方式，同样也能让机器人更全面地检测环境并对环境做出反应。</p>
+<p>当然，视频游戏，在线娱乐，真实世界中的娱乐活动，以及移动通信技术的界线将变得模糊。这个星球上的所有的设备将变得更加具有交互能力，而这种交互能力将由更多的自然交互行为，包括语音，眼神接触，手势等驱动。越来越多的个人用品将具有自主能力，就像一个好管家一样，按照我们的意愿或者是高级指令做出行动：找到并预定正确的餐厅，重新安排我们的日程，甚至是根据观察我们正在做什么而过滤我们的电话。</p>
+<p>也许“机器人”这个词的含义将变得模糊，因为手机表现出来的行为将会越来越像一个机器人，并且机器人将可能成为先进的远程监控设备，使我们能够在其他地方远程照顾孩子或者是造访同事。不管怎么样，多亏了那些电子相关行业的不断发展，我们今天所设想到的机器人技术将会变得更加复杂，更加智能。</p>
+</div>
+<div class="section" id="id6">
+<h3>导引4：软件</h3>
+<p>机器人技术里软件的发展围绕着一段试图为程序设计创造出一个标准框架的历史，理论上这种框架能以开放共享的方式逐步提高所有机器人的能力。通常从计算标准化的成功中得到启示，在标准框架方面的努力已经在软件开发中获得了很好的实践，并试图将这些成果应用在机器人方面。</p>
+<p>38</p>
+<p>但是，机器人与计算机差距甚远，受制于这个因素，在机器人技术上的这种尝试只取得了部分成功。计算机之间有相似的结构，并使用类似的处理器和零部件。机器人在外表上看起来可以很像，但内部结构确实完全不同：例如，一个机器人使用无线电收发器和低成本的处理器，而另外一个使用成熟的计算机和定制的传感器。标准化在这些差异性面前几乎就是矛盾的。但是，这并没有妨碍那些大公司做最大的努力。</p>
+<p>2002年，英特尔公司和其他一些公司首先在开发社区项目上做推进，并着手机器人技术标准化的工作（<a class="reference external" href="http://www.retf.info">http://www.retf.info</a>）。在基于社区的互联网工程任务组（Internet Engineering Task Force：IETF），英特尔是早期的重要参与者，他们的想法是在这个成功模式基础上规范机器人技术。IETF基于兼容，开放，一致性，成功地规范了互联网。通过建立机器人工程任务组（Robotics Engineering Task Force：RETF）将这些概念引入机器人技术，似乎是合理尝试的第一步，但是，这种尝试在把基于一致性的方法应用于最简单的问题时，就已经困难重重了：例如为机器人零部件编写一系列标准化的规范。机器人技术可不是那么轻易就能定义传感器，马达，处理器的——不是因为努力不够，而是因为一个研究者的马达，毫不夸张地讲就可以是另外一个人的感知器。即使是机器人这个词也太难定义了，标准化似乎也只是一个目标，还没到实现这个目标的时候。</p>
+<p>39</p>
+<p>跳过硬件上追求一致的目标，微软从2005年开始借助Microsoft Robotics Studio独自标准化机器人技术的编程开发（Jackson 2007）。微软的目标是为机器人技术开发一套唯一的编程接口，这种接口对爱好者，教育工作者，甚至从业人员都是很有价值的。应用目标的多样性迫使微软要同时解决多方面的需求，例如爱好者和教育工作者要求容易上手，研究工作者们要求有如实时控制之类的高性能，还有工业装配机器人之类的商业应用的需求。同时，微软希望支持一种基于服务的架构，以便机器人和机器人进程能够发布和订阅如同人脸追踪，导航，远程控制之类的服务。最后，满足这些消费者差异性的需求，导致最后的产品能够被一部分人使用，但还是没能成为广泛的社区性标准。2005年对于诞生一个这样的标准来说，似乎还是太早了。</p>
+<p>2008年，一个叫Willow Garage的新公司依靠其机器人操作系统（Robot Operating System: ROS）加入了竞争行列。英特尔的OpenCV库由一系列开源的计算机视觉程序组成，它对爱好者，教育工作者，和研究者们在计算机视觉方面的工作影响很大，ROS就是从英特尔公司在先前的十年里在OpenCV上面取得的成功中获取了灵感（Bradski and Kaehler 2008）。选择重要的计算机视觉功能，然后在英特尔的计算机芯片上优化软件使这些功能更好地运行，公司通过这种方式向为终端用户制作应用的那些人递交了高质量的视觉产品（Quigley et al. 2009）。从可以打乒乓球的机器人到能够照下你的脸然后用线条画出来的草图绘制机械臂，纵观计算机实验室和科技博物馆，OpenCV引领了迷人的演示程序的蓬勃发展。Willow Garage希望通过ROS，将移动机器人所要用到的关键技术成功地封装起来，将所有技术打包给用户，这样，用户就能在Willow Garage自己的机器人或者是其他运行ROS的机器人上面使用这些技术了。这些技术包括基本的导航，操控，跟踪移动的物体，人脸识别，以及手势识别，这已经催生了一个由ROS研究者组成的社区性质的亚群体，这些人使用ROS，修改ROS，以及向ROS资源库内添加自己的功能包。</p>
+<p>40</p>
+<p>当ROS已经很有成效地应用在高端机器人上的时候，智能手机方面在小型低耗机器人技术上也同样有很大的进步。谷歌公司的安卓操作系统提出了一种架构，这种架构允许智能手机直接与机器人通讯，并允许智能手机像小型机器人的决策处理器或者大脑一样运作。在不久的将来，你也许能够建造一个可以与手机通讯的机器人，甚至是通过手机与互联网通讯。你手里的手机甚至可能成为一个控制中心，像蜂后那样，控制你周围的一群低成本机器人。</p>
+<p>过去十年的经验告诉我们，将不会有对所有机器人都适用的大统一的软件架构出现。这个领域的差异性实在是太大了，以至于这种大统一的尝试没有任何意义。然而，在所有机器人都能使用的软件服务里已经出现了重要的进展，并且这种进展的发展速度只增不减。室内导航曾今是机器人技术里主要的研究课题，有一系列会议文章致力于解决如何让机器人不会迷路。现在，整个室内导航工具包常常作为软件服务被那些不需要学习机器人导航理论，却需要搭建能够进行室内地图构建与导航的大学生使用。按照OpenCV和ROS的惯例，越来越多的软件服务将会面向大众，尤其是机器人，将会走的更远并与我们的现实世界做更多的交互。在道路上人群里行走，乘坐电梯并协调出入，做简单的煎蛋，在现在，这些对机器人来说都还是很困难的，但是只要出现合适的硬件设备，软件上的解决方案很快就能以共享的方式开放出来，所有的机器人都能从中受益。</p>
+<p>41</p>
+<p>没有什么行为比实际对这个构建的世界进行操作更重要了。处理人类的家务事的能力，如拿起并移动罐子，杯子，报纸，或是洗衣机，对于作为一个家庭成员角色的机器人的能力来说是非常重要的。现在，操控方面的研究停留在20世纪90年代室内导航的水平。Today, manipulation research is where indoor navigation was in the 1990s. 研究者先驱们开始展示他们的机器人，它们能够将高端的识别技术与轻量级的机械臂结合起来，去识别桌子，分析桌子上的物品，然后在不碰到桌子上任何其他物品的情况下，用机械手抓起目标物品（Srinivasa et al. 2010）。这些问题是非常困难的，包括推测物体的形状，用什么样的方式抓取，如何感知目标物体的重量，以及如果目标物体装满了液体，该如何在不洒出来的前提下移动它。</p>
+<p>从早期的导航系统过渡到完整的室内导航解决方案只用了不到十年。现在，软件技术的发展越来越快，以至于我们不会再遇到一年前所呈现出来的计算方面的限制所带来的问题。如果在5到8年内对机器人的基本操控能成为扎扎实实的公共服务，那么在20年内我们可能完全开发出来的机器人的技能数量将十分惊人。在现实世界中，很多事情我们人类只是机械地去做，对于这些事情，将会有一些对应的机器人去模仿着完成。</p>
+<p>42</p>
+</div>
+<div class="section" id="id7">
+<h3>导引5：连通性</h3>
+<p>在加利福尼亚州，由观光客们不知不觉引入的一个入侵物种阿根廷蚂蚁，已经成为了一个单独的，数量庞大的超级群落，沿着加利福尼亚海岸延绵了将近600英里（Walker 2009）。作为一个已知的群落，在“加州大蚁群”面前，加州的其他蚁群都显得十分渺小，这个蚁群展现出了它独一无二的力量，没有任何其他蚁群能与之抗衡。当你的敌人拥有无限的后援和无处不在的食物资源信息的时候，任何普通攻击都会失败。所有的阿根廷蚂蚁都混杂在一起不会遭到攻击——它们呼吸同样的信息素，甚至有冗余的蚁后，每一千只工蚁就有八只蚁后。</p>
+<p>是否真的就像“加州大蚁群”或者星际迷航里面的博格人那样，当你和这种群落中的一员交流的时候，它们拥有远超出你经验范围的基础力量和知识，这些群落既有趣又令人不安。构成我们所讲的机器人烟雾的那群机器人，是否将成为一个大型群落中的成员，还尚无定论。但可以肯定的是，我们机器人烟雾将会与自己，以及与数字世界里的信息上层建筑有大量的互连互通。无论从哪点来看，都将会有一个新的超级机器人群落出现，并且这个群落将给我们这些具有独立思想的人类带来有点令人棘手的交互方式。</p>
+<p>对机器人的基本连通性的争论，源于这样一个事实：他们最初在对物理环境的感知和交互能力上是很一般的。机器人为了尽可能地看到世界并去理解感知到的信号，必须利用在线资源，这当然包括视觉识别服务，和特定物体与信息的数据库。设想一下将庞大的谷歌搜索引擎用于机器人而不是人：Robo-Google（译者注：意思是将类似谷歌的搜索引擎用在机器人身上，让机器人能够通过它搜索信息），将全世界的信息组织起来供移动机器人使用。我们希望机器人学会如何去识别交通信号灯，如何去拧他们从未遇到过的门上的门把手，以及如何去折叠或是打开一台婴儿推车。我们需要机器人能够识别人脸，以及记住被识别人的身份以备以后能重新说出被识别人的名字。</p>
+<p>43</p>
+<p>一旦机器人使用Robo-Google收集并存储现实世界的详细信息，这些信息在机器人之间广泛地共享方面将会出现自然的进步。很有趣的是，基于互联网的信息是非物质的，而这却能顺利地与有形世界关联起来。一个机器人在飞机场看见你吃力地拖着一堆行李，然后问你是否可以给你联系一些新型的助力行李箱。如果你回答需要，你不必提供联系方式。机器人知道你智能手机的详细信息——你的手机和机器人都在同一个网络内，并且，你在新型行李箱方面的兴趣信息，将会被提供给任何为享有这种特权而付费过的机器人或者服务。但是共享并未在此止步：你愿意接受一些什么样的新产品，只要这种市场情报有商业价值，它就会在机器人网络里被买卖。</p>
+<p>因为在线社区具有任意大的性质，当你在街道上看见一个机器人的时候，很难推断它拥有多少关于你的背景信息。影视明星或者是政客遇到他们的粉丝，就类似于这种情况。粉丝们很清楚的知道明星的大量信息，而明星对每个粉丝的信息一无所知。在这种关系中，平等和相互性是没有任何意义的，当然了，奇怪的单边社交也不会使双方都满意。</p>
+<p>44</p>
+<p>关于连通性的最后一句话，机器人，即使是社交机器人，都不会像真正的人。因此，认为我们与社会上的智能机器人交互将会如同与人交互一般，这种想法是非常天真的。没有任何先例能表明这种情况将会变成哪般，我唯一有信心预测的是，2035年你在大街上遇到的机器人，他们了解你的信息将会比你了解它的信息要多得多。如果你是一个不折不扣的乐观主义者，你可以将这种现象解释为，机器人把你当作影视明星一样对待。</p>
+</div>
+</div>
+
+				</div>
+
+				<div id="uyan_frame"></div>
+
+				
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="YOUJIAN" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+			</div>
+		</div>
+	</article>
+</div>
+<div class="container-fluid c-section section_ZJJRsu">
+</div>
+	<!-- ENDS MAIN -->
+
+	<div class="container-fluid c-section section_dQA3ox" data-c_act_id="M_e64dbf1efc94f55d09a9cc735f442dc5" data-c_tl_id="M_c56b22ee4c946934">
+		<div class="container c-container container_XtBvb8">
+			<div class="row c-row row_PbZJp1">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_vTzKOo">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							服务支持
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/blog/" target="_blank">
+							技术博客
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							咨询服务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							意见反馈
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							资讯中心
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/news.html" target="_blank">
+							新闻动态
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/videos.html" target="_blank">
+							官方视频
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/lives.html" target="_blank">
+							办公生活
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_ClzrwN">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关于我们
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/about.html" target="_blank">
+							公司简介
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/joinus.html" target="_blank">
+							加入我们
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/contact.html" target="_blank">
+							联系我们
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_S4sJkc">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关注我们
+						</h1>
+						<button class="c-textlink textlink_WSs7bO" data-toggle="modal" data-target="#myModal">
+							官方微信
+						</button>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+										<h3 id="myModalLabel">爱啃萝卜官方微信</h3>
+										<p>打开微信，点击右上角的“+”，选择“扫一扫”功能，用摄像头对准下方二维码即可。</p>
+									</div>
+									<div class="modal-body">
+										<img class="c-image" src="http://www.aicrobo.com/theme/files/ba874f19480ae396b7c1bca3f131f3d8.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+				<div style="border-top: 2px ridge gray; margin-left: -15px; margin-top: 20px; padding-top: 5px;">
+					<p style="color: white; font-size: 12px;">Copyright &nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp; 2013-2015, AICRobo, All Rights Reserved. 爱啃萝卜机器人技术（深圳）有限责任公司</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var uyan_config = {
+	'du': 'yuanboshe.github.io', 		
+		'su': 'drafts/robot_smog.html'
+		};
+	</script>
+	<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36220570-3', 'phirobot.com');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- ie8 以下版本提示信息 -->
+<!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+<div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;" onclick="hide()">×</button>
+	<p style="text-align: center;">
+		您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+	<span style="margin-left:10px;">
+		<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+		</a>
+		<a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+		</a>
+		<a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+		</a>
+		<a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+		</a>
+	</span>
+	</p>
+</div>
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/pack.built.3a8efe4c.cache.js"></script>
+
+</html>
