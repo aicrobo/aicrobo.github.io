@@ -40,23 +40,6 @@
 	document.writeln('<link type="text/css" href="http://www.aicrobo.com/theme/styles.css" rel="stylesheet">')
 	}
 	</script>
-	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script type="text/javascript">
-	wx.onMenuShareAppMessage({
-		title: '分享标题', // 分享标题
-		desc: '分享描述', // 分享描述
-		link: '分享链接', // 分享链接
-		imgUrl: '分享图标', // 分享图标
-		type: '分享类型', // 分享类型,music、video或link，不填默认为link
-		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-		success: function () { 
-			// 用户确认分享后执行的回调函数
-		},
-		cancel: function () { 
-			// 用户取消分享后执行的回调函数
-		}
-	});
-	</script>
 </head>
 
 <body class="body_7qcIGG" data-c_tl_id="M_fdbf4fca884a4049c0a9f0f5758ca13b">
@@ -566,78 +549,60 @@
 	</p>
 </div>
 <script type="text/javascript" src="http://www.aicrobo.com/theme/js/pack.built.3a8efe4c.cache.js"></script>
-  <script type="text/javascript">
-      var not_in_mm_css = "https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/not_in_mm2a7a3f.css";
-      var windowwx_css = "https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve_winwx2a9cd9.css";
-      var tid = "";
-      var aid = "";
-      var clientversion = "61050021";
-      var appuin = "MjM5NzMwNzIwNw==";
+<script type="text/javascript">
+var imgUrl = 'http://#www.jakehu.me/xxx.jpg';
+var lineLink = 'http://#www.jakehu.me/904';
+var descContent = "这是晨曦的博客";
+var shareTitle = '晨曦';
+var appid = '';
 
-      var source = "1";
-      var scene = 75;
-      
-      var itemidx = "";
-
-      var _copyright_stat = "0";
-      var _ori_article_type = "";
-
-      var nickname = "道和投资";
-      var appmsg_type = "6";
-      var ct = "1451527043";
-      var user_name = "gh_2566f31e0bba";
-      var user_name_new = "";
-      var fakeid   = "MTk3MTc3MzMyMA==";
-      var version   = "";
-      var is_limit_user   = "0";
-      var msg_title = "世纪收购创举：苹果1000亿美元收购特斯拉！";
-      var msg_desc = "今天，美国苹果公司今天对外发布公告，公司将以1000亿美元的价格收购美国著名汽车品牌特斯拉。现在库克和马斯克";
-      var msg_cdn_url = "http://mmbiz.qpic.cn/mmbiz/1XrZ64jncZ6nDicnh0uwibT6eH8FQFkibGbDGia7xPJemdbZ7zcWICDG38ONdL9iblQwMeH9RFT1XPq1HAyHAOic9qmw/0?wx_fmt=jpeg";
-      var msg_link = "http://mp.weixin.qq.com/s?__biz=MjM5NzMwNzIwNw==&amp;mid=401322511&amp;idx=2&amp;sn=d41578e48f603eb850ce38625d1dc717#rd";
-      var user_uin = "1889477320"*1;
-      var msg_source_url = '';
-      var img_format = 'jpeg';
-      var srcid = '1231uhkIj8XiYpeUNkS8sXZf';
-      var networkType;
-      var appmsgid = '' || '401322511';
-      var comment_id = "0" * 1;
-      var comment_enabled = "" * 1;
-      var is_need_reward = "0" * 1;
-      var is_https_res = ("" * 1) && (location.protocol == "https:");
-
-      var devicetype = "Windows&amp;nbsp;8";
-      var source_username = "";  
-      var profile_ext_signature = "" || "";
-      var reprint_ticket = "";
-      var source_mid = "";
-      var source_idx = "";
-
-      var show_comment = "0";
-      var __appmsgCgiData = {
-            can_use_page : "0"*1,
-            is_wxg_stuff_uin : "0"*1,
-            card_pos : "",
-            copyright_stat : "0",
-            source_biz : "",
-            hd_head_img : "http://wx.qlogo.cn/mmhead/Q3auHgzwzM5FS6gIm9uU2HibX2lNWTF9bibsqn6eeMnw7l7aLxjXgibQg/0"||(window.location.protocol+"//"+window.location.host + "http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/pic/appmsg/pic_rumor_link.2x264e76.jpg")
-      };
-      var _empty_v = "http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/pic/pages/voice/empty26f1f1.mp3";
-
-      var copyright_stat = "0" * 1;
-
-      var pay_fee = "" * 1;
-      var pay_timestamp = "";
-      var need_pay = "" * 1;
-
-      var need_report_cost = "0" * 1;
-      
-            window.wxtoken = "4071732027";
-          if(!!window.__initErrorReport){
-        window.__initErrorReport(84,{
-            biz : biz || "",
-            mid : mid || "",
-            idx : idx || ""
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+        "appid": appid,
+            "img_url": imgUrl,
+            "img_width": "200",
+            "img_height": "200",
+            "link": lineLink,
+            "desc": descContent,
+            "title": shareTitle
+        }, function(res) {
+            //_report('send_msg', res.err_msg);
+        })
+    }
+    function shareTimeline() {
+        WeixinJSBridge.invoke('shareTimeline',{
+            "img_url": imgUrl,
+            "img_width": "200",
+            "img_height": "200",
+            "link": lineLink,
+            "desc": descContent,
+            "title": shareTitle
+        }, function(res) {
+              //_report('timeline', res.err_msg);
         });
     }
-  </script>
+    function shareWeibo() {
+        WeixinJSBridge.invoke('shareWeibo',{
+            "content": descContent,
+            "url": lineLink,
+        }, function(res) {
+            //_report('weibo', res.err_msg);
+        });
+    }
+    // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+        });
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+        });
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            shareWeibo();
+        });
+    }, false);
+</script>
 </html>
