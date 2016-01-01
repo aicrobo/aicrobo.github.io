@@ -686,7 +686,7 @@
 .div_0aPMbC{margin-top: 200px;}
 .heading_ACx7yy{font-size: 30px; font-weight: 300; transform: rotate(0deg) scale(1) translate(0%,-195%); -webkit-transform: rotate(0deg) scale(1) translate(0%,-195%); -webkit-transition: All 1s ease; transition: All 1s ease; margin-top: 30px; -ms-transform: rotate(0deg) scale(1) translate(0%,-195%); -o-transform: rotate(0deg) scale(1) translate(0%,-195%); -moz-transform: rotate(0deg) scale(1) translate(0%,-195%); -ms-transition: All 1s ease; -o-transition: All 1s ease; -moz-transition: All 1s ease; }
 .paragraph_JGk4ws{font-size: 18px; width: 60%; overflow: hidden; }
-.div_9dPeql{margin-left: 21%; margin-top: 11%; }
+.div_9dPeql{margin-top: 21%; margin-left: 20%; }
 .heading_xJyd5f{font-size: 30px;}
 .paragraph_sn25fL{font-size: 16px; }
 .button_3NK6nh{transform: rotate(0deg) scale(1) translate(0%, 43%); -webkit-transform: rotate(0deg) scale(1) translate(0%, 43%); transition: all 0s ease; -webkit-transition: all 0s ease; margin-top: 122px; }
@@ -806,7 +806,7 @@
 .paragraph_mtbGwQ{font-size: 40px;  line-height: 40px;}
 .heading_ACx7yy{font-size: 20px; font-weight: 200; transform: rotate(0deg) scale(1) translate(0%, -304%); -webkit-transform: rotate(0deg) scale(1) translate(0%, -304%); transition: all 1s ease; -webkit-transition: all 1s ease; margin-top: 42px; }
 .paragraph_JGk4ws{font-size: 13px; }
-.div_9dPeql{margin-left: 8%; margin-top: 25%; }
+.div_9dPeql{margin-top: 15%; margin-left: 20%;  }
 .heading_xJyd5f {font-size: 25px;}
 .paragraph_sn25fL{width: 110px; font-size: 13px;}
 .button_3NK6nh{text-align: center; height: 30px; margin-left: auto; margin-right: auto; width: 150px; font-size: 11px; padding-left: 5px; padding-right: 5px; transform: rotate(0deg) scale(1) translate(0%, 760%); -webkit-transform: rotate(0deg) scale(1) translate(0%, 760%); transition: all 0s ease; -webkit-transition: all 0s ease; margin-top: 190px; top: 0px; z-index: 20; background-size: cover; }
@@ -1039,6 +1039,7 @@
 .div_70RD3K iframe{ width: 333px; height: 187px;}
 .paragraph_mtbGwQ{font-size: 30px;  line-height: 30px;}
 .div_Umaywb{ width: 60%; margin-left: 35px; margin-top: 40%;}
+.div_9dPeql{margin-top: 100px; margin-left: 6%;  }
 } 
 @media (min-width: 992px) {} 
 @media (min-width: 768px) and (max-width: 991px) {} 
