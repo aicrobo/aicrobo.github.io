@@ -149,7 +149,7 @@
 			</div>
 		</div>
 	</div>
-	<article>
+	<article class="post-content">
 		<div class="container c-container container_2ngLOL">
 			<div class="c-contentview contentview_FBo9Ir" data-c_e_id="contentview_d02e19b336306fb2">
 				<h2 class="c-heading heading_sHeIAC">
@@ -183,7 +183,7 @@
                 <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/xtion.html">xtion</a>,
                 <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/kinect.html">kinect</a>,
         </li>
-</ul>				<div class="paragraph_5GcJsW">
+</ul>				<div class="summary">
 					<p class="first">忘了是从哪里看来的消息，说ROS里面的openni已经不能用来驱动Kinect和Xtion pro Live摄像头了，究其原因，说是openni驱动更新出现了问题，而且官方也不再更新了。当前Ubuntu某个摄像头包已经包含了Kinect驱动，新版Xtion pro Live也不能用以前的openni驱动。那么现在的Kinect和Xtion pro Live用什么驱动呢？玩turtlebot免不了使用3dsensor.launch来启动深度摄像头相关的nodes但3dsensor.launch里面依旧使用的openni驱动，大部分玩家都是买的现成turtlebot，不明白为什么他们的Kinect还能用得起来而我的Kinect却无法用openni驱动起来，也许是他们没有更新openni包吧。对于我这种没买turtlebot的，只有自己fix 3dsensor.launch的摄像头驱动问题了。</p>
 <p class="last">环境：ROS Groovy + Kinect / Xtion pro Live</p>
 
