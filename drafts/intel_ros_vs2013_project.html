@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="爱啃萝卜,智能移动机器人,自主导航,slam,vslam,turtlebot,ROS,Ubuntu for ROS,aicrobo,yuanboshe,exbot,计算机视觉,机器人操作系统,rgbd,激光雷达,机器学习,lamda,人工智能,视觉定位,视觉导航,自然人机交互,跟随,智能避障,多机协同">
+    <meta name="description" content="爱啃萝卜机器人技术（深圳）有限责任公司是一家集机器人操作系统、人工智能解决方案、智能移动机器人设计研发为一体的高科技公司,致力于服务机器人和机器人技术研发及服务。我们凭借优质的产品和服务与多家高校和机器人研发结构建立了战略合作关系，并一直保持着良好的口碑，业务遍及13个省的23个城市，并与25所高校建立了战略合作伙伴关系，包括南京大学计算机软件新技术国家重点实验室机器学习与数据挖掘研究组（LAMDA）、华东师范大学智能机器人运动与视觉实验室等。公司网址是：http://www.aicrobo.com/">
+    <meta name="author" content="aicrobo">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="renderer" content="webkit">
+    <title>Articles | AICRobo</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+	<meta name="baidu-site-verification" content="QKTXqDPfbb" />
+	<meta baidu-gxt-verify-token="e040d82b91018704584e4a686e820114">
+    <!--[if lt ie 9]>
+      <script type="text/javascript" src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+      <script type="text/javascript" src="//cdn.bootcss.com/selectivizr/1.0.2/selectivizr-min.js"></script>
+    <![endif]-->
+	
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+    <!--[if lte IE 8]>
+      <link type="text/css" href="http://www.aicrobo.com/theme/styles_forie.css" rel="stylesheet">
+      <script type="text/javascript" src="//cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://www.aicrobo.com/theme/img/favicon.ico" type="image/x-icon">
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//cdn.bootcss.com/jquery/1.8.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Users -->
+	<link type="text/css" href="http://www.aicrobo.com/theme/css/pack.built.d7a4735d.cache.css" rel="stylesheet" media="all">
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/blog_data.js"></script>    <script type="text/javascript">
+	if(navigator.appVersion.match(/MSIE [678]./i)==null){
+	document.writeln('<link type="text/css" href="http://www.aicrobo.com/theme/styles.css" rel="stylesheet">')
+	}
+	</script>
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?bb5a6b5f6f4bd10928db401f57b4b08f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+</head>
+
+<body class="body_7qcIGG" data-c_tl_id="M_fdbf4fca884a4049c0a9f0f5758ca13b">
+	<header>
+<div class="container-fluid c-section section_2CGTQP" data-c_tl_id="M_c11f7cfd17d72ac5">
+	<div class="container c-container container_IwJriH">
+		<nav class="navbar c-navbar navbar_1q03Hb">
+			<div class="container-fluid navcontainer_Uhjg6c">
+				<div class="navbar-header c-navheader navheader_FY9sjX">
+					<button class="navbar-toggle c-navmenubutton navmenubutton_J4RzJu" data-target="#navmenu_755a1c6b9843c69b" data-toggle="collapse" type="button">
+						<span class="sr-only c-span span_zmeU34">
+							Toggle navigation
+						</span>
+						<span class="icon-bar c-nav-btn-span span_eujvK4">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_JZBDJ2">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_Qioh26">
+						</span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse c-navcollapse navcollapse_gzXDA4" id="navmenu_755a1c6b9843c69b">
+					<ul class="nav navbar-nav navbar-right c-navlist navlist_U1qhg4">
+						<li class="c-navlistitem navlistitem_0r3Vch">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/index.html">
+								首页
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_YgRLVb">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/news.html">
+								资讯
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_3KREzQ">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/business.html">
+								业务
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/blog/">
+								支持
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/about.html">
+								我们
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="c-div div_4EeF5x">
+			<img class="c-image image_2OVLQP" src="http://www.aicrobo.com/theme/files/5b331cc49c0aa557a34eec662d1d1204.png"/>
+		</div>
+	</div>
+</div>
+	</header>
+
+	<!-- MAIN -->
+<div class="container-fluid c-section section_0TxsTH navlist_U1qhg4" data-c_tl_id="M_f5a89589fa73388d">
+	<div class="container c-container container_NTlCsu">
+		<a class="c-textlink textlink_5qefPL" href="http://www.aicrobo.com/index.html">
+			首页
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			支持
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			技术博客
+		</a>
+	</div>
+</div>
+<div class="container-fluid c-section section_3egbpywzlbBKNR" data-c_tl_id="M_4096039ed3a9299c">
+	<div class="container c-container container_IDMIxJ">
+		<div class="row c-row row_RMwxv0">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_ScfXmQ">
+				<h1 class="c-heading heading_mj8l0L">
+					技术支持
+				</h1>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_J9TicW">
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/blog/" type="button">
+					技术博客
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/service.html" type="button">
+					咨询服务
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/feedback.html" type="button">
+					意见反馈
+				</a>
+			</div>
+		</div>
+	</div>
+	<article class="post-content">
+		<div class="container c-container container_2ngLOL">
+			<div class="c-contentview contentview_FBo9Ir" data-c_e_id="contentview_d02e19b336306fb2">
+				<h2 class="c-heading heading_sHeIAC">
+					10分钟上手玩ROS仿真机器人
+				</h2>
+<ul class="list-inline">
+    <!-- date -->
+    <li>
+        <i class="fa fa-calendar-o fa-lg">C: </i>
+        <abbr class="published" title="2014-04-23"> 2014-04-23</abbr>
+    </li>
+	
+
+    <!-- author -->
+        <li>
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://www.aicrobo.com/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li>
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://www.aicrobo.com/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li>
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/exbotxi.html">exbotxi</a>,
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/ros.html">ros</a>,
+        </li>
+</ul>				<div class="summary">
+					<p class="first">没钱买ROS移动机器人平台？那就玩玩免费的ROS仿真机器人平台吧！ROS里面玩仿真机器人是很容易的事情，但从0开始配置到能玩ROS仿真机器人是很麻烦的，新手想凭自己的Search能力玩起来，先磨几个月再考虑吧。10分钟上手玩不是玩笑，下载好Ubuntu for ROS开发版后，如果使用虚拟机预览模式进入系统，10分钟都不要就能上手玩！</p>
+<p class="last">环境：Windows, VMWare Workstation 10.0, Ubuntu for ROS h2-140330.</p>
+
+				</div>
+				<div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+				</div>
+				<div class="textblock_DZ9doZ">
+					<div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#win-rosvs" id="id2">win_ros的VS工程</a></li>
+<li><a class="reference internal" href="#win-rosvs2013" id="id3">win_ros在vs2013下编译</a></li>
+<li><a class="reference internal" href="#detail-steps-of-compile-win-ros" id="id4">detail steps of compile win_ros</a></li>
+</ul>
+</div>
+<div class="section" id="win-rosvs">
+<h2><a class="toc-backref" href="#id2">win_ros的VS工程</a></h2>
+<p>参考：<a class="reference external" href="http://wiki.ros.org/win_ros/hydro/Msvc%20SDK%20Projects">http://wiki.ros.org/win_ros/hydro/Msvc%20SDK%20Projects</a></p>
+<p>0.1 新建控制台应用程序</p>
+<p>1. 项目属性：
+输出目录：......devellibintel_ros
+中间目录：..temp
+目标文件名：&lt;node_name&gt;</p>
+<ol class="arabic simple" start="6">
+<li>vc10 编译</li>
+</ol>
+<p>4. Debugging Environment
+添加：
+ROS_MASTER_URI=http://localhost:11311
+PATH=C:optrosdepshydrox86lib;C:optrosdepshydrox86bin;C:optroshydrox86lib;C:optroshydrox86bin;$(Path)
+$(LocalDebuggerEnvironment)</p>
+<p>除了添加 PATH外，还要添加ROS_MASTER_URI=http://localhost:11311。多变量可能添加不成功，需要参考 http://connect.microsoft.com/VisualStudio/feedback/details/739477/visual-c-2010-set-multiple-variables-for-project-debug-environment 中的说法，是VS里面的换行在.user文件里面变成了tab的缘故，需要手动改为CR LF间隔</p>
+<div class="highlight"><pre>CR LF should be escaped in the .user file
+see also: http://www.w3.org/TR/2004/REC-xml-20040204/#sec-references
+
+- close project
+- edit and save .user file in text editor:
+&lt;LocalDebuggerEnvironment&gt;foo1=bar1
+foo2=bar2&lt;/LocalDebuggerEnvironment&gt;
+- open project
+</pre></div>
+<ol class="arabic simple" start="2">
+<li>重新编译intel的两个lib，用与ROS统一的vc编译器和运行时库编译：项目属性 -&gt; C/C++ -&gt; 代码生成 -&gt; 运行库</li>
+<li>导入intel_ros属性表</li>
+</ol>
+<ol class="arabic simple" start="5">
+<li>取消预编译头</li>
+</ol>
+<p>voicesynthesis 需要加入winmm.lib
+voiceRecognition 需要加入 ../common 目录</p>
+</div>
+<div class="section" id="win-rosvs2013">
+<h2><a class="toc-backref" href="#id3">win_ros在vs2013下编译</a></h2>
+<p>参考： <a class="reference external" href="http://wiki.ros.org/win_ros/hydro/Msvc%20Compiled%20SDK">http://wiki.ros.org/win_ros/hydro/Msvc%20Compiled%20SDK</a></p>
+<ol class="arabic simple">
+<li>除windows sdk 7.1 外其他都安装</li>
+</ol>
+<p>1-2. 把git加入环境变量，如：C:Program Files (x86)Gitbin;C:Program Files (x86)Gitcmd</p>
+<p>否则会出现找不到git的问题：</p>
+<blockquote>
+'git' is not recognized as an internal or external command,operable program or batch file.</blockquote>
+<p>1-3. cmd中执行编码设置（windows默认GBK）否则python命令会出问题，如：</p>
+<blockquote>
+'utf8' codec can't decode byte 0xb2 in position 6: invalid start byte</blockquote>
+<p>chcp 65001  就是换成UTF-8，在命令行标题栏上点击右键，选择&quot;属性&quot;-&gt;&quot;字体&quot;，将字体修改为True Type字体&quot;Lucida Console&quot;，然后点击确定将属性应用到当前窗口</p>
+<p>如果还报错，就用美国英语编码：chcp 437 是美国英语</p>
+<p>chcp 936 可以换回默认的GBK</p>
+<ol class="arabic simple" start="2">
+<li>winros_init_workspace --track=hydro ws</li>
+</ol>
+<p>winros_init_workspace.py 在D:PythonPython27Scripts内，可以看到操作</p>
+<p>如果不成功，catkin空间没有init起来，参照 <a class="reference external" href="http://wiki.ros.org/win_ros/hydro/Msvc%20Overlays">http://wiki.ros.org/win_ros/hydro/Msvc%20Overlays</a> 手动建立catkin workspace，然后把win_ros源码src靠过去</p>
+<ol class="arabic simple" start="4">
+<li>fix catkin_install_python</li>
+</ol>
+<p>修改 D:ros_wssrccommon_msgsactionlib_msgsCMakelist.txt 里面的catkin_install_python，改为install，否则会出错</p>
+<ol class="arabic simple" start="5">
+<li>重编译tinyxml.lib</li>
+</ol>
+<p>来到 D:ros_wssrcwin_rosrosdepswin_tinyxml 执行 make compile命令编译，把编译好的tinyxml.lib覆盖 C:optrosdepshydrox86lib 的tinyxml.lib。否则会有下面的错误</p>
+<blockquote>
+error LNK2038: mismatch detected for '_MSC_VER': value '1600' doesn't match value '1800'</blockquote>
+</div>
+<div class="section" id="detail-steps-of-compile-win-ros">
+<h2><a class="toc-backref" href="#id4">detail steps of compile win_ros</a></h2>
+<ol class="arabic">
+<li><p class="first">open cmd</p>
+<blockquote>
+<p>&gt; mkdir C:work
+&gt; cd C:work
+&gt; winros_init_workspace --track=hydro ws</p>
+</blockquote>
+</li>
+<li><p class="first">修改 setup.bat 在最下面添加：call &quot;D:Program Files (x86)Microsoft Visual Studio 12.0VCvcvarsall.bat&quot;</p>
+</li>
+<li><p class="first">&gt; cd C:workws
+&gt; setup
+&gt; winros_init_build --track=hydro
+# Parse and edit config.cmake to configure build settings
+# especially CMAKE_BUILD_TYPE if you want to build Debug
+&gt; winros_make
+# Optional install step
+&gt; winros_make --install</p>
+</li>
+<li><p class="first">winros_make 错误的解决：</p>
+<blockquote>
+<p>CMake Error at common_msgs/actionlib_msgs/CMakeLists.txt:19 (catkin_install_pyth
+on):
+Unknown CMake command &quot;catkin_install_python&quot;.</p>
+</blockquote>
+</li>
+</ol>
+<p>修改 D:ros_wssrccommon_msgsactionlib_msgsCMakelist.txt 里面的catkin_install_python，改为install</p>
+<ol class="arabic simple" start="5">
+<li>编译boost</li>
+</ol>
+</div>
+
+				</div>
+
+				<div id="uyan_frame"></div>
+
+				
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="YOUJIAN" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+			</div>
+		</div>
+	</article>
+</div>
+<div class="container-fluid c-section section_ZJJRsu">
+</div>
+	<!-- ENDS MAIN -->
+
+	<div class="container-fluid c-section section_dQA3ox" data-c_act_id="M_e64dbf1efc94f55d09a9cc735f442dc5" data-c_tl_id="M_c56b22ee4c946934">
+		<div class="container c-container container_XtBvb8">
+			<div class="row c-row row_PbZJp1">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							资讯中心
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/news.html" target="_blank">
+							新闻动态
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/lives.html" target="_blank">
+							办公生活
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							项目业务
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/business.html" target="_blank">
+							公司业务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/education.html" target="_blank">
+							教育分享
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_vTzKOo">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							服务支持
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/blog/" target="_blank">
+							技术博客
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							咨询服务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							意见反馈
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_ClzrwN">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关于我们
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/about.html" target="_blank">
+							公司简介
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/joinus.html" target="_blank">
+							加入我们
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/contact.html" target="_blank">
+							联系我们
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_S4sJkc">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关注我们
+						</h1>
+						<button class="c-textlink textlink_WSs7bO" data-toggle="modal" data-target="#myModal">
+							官方微信
+						</button>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+										<h3 id="myModalLabel">爱啃萝卜官方微信</h3>
+										<p>打开微信，点击右上角的“+”，选择“扫一扫”功能，用摄像头对准下方二维码即可。</p>
+									</div>
+									<div class="modal-body">
+										<img class="c-image" src="http://www.aicrobo.com/theme/files/ba874f19480ae396b7c1bca3f131f3d8.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+				<div style="border-top: 2px ridge gray; margin-left: -15px; margin-top: 20px; padding-top: 5px;">
+					<p style="color: white; font-size: 12px;">Copyright &nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp; 2013-2015, AICRobo, All Rights Reserved. 爱啃萝卜机器人技术（深圳）有限责任公司</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var uyan_config = {
+	'du': 'yuanboshe.github.io', 		
+		'su': 'drafts/intel_ros_vs2013_project.html'
+		};
+	</script>
+	<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36220570-3', 'phirobot.com');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- ie8 以下版本提示信息 -->
+<!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+<div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;" onclick="hide()">×</button>
+	<p style="text-align: center;">
+		您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+	<span style="margin-left:10px;">
+		<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+		</a>
+		<a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+		</a>
+		<a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+		</a>
+		<a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+		</a>
+	</span>
+	</p>
+</div>
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/pack.built.3a8efe4c.cache.js"></script>
+</html>

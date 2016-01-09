@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="爱啃萝卜,智能移动机器人,自主导航,slam,vslam,turtlebot,ROS,Ubuntu for ROS,aicrobo,yuanboshe,exbot,计算机视觉,机器人操作系统,rgbd,激光雷达,机器学习,lamda,人工智能,视觉定位,视觉导航,自然人机交互,跟随,智能避障,多机协同">
+    <meta name="description" content="爱啃萝卜机器人技术（深圳）有限责任公司是一家集机器人操作系统、人工智能解决方案、智能移动机器人设计研发为一体的高科技公司,致力于服务机器人和机器人技术研发及服务。我们凭借优质的产品和服务与多家高校和机器人研发结构建立了战略合作关系，并一直保持着良好的口碑，业务遍及13个省的23个城市，并与25所高校建立了战略合作伙伴关系，包括南京大学计算机软件新技术国家重点实验室机器学习与数据挖掘研究组（LAMDA）、华东师范大学智能机器人运动与视觉实验室等。公司网址是：http://www.aicrobo.com/">
+    <meta name="author" content="aicrobo">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="renderer" content="webkit">
+    <title>Articles | AICRobo</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+	<meta name="baidu-site-verification" content="QKTXqDPfbb" />
+	<meta baidu-gxt-verify-token="e040d82b91018704584e4a686e820114">
+    <!--[if lt ie 9]>
+      <script type="text/javascript" src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+      <script type="text/javascript" src="//cdn.bootcss.com/selectivizr/1.0.2/selectivizr-min.js"></script>
+    <![endif]-->
+	
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+    <!--[if lte IE 8]>
+      <link type="text/css" href="http://www.aicrobo.com/theme/styles_forie.css" rel="stylesheet">
+      <script type="text/javascript" src="//cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://www.aicrobo.com/theme/img/favicon.ico" type="image/x-icon">
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//cdn.bootcss.com/jquery/1.8.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Users -->
+	<link type="text/css" href="http://www.aicrobo.com/theme/css/pack.built.d7a4735d.cache.css" rel="stylesheet" media="all">
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/blog_data.js"></script>    <script type="text/javascript">
+	if(navigator.appVersion.match(/MSIE [678]./i)==null){
+	document.writeln('<link type="text/css" href="http://www.aicrobo.com/theme/styles.css" rel="stylesheet">')
+	}
+	</script>
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?bb5a6b5f6f4bd10928db401f57b4b08f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+</head>
+
+<body class="body_7qcIGG" data-c_tl_id="M_fdbf4fca884a4049c0a9f0f5758ca13b">
+	<header>
+<div class="container-fluid c-section section_2CGTQP" data-c_tl_id="M_c11f7cfd17d72ac5">
+	<div class="container c-container container_IwJriH">
+		<nav class="navbar c-navbar navbar_1q03Hb">
+			<div class="container-fluid navcontainer_Uhjg6c">
+				<div class="navbar-header c-navheader navheader_FY9sjX">
+					<button class="navbar-toggle c-navmenubutton navmenubutton_J4RzJu" data-target="#navmenu_755a1c6b9843c69b" data-toggle="collapse" type="button">
+						<span class="sr-only c-span span_zmeU34">
+							Toggle navigation
+						</span>
+						<span class="icon-bar c-nav-btn-span span_eujvK4">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_JZBDJ2">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_Qioh26">
+						</span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse c-navcollapse navcollapse_gzXDA4" id="navmenu_755a1c6b9843c69b">
+					<ul class="nav navbar-nav navbar-right c-navlist navlist_U1qhg4">
+						<li class="c-navlistitem navlistitem_0r3Vch">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/index.html">
+								首页
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_YgRLVb">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/news.html">
+								资讯
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_3KREzQ">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/business.html">
+								业务
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/blog/">
+								支持
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/about.html">
+								我们
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="c-div div_4EeF5x">
+			<img class="c-image image_2OVLQP" src="http://www.aicrobo.com/theme/files/5b331cc49c0aa557a34eec662d1d1204.png"/>
+		</div>
+	</div>
+</div>
+	</header>
+
+	<!-- MAIN -->
+<div class="container-fluid c-section section_0TxsTH navlist_U1qhg4" data-c_tl_id="M_f5a89589fa73388d">
+	<div class="container c-container container_NTlCsu">
+		<a class="c-textlink textlink_5qefPL" href="http://www.aicrobo.com/index.html">
+			首页
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			支持
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			技术博客
+		</a>
+	</div>
+</div>
+<div class="container-fluid c-section section_3egbpywzlbBKNR" data-c_tl_id="M_4096039ed3a9299c">
+	<div class="container c-container container_IDMIxJ">
+		<div class="row c-row row_RMwxv0">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_ScfXmQ">
+				<h1 class="c-heading heading_mj8l0L">
+					技术支持
+				</h1>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_J9TicW">
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/blog/" type="button">
+					技术博客
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/service.html" type="button">
+					咨询服务
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/feedback.html" type="button">
+					意见反馈
+				</a>
+			</div>
+		</div>
+	</div>
+	<article class="post-content">
+		<div class="container c-container container_2ngLOL">
+			<div class="c-contentview contentview_FBo9Ir" data-c_e_id="contentview_d02e19b336306fb2">
+				<h2 class="c-heading heading_sHeIAC">
+					用hector mapping构建地图
+				</h2>
+<ul class="list-inline">
+    <!-- date -->
+    <li>
+        <i class="fa fa-calendar-o fa-lg">C: </i>
+        <abbr class="published" title="2014-06-13"> 2014-06-13</abbr>
+    </li>
+	
+
+    <!-- author -->
+        <li>
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://www.aicrobo.com/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li>
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://www.aicrobo.com/blog/category/ros.html">ROS</a>
+    </li>
+
+    <!-- tags -->
+        <li>
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/ros.html">ros</a>,
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/ubuntu_for_ros.html">ubuntu_for_ros</a>,
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/exbotxi.html">exbotxi</a>,
+        </li>
+</ul>				<div class="summary">
+					<p class="first last">本文介绍如何在Ubuntu for ROS中配置Hokuyo（或者是rplidar），运行hector slam中的mapping示例代码。示例代码包含在exbot_xi开发包中，Ubuntu for ROS开发版已经包含此开发包。</p>
+
+				</div>
+				<div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+				</div>
+				<div class="textblock_DZ9doZ">
+					<div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#lidar" id="id6">安装配置LiDar</a><ul>
+<li><a class="reference internal" href="#rplidar" id="id7">rplidar的配置</a></li>
+<li><a class="reference internal" href="#id2" id="id8">通用配置</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3" id="id9">测试LiDar</a><ul>
+<li><a class="reference internal" href="#id4" id="id10">rplidar接入</a></li>
+<li><a class="reference internal" href="#hokuyo" id="id11">Hokuyo接入</a></li>
+<li><a class="reference internal" href="#id5" id="id12">启动测试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hector-slam" id="id13">hector slam</a><ul>
+<li><a class="reference internal" href="#lidarmapping" id="id14">手持LiDar做mapping</a></li>
+<li><a class="reference internal" href="#exbot-ximapping" id="id15">用ExBot XI平台做mapping</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="lidar">
+<h2><a class="toc-backref" href="#id6">安装配置LiDar</a></h2>
+<p>exbot_xi内置了Hokuyo和rplidar的启动程序，可以根据自己的LiDar型号来选择。其中Hokuyo不需要进行任何设置即可驱动，如果使用的是rplidar，需要编译rplidar的驱动程序。</p>
+<div class="section" id="rplidar">
+<h3><a class="toc-backref" href="#id7">rplidar的配置</a></h3>
+<p>rplidar的ROS端配置可以参考 <a class="reference external" href="https://github.com/yuanboshe/exbot_sensors">https://github.com/yuanboshe/exbot_sensors</a> 的相关配置说明，或者直接看本网接下来的流程说明。</p>
+<p>rplidar的ROS端驱动封装放在exbot_sensors开发包内，需要先下载exbot_sensors包。打开terminal，输入下面的代码即可：</p>
+<div class="highlight"><pre>cd ~/catkin_ws/src/
+git clone https://github.com/yuanboshe/exbot_sensors.git
+</pre></div>
+<p>要使用rplidar还需要编译rplidar的sdk，从rplidar官方网站下载sdk（<a class="reference external" href="http://rplidar.robopeak.com/download.html">http://rplidar.robopeak.com/download.html</a>），如 <em>rplidar_sdk_v1.4.2.7z</em> 解压并拷贝到Ubuntu for ROS中，如拷贝后为 <em>/home/exbot/rplidar_sdk_v1.4.2</em> 。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">sdk的版本号请根据实际情况加以修改，本文以老版本的驱动号为例。</p>
+</div>
+<p>然后执行下面的命令对rplidar的sdk进行编译：</p>
+<div class="highlight"><pre>cd ~/rplidar_sdk_v1.4.2/sdk/sdk/
+make
+</pre></div>
+<p>执行命令 <tt class="docutils literal">gedit ~/catkin_ws/src/exbot_sensors/rplidar/CMakeLists.txt</tt> 打开rplidar ROS端封装的编译配置文件，找到 <em>set(RPLIDAR_DIR /home/exbot/rplidar_sdk_v1.4.1/sdk)</em> 一行，将路径改正确（如版本号改为1.4.2）。</p>
+<p>接下来使用下面的命令编译rplidar的ROS端驱动：</p>
+<div class="highlight"><pre>cd ~/catkin_ws/
+catkin_make --pkg rplidar
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id8">通用配置</a></h3>
+<p>exbot_xi开发包选择使用的LiDar型号是通过环境中的 <em>SENSOR_2D</em> 参数进行选择的，<em>SENSOR_2D</em> 参数可以是 <tt class="docutils literal">rplidar</tt> 或者是 <tt class="docutils literal">hokuyo</tt> 。设置方法如下：</p>
+<p>输入命令 <tt class="docutils literal">gedit <span class="pre">~/.bashrc</span></tt> 打开 <strong>.bashrc</strong> 文件，在最下面添加 <tt class="docutils literal">export SENSOR_2D=rplidar</tt> 一行即可将参数设置为 <tt class="docutils literal">rplidar</tt> 。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id9">测试LiDar</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id10">rplidar接入</a></h3>
+<p>将rplidar接入Ubuntu for ROS开发版系统内部，输入命令 <tt class="docutils literal">ls /dev/ttyUSB*</tt> 查看USB端口占用情况，结果可能如下所示：</p>
+<blockquote>
+<a class="reference external" href="mailto:exbot&#64;ubuntu">exbot&#64;ubuntu</a>:~$ ls /dev/ttyUSB*
+/dev/ttyUSB0
+<a class="reference external" href="mailto:exbot&#64;ubuntu">exbot&#64;ubuntu</a>:~$</blockquote>
+<p>如果只有一个USB接入设备，那么rplidar的接入端口就是上面显示的 <strong>/dev/ttyUSB0</strong>，记录下来。</p>
+<p>输入命令 <tt class="docutils literal">gedit catkin_ws/src/exbot_xi/exbotxi_bringup/launch/include/rplidar_2d_sensor.launch.xml</tt> 打开rplidar的配置文件，找到 <em>&lt;param name=&quot;com_path&quot; type=&quot;string&quot; value=&quot;/dev/ttyUSB1&quot; /&gt;</em> 一行，将其中的 <em>value</em> 值改为刚才找到的端口路径 <strong>/dev/ttyUSB0</strong> 然后保存。</p>
+</div>
+<div class="section" id="hokuyo">
+<h3><a class="toc-backref" href="#id11">Hokuyo接入</a></h3>
+<p>hokuyo的端口默认是 <strong>/dev/ttyACM0</strong> 一般不会出现冲突，接入系统即可使用。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id12">启动测试</a></h3>
+<p>打开4个terminal，分别输入下面的命令：</p>
+<div class="highlight"><pre>roscore
+roslaunch exbotxi_bringup fake_exbotxi.launch
+roslaunch exbotxi_bringup 2dsensor.launch
+roslaunch exbotxi_rviz view_mobile.launch
+</pre></div>
+<p>其中第3条命令用于启动LiDar设备，并从设备中获取数据。第4条命令用于启动rviz观察数据。</p>
+<p>rviz启动后将看到图形界面，勾选左边的 <em>LaserScan</em> 选框，将可以看到LiDar中的点云数据，如图中的红色点。</p>
+<img alt="lidar" src="http://www.aicrobo.com/images/2014-06-13_hector_mapping_example/lidar.jpg" />
+</div>
+</div>
+<div class="section" id="hector-slam">
+<h2><a class="toc-backref" href="#id13">hector slam</a></h2>
+<p>hector slam 已经可以直接通过ROS远程源安装，在Ubuntu for ROS中执行下面的命令即可：</p>
+<div class="highlight"><pre>sudo apt-get install ros-hydro-cmake-modules ros-hydro-hector-slam
+</pre></div>
+<div class="section" id="lidarmapping">
+<h3><a class="toc-backref" href="#id14">手持LiDar做mapping</a></h3>
+<p>依次输入下面的命令，保持LiDar水平移动即可在rviz窗口中看到构建地图的过程。</p>
+<div class="highlight"><pre>roscore
+roslaunch exbotxi_bringup fake_exbotxi.launch
+roslaunch exbotxi_bringup 2dsensor.launch
+roslaunch exbotxi_nav hector_mapping_demo.launch
+roslaunch exbotxi_rviz view_navigation.launch
+</pre></div>
+</div>
+<div class="section" id="exbot-ximapping">
+<h3><a class="toc-backref" href="#id15">用ExBot XI平台做mapping</a></h3>
+<p>与手持LiDar类似，只需要将 <em>fake_exbotxi</em> 改为真实机器人的启动命令即可。输入下面的命令：</p>
+<div class="highlight"><pre>roscore
+roslaunch exbotxi_bringup minimal.launch
+roslaunch exbotxi_bringup 2dsensor.launch
+roslaunch exbotxi_nav hector_mapping_demo.launch
+roslaunch exbotxi_rviz view_navigation.launch
+roslaunch exbotxi_teleop keyboard_teleop.launch
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果使用的是rplidar，由于rplidar与机器人底盘都是使用ttyUSB？端口，所以需要按照前面的步骤将端口号修改正确，建议先将底盘的USB接入计算机，然后再接入rplidar，这样机器人底盘的端口就是 <em>ttyUSB0</em>，rplidar的端口就是默认的 <em>ttyUSB1</em>。</p>
+</div>
+<p>将键盘焦点放在键盘控制的terminal窗口中，然后通过键盘控制机器人移动，并可以从rviz中观察机器人构建的地图。此地图只需要LiDar设备即可，不需要其他传感器输入，如下图是rplidar的效果，如果使用频率更高的hokuyo，能够得到更好的地图：</p>
+<img alt="map" src="http://www.aicrobo.com/images/2014-06-13_hector_mapping_example/map.jpg" />
+</div>
+</div>
+
+				</div>
+
+				<div id="uyan_frame"></div>
+
+				
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="YOUJIAN" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+			</div>
+		</div>
+	</article>
+</div>
+<div class="container-fluid c-section section_ZJJRsu">
+</div>
+	<!-- ENDS MAIN -->
+
+	<div class="container-fluid c-section section_dQA3ox" data-c_act_id="M_e64dbf1efc94f55d09a9cc735f442dc5" data-c_tl_id="M_c56b22ee4c946934">
+		<div class="container c-container container_XtBvb8">
+			<div class="row c-row row_PbZJp1">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							资讯中心
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/news.html" target="_blank">
+							新闻动态
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/lives.html" target="_blank">
+							办公生活
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							项目业务
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/business.html" target="_blank">
+							公司业务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/education.html" target="_blank">
+							教育分享
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_vTzKOo">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							服务支持
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/blog/" target="_blank">
+							技术博客
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							咨询服务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							意见反馈
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_ClzrwN">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关于我们
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/about.html" target="_blank">
+							公司简介
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/joinus.html" target="_blank">
+							加入我们
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/contact.html" target="_blank">
+							联系我们
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_S4sJkc">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关注我们
+						</h1>
+						<button class="c-textlink textlink_WSs7bO" data-toggle="modal" data-target="#myModal">
+							官方微信
+						</button>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+										<h3 id="myModalLabel">爱啃萝卜官方微信</h3>
+										<p>打开微信，点击右上角的“+”，选择“扫一扫”功能，用摄像头对准下方二维码即可。</p>
+									</div>
+									<div class="modal-body">
+										<img class="c-image" src="http://www.aicrobo.com/theme/files/ba874f19480ae396b7c1bca3f131f3d8.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+				<div style="border-top: 2px ridge gray; margin-left: -15px; margin-top: 20px; padding-top: 5px;">
+					<p style="color: white; font-size: 12px;">Copyright &nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp; 2013-2015, AICRobo, All Rights Reserved. 爱啃萝卜机器人技术（深圳）有限责任公司</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var uyan_config = {
+	'du': 'yuanboshe.github.io', 		
+		'su': 'blog/2014-06-hector_mapping_example.html'
+		};
+	</script>
+	<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36220570-3', 'phirobot.com');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- ie8 以下版本提示信息 -->
+<!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+<div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;" onclick="hide()">×</button>
+	<p style="text-align: center;">
+		您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+	<span style="margin-left:10px;">
+		<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+		</a>
+		<a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+		</a>
+		<a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+		</a>
+		<a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+		</a>
+	</span>
+	</p>
+</div>
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/pack.built.3a8efe4c.cache.js"></script>
+</html>

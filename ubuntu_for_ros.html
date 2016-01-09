@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="爱啃萝卜,智能移动机器人,自主导航,slam,vslam,turtlebot,ROS,Ubuntu for ROS,aicrobo,yuanboshe,exbot,计算机视觉,机器人操作系统,rgbd,激光雷达,机器学习,lamda,人工智能,视觉定位,视觉导航,自然人机交互,跟随,智能避障,多机协同">
+    <meta name="description" content="爱啃萝卜机器人技术（深圳）有限责任公司是一家集机器人操作系统、人工智能解决方案、智能移动机器人设计研发为一体的高科技公司,致力于服务机器人和机器人技术研发及服务。我们凭借优质的产品和服务与多家高校和机器人研发结构建立了战略合作关系，并一直保持着良好的口碑，业务遍及13个省的23个城市，并与25所高校建立了战略合作伙伴关系，包括南京大学计算机软件新技术国家重点实验室机器学习与数据挖掘研究组（LAMDA）、华东师范大学智能机器人运动与视觉实验室等。公司网址是：http://www.aicrobo.com/">
+    <meta name="author" content="aicrobo">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="renderer" content="webkit">
+    <title>About Ubuntu for ROS | AICRobo</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+	<meta name="baidu-site-verification" content="QKTXqDPfbb" />
+	<meta baidu-gxt-verify-token="e040d82b91018704584e4a686e820114">
+    <!--[if lt ie 9]>
+      <script type="text/javascript" src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+      <script type="text/javascript" src="//cdn.bootcss.com/selectivizr/1.0.2/selectivizr-min.js"></script>
+    <![endif]-->
+	
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+    <!--[if lte IE 8]>
+      <link type="text/css" href="http://www.aicrobo.com/theme/styles_forie.css" rel="stylesheet">
+      <script type="text/javascript" src="//cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://www.aicrobo.com/theme/img/favicon.ico" type="image/x-icon">
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//cdn.bootcss.com/jquery/1.8.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Users -->
+	<link type="text/css" href="http://www.aicrobo.com/theme/css/pack.built.d7a4735d.cache.css" rel="stylesheet" media="all">
+    <script type="text/javascript">
+	if(navigator.appVersion.match(/MSIE [678]./i)==null){
+	document.writeln('<link type="text/css" href="http://www.aicrobo.com/theme/styles.css" rel="stylesheet">')
+	}
+	</script>
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?bb5a6b5f6f4bd10928db401f57b4b08f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+</head>
+
+<body class="body_7qcIGG" data-c_tl_id="M_fdbf4fca884a4049c0a9f0f5758ca13b">
+	<header>
+<div class="container-fluid c-section section_2CGTQP" data-c_tl_id="M_c11f7cfd17d72ac5">
+	<div class="container c-container container_IwJriH">
+		<nav class="navbar c-navbar navbar_1q03Hb">
+			<div class="container-fluid navcontainer_Uhjg6c">
+				<div class="navbar-header c-navheader navheader_FY9sjX">
+					<button class="navbar-toggle c-navmenubutton navmenubutton_J4RzJu" data-target="#navmenu_755a1c6b9843c69b" data-toggle="collapse" type="button">
+						<span class="sr-only c-span span_zmeU34">
+							Toggle navigation
+						</span>
+						<span class="icon-bar c-nav-btn-span span_eujvK4">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_JZBDJ2">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_Qioh26">
+						</span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse c-navcollapse navcollapse_gzXDA4" id="navmenu_755a1c6b9843c69b">
+					<ul class="nav navbar-nav navbar-right c-navlist navlist_U1qhg4">
+						<li class="c-navlistitem navlistitem_0r3Vch">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/index.html">
+								首页
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_YgRLVb">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/news.html">
+								资讯
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_3KREzQ">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/business.html">
+								业务
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/blog/">
+								支持
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/about.html">
+								我们
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="c-div div_4EeF5x">
+			<img class="c-image image_2OVLQP" src="http://www.aicrobo.com/theme/files/5b331cc49c0aa557a34eec662d1d1204.png"/>
+		</div>
+	</div>
+</div>
+	</header>
+
+	<!-- MAIN -->
+<div class="container-fluid c-section section_3egbpywzlbBKNR" data-c_tl_id="M_4096039ed3a9299c">
+<div class="container c-container container_ubtforros">
+<h2>Ubuntu for ROS</h2>
+<ul>
+	<li>如果是Windows用户，请安装虚拟机，如VMWare，笔者使用的是 VMWare Workstation 10.0.4，然后参考《<a title="10分钟安装ROS（Windows + 虚拟机）2015-07-19更新" href="http://aicrobo.github.io/blog/2015-07-install_ros_in_10mins_vm_new.html" target="_blank">10分钟安装ROS（Windows + 虚拟机）2015-07-19更新</a>》教程进行安装。</li>
+	<li>如果是Ubuntu用户，在裸机中安装，请参考《<a title="10分钟安装ROS（U盘/CD刻录盘 + 裸机）2015-07-19更新" href="http://aicrobo.github.io/blog/2015-07-install_ros_in_10mins_pc_new.html" target="_blank">10分钟安装ROS（U盘/CD刻录盘 + 裸机）2015-07-19更新</a>》。</li>
+    <li><span style="color: #f55;"><strong>华东师范大学智能机器人运动与视觉实验室主办<a title="2015中国ROS Summer School" href="http://www.robotics.sei.ecnu.edu.cn/ros2015/" target="_blank">2015中国ROS Summer School</a>，请使用“开发版”Ubuntu for ROS。</strong></span></li>
+</ul>
+
+<div class="row">
+	<div class='col-md-6'>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>基础版(Ubuntu 14.04 + Indigo)</h3>
+			</div>
+			<div class="panel-body">
+				<h4>64位</h4>
+				<ul class="simple">
+					<li><p><strong>UROS1404I64BASE_aicrobo_150714 [<a href="http://pan.baidu.com/s/1eQIY8Ye" target="_blank">下载iso</a>]</strong></p>
+					<p>MD5 [46366f2d412c1c2090bdf1783fff6d19]</p></li>
+				</ul>
+				<hr/>
+				<h4>32位</h4>
+				<ul class="simple">
+					<li><p><strong>UROS1404I32BASE_aicrobo_150714 [<a href="http://pan.baidu.com/s/1sjn4j7n" target="_blank">下载iso</a>]</strong></p>
+					<p>MD5 [c9b34c14997718eae31d1938188554d3]</p></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class='col-md-6'>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>开发版(Ubuntu 14.04 + Indigo)</h3>
+			</div>
+			<div class="panel-body">
+				<h4>64位</h4>
+				<ul class="simple">
+					<li><p><strong>UROS1404I64DEV_aicrobo_150715 [<a href="http://pan.baidu.com/s/1jGjE918" target="_blank">下载iso</a>]</strong></p>
+					<p>MD5 [8e4a47fbb80c54cb1d4b0b094dac7947]</p></li>
+				</ul>
+				<hr/>
+				<h4>32位</h4>
+				<ul class="simple">
+					<li><p><strong>UROS1404I32DEV_aicrobo_150715 [<a href="http://pan.baidu.com/s/1bnuImCJ" target="_blank">下载iso</a>]</strong></p>
+					<p>MD5 [fe5f62cc1684879b06c88bcd7a564ff8]</p></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h3>关于Ubuntu for ROS</h3>
+<div class="row">
+	<div class='col-md-6'>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> 历史：</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="simple">
+					<li>2013年，Ubuntu for ROS诞生于<span style="color: #ff0000;"><strong>南京大学计算机软件新技术国家重点实验室机器学习与数据挖掘研究组（LAMDA）</strong></span>，由负责智能机器人系统架构与开发的佘元博（Yuanbo She）同学设计制作完成。</li>
+					<li>设计制作Ubuntu for ROS的初衷，是节约ROS开发团队的开发环境部署时间。</li>
+					<li>2014年1月30日，作为ExBot网上机器人兴趣小组的创始人之一，Yuanbo She以ExBot小组的名义通过ExBot机器人社区（http://blog.exbot.net/archives/702）对外发布分享Ubuntu for ROS，并编写初级使用教程，让广大ROS爱好者受益。</li>
+					<li>2014年5月20日，发布完520版本后，Ubuntu for ROS的维护工作停止，其他版本以及其他团队的类似定制版Ubuntu与本ROS技术团队无关。</li>
+					<li>2015年7月，设计制作Ubuntu for ROS的原班人马正式全职，重新为大家维护ROS定制版Ubuntu iso，并推出更完善的使用教程。</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class='col-md-6'>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>说明：</h3>
+			</div>
+			<div class="panel-body">
+				<p>Ubuntu for ROS是一款基于ROS开发的定制版Ubuntu系统，按照常规的方式部署和配置ROS学习与开发环境需要有经验的开发者花费数小时甚至一两天（网络不好的情况下）完成，而使用Ubuntu for ROS对于一个完全没有经验的开发者来说，也只需要10分钟即可开始进行ROS学习与开发。</p>
+
+				<p>2014年6月，团队停止Ubuntu for ROS的维护工作原因有以下几点：</p>
+
+				<ul class="simple">
+					<li>Ubuntu系统的定制打包很简单，但内容功能的优化与完善需要倾注制作者的经验和心血。而Ubuntu for ROS的发布与推广让一些商业化团队看到商机，伸手党之余还各种信息叨扰让制作者不甚其烦，没底线地进行商业忽悠也让作者感到厌恶。</li>
+					<li>团队成员对外分享经验、答疑解难，但很多劳动被商业化团队无偿利用，内部商定就此封笔停止对外分享。团队外的使用者遇到疑问常常得到错误的回答，被误导导致Ubuntu for ROS名声受损，也使团队感到烦闷。</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+		<div id="uyan_frame"></div>
+</div>
+</div>
+	<!-- ENDS MAIN -->
+
+	<div class="container-fluid c-section section_dQA3ox" data-c_act_id="M_e64dbf1efc94f55d09a9cc735f442dc5" data-c_tl_id="M_c56b22ee4c946934">
+		<div class="container c-container container_XtBvb8">
+			<div class="row c-row row_PbZJp1">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							资讯中心
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/news.html" target="_blank">
+							新闻动态
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/lives.html" target="_blank">
+							办公生活
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							项目业务
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/business.html" target="_blank">
+							公司业务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/education.html" target="_blank">
+							教育分享
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_vTzKOo">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							服务支持
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/blog/" target="_blank">
+							技术博客
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							咨询服务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							意见反馈
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_ClzrwN">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关于我们
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/about.html" target="_blank">
+							公司简介
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/joinus.html" target="_blank">
+							加入我们
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/contact.html" target="_blank">
+							联系我们
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_S4sJkc">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关注我们
+						</h1>
+						<button class="c-textlink textlink_WSs7bO" data-toggle="modal" data-target="#myModal">
+							官方微信
+						</button>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+										<h3 id="myModalLabel">爱啃萝卜官方微信</h3>
+										<p>打开微信，点击右上角的“+”，选择“扫一扫”功能，用摄像头对准下方二维码即可。</p>
+									</div>
+									<div class="modal-body">
+										<img class="c-image" src="http://www.aicrobo.com/theme/files/ba874f19480ae396b7c1bca3f131f3d8.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+				<div style="border-top: 2px ridge gray; margin-left: -15px; margin-top: 20px; padding-top: 5px;">
+					<p style="color: white; font-size: 12px;">Copyright &nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp; 2013-2015, AICRobo, All Rights Reserved. 爱啃萝卜机器人技术（深圳）有限责任公司</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var uyan_config = {
+	'du': 'yuanboshe.github.io', 		
+		'su': 'ubuntu_for_ros.html'
+		};
+	</script>
+	<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36220570-3', 'phirobot.com');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- ie8 以下版本提示信息 -->
+<!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+<div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;" onclick="hide()">×</button>
+	<p style="text-align: center;">
+		您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+	<span style="margin-left:10px;">
+		<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+		</a>
+		<a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+		</a>
+		<a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+		</a>
+		<a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+		</a>
+	</span>
+	</p>
+</div>
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/pack.built.3a8efe4c.cache.js"></script>
+</html>

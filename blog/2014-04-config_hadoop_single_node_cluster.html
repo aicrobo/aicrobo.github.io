@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="爱啃萝卜,智能移动机器人,自主导航,slam,vslam,turtlebot,ROS,Ubuntu for ROS,aicrobo,yuanboshe,exbot,计算机视觉,机器人操作系统,rgbd,激光雷达,机器学习,lamda,人工智能,视觉定位,视觉导航,自然人机交互,跟随,智能避障,多机协同">
+    <meta name="description" content="爱啃萝卜机器人技术（深圳）有限责任公司是一家集机器人操作系统、人工智能解决方案、智能移动机器人设计研发为一体的高科技公司,致力于服务机器人和机器人技术研发及服务。我们凭借优质的产品和服务与多家高校和机器人研发结构建立了战略合作关系，并一直保持着良好的口碑，业务遍及13个省的23个城市，并与25所高校建立了战略合作伙伴关系，包括南京大学计算机软件新技术国家重点实验室机器学习与数据挖掘研究组（LAMDA）、华东师范大学智能机器人运动与视觉实验室等。公司网址是：http://www.aicrobo.com/">
+    <meta name="author" content="aicrobo">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="renderer" content="webkit">
+    <title>Articles | AICRobo</title>
+    <meta name="google-site-verification" content="0mXr6Pg187Q4q6NgNglcunnBiVqqS1L4yKV6loUWYkY"/>
+	<meta name="baidu-site-verification" content="QKTXqDPfbb" />
+	<meta baidu-gxt-verify-token="e040d82b91018704584e4a686e820114">
+    <!--[if lt ie 9]>
+      <script type="text/javascript" src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+      <script type="text/javascript" src="//cdn.bootcss.com/selectivizr/1.0.2/selectivizr-min.js"></script>
+    <![endif]-->
+	
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+    <!--[if lte IE 8]>
+      <link type="text/css" href="http://www.aicrobo.com/theme/styles_forie.css" rel="stylesheet">
+      <script type="text/javascript" src="//cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="http://www.aicrobo.com/theme/img/favicon.ico" type="image/x-icon">
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//cdn.bootcss.com/jquery/1.8.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Users -->
+	<link type="text/css" href="http://www.aicrobo.com/theme/css/pack.built.d7a4735d.cache.css" rel="stylesheet" media="all">
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/blog_data.js"></script>    <script type="text/javascript">
+	if(navigator.appVersion.match(/MSIE [678]./i)==null){
+	document.writeln('<link type="text/css" href="http://www.aicrobo.com/theme/styles.css" rel="stylesheet">')
+	}
+	</script>
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?bb5a6b5f6f4bd10928db401f57b4b08f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+</head>
+
+<body class="body_7qcIGG" data-c_tl_id="M_fdbf4fca884a4049c0a9f0f5758ca13b">
+	<header>
+<div class="container-fluid c-section section_2CGTQP" data-c_tl_id="M_c11f7cfd17d72ac5">
+	<div class="container c-container container_IwJriH">
+		<nav class="navbar c-navbar navbar_1q03Hb">
+			<div class="container-fluid navcontainer_Uhjg6c">
+				<div class="navbar-header c-navheader navheader_FY9sjX">
+					<button class="navbar-toggle c-navmenubutton navmenubutton_J4RzJu" data-target="#navmenu_755a1c6b9843c69b" data-toggle="collapse" type="button">
+						<span class="sr-only c-span span_zmeU34">
+							Toggle navigation
+						</span>
+						<span class="icon-bar c-nav-btn-span span_eujvK4">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_JZBDJ2">
+						</span>
+						<span class="icon-bar c-nav-btn-span span_Qioh26">
+						</span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse c-navcollapse navcollapse_gzXDA4" id="navmenu_755a1c6b9843c69b">
+					<ul class="nav navbar-nav navbar-right c-navlist navlist_U1qhg4">
+						<li class="c-navlistitem navlistitem_0r3Vch">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/index.html">
+								首页
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_YgRLVb">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/news.html">
+								资讯
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_3KREzQ">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/business.html">
+								业务
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/blog/">
+								支持
+							</a>
+						</li>
+						<li class="c-navlistitem navlistitem_69uu7y">
+							<a class="c-navlink navlink_mqf5Sb" href="http://www.aicrobo.com/about.html">
+								我们
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="c-div div_4EeF5x">
+			<img class="c-image image_2OVLQP" src="http://www.aicrobo.com/theme/files/5b331cc49c0aa557a34eec662d1d1204.png"/>
+		</div>
+	</div>
+</div>
+	</header>
+
+	<!-- MAIN -->
+<div class="container-fluid c-section section_0TxsTH navlist_U1qhg4" data-c_tl_id="M_f5a89589fa73388d">
+	<div class="container c-container container_NTlCsu">
+		<a class="c-textlink textlink_5qefPL" href="http://www.aicrobo.com/index.html">
+			首页
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			支持
+		</a>
+		<h1 class="c-heading heading_v5itPp">
+			｜
+		</h1>
+		<a class="c-textlink textlink_5qefPL2" href="http://www.aicrobo.com/blog/">
+			技术博客
+		</a>
+	</div>
+</div>
+<div class="container-fluid c-section section_3egbpywzlbBKNR" data-c_tl_id="M_4096039ed3a9299c">
+	<div class="container c-container container_IDMIxJ">
+		<div class="row c-row row_RMwxv0">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_ScfXmQ">
+				<h1 class="c-heading heading_mj8l0L">
+					技术支持
+				</h1>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_J9TicW">
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/blog/" type="button">
+					技术博客
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/service.html" type="button">
+					咨询服务
+				</a>
+				<a class="btn c-button button_dwFjz9" href="http://www.aicrobo.com/feedback.html" type="button">
+					意见反馈
+				</a>
+			</div>
+		</div>
+	</div>
+	<article class="post-content">
+		<div class="container c-container container_2ngLOL">
+			<div class="c-contentview contentview_FBo9Ir" data-c_e_id="contentview_d02e19b336306fb2">
+				<h2 class="c-heading heading_sHeIAC">
+					Ubuntu Hadoop2.3.0 (Single-node) 单节点配置流程
+				</h2>
+<ul class="list-inline">
+    <!-- date -->
+    <li>
+        <i class="fa fa-calendar-o fa-lg">C: </i>
+        <abbr class="published" title="2014-04-05"> 2014-04-05</abbr>
+    </li>
+	
+
+    <!-- author -->
+        <li>
+            <i class="fa fa-user fa-lg"></i>
+            <a class="ybs-black" href="http://www.aicrobo.com/about.html">Yuanbo She</a>
+        </li>
+
+    <!-- category -->
+    <li>
+        <i class="fa fa-folder-open-o fa-lg"></i>
+        <a class="ybs-black" href="http://www.aicrobo.com/blog/category/machine-learning.html">Machine Learning</a>
+    </li>
+
+    <!-- tags -->
+        <li>
+            <i class="fa fa-tag fa-lg"></i>
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/hadoop.html">hadoop</a>,
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/mapreduce.html">mapreduce</a>,
+                <a class="ybs-black" href="http://www.aicrobo.com/blog/tag/big-data.html">big data</a>,
+        </li>
+</ul>				<div class="summary">
+					<p class="first">Hadoop课程的第一个小作业就是配置Hadoop并记录过程，刚好我有写博客的习惯，干脆写成博客。本文主要参考：《 <a class="reference external" href="http://javatute.com/javatute/faces/post/hadoop/2014/setting-hadoop-2.2.0-on-ubuntu-12-lts.xhtml">Setting hadoop 2.2.0 on ubuntu 12 lts</a> 》设置Hadoop单节点，做学习实验用。我有追求新东西的癖好，虽然要求配置1.x版本的Hadoop，但还是忍不住要配置最新的2.3.0。</p>
+<p class="last">环境：VMWare10.0.0, Ubuntu 12.04, Hadoop 2.3.0.</p>
+
+				</div>
+				<div class="copyright">
+欢迎转载或参考，但请尊重作者劳动成果，转载请注明出处，参考请引用链接！
+				</div>
+				<div class="textblock_DZ9doZ">
+					<div class="contents topic" id="id1">
+<p class="topic-title first">目录</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id11">准备工作</a><ul>
+<li><a class="reference internal" href="#windows" id="id12">Windows中下载软件</a></li>
+<li><a class="reference internal" href="#jdk" id="id13">安装JDK</a></li>
+<li><a class="reference internal" href="#openssh-server" id="id14">安装openssh-server</a></li>
+<li><a class="reference internal" href="#hduser-hadoop" id="id15">添加新的组和用户名hduser:hadoop</a></li>
+<li><a class="reference internal" href="#ssh" id="id16">配置SSH</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3" id="id17">安装配置Hadoop</a><ul>
+<li><a class="reference internal" href="#id4" id="id18">解压hadoop</a></li>
+<li><a class="reference internal" href="#id5" id="id19">设置Hadoop相关环境变量</a></li>
+<li><a class="reference internal" href="#id6" id="id20">修改Hadoop配置文件</a><ul>
+<li><a class="reference internal" href="#hadoop-env-sh" id="id21">hadoop-env.sh</a></li>
+<li><a class="reference internal" href="#core-site-xml" id="id22">core-site.xml</a></li>
+<li><a class="reference internal" href="#yarn-site-xml" id="id23">yarn-site.xml</a></li>
+<li><a class="reference internal" href="#mapred-site-xml" id="id24">mapred-site.xml</a></li>
+<li><a class="reference internal" href="#hdfs-site-xml" id="id25">hdfs-site.xml</a></li>
+<li><a class="reference internal" href="#id7" id="id26">清理</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id27">试运行</a><ul>
+<li><a class="reference internal" href="#format-namenode" id="id28">Format namenode</a></li>
+<li><a class="reference internal" href="#id9" id="id29">启动服务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10" id="id30">测试</a><ul>
+<li><a class="reference internal" href="#sample-example" id="id31">Sample example</a></li>
+<li><a class="reference internal" href="#wordcount-example" id="id32">WordCount example</a></li>
+<li><a class="reference internal" href="#web-interface" id="id33">web interface</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">准备工作</a></h2>
+<div class="section" id="windows">
+<h3><a class="toc-backref" href="#id12">Windows中下载软件</a></h3>
+<p>下载并安装好虚拟机VMWare10.0.0。</p>
+<p>下载 Ubuntu for ROS 开发版本，找到 <a class="reference external" href="http://blog.exbot.net/archives/702">ubuntu12.04-ros-exbot-h2-140330</a> 并下载。这个是针对ROS的Ubuntu 12.04的定制版本，下载完后10分钟就能在虚拟机中安装好，并且里面已经附带了JDK8，对于没有安装Ubuntu的人还说是很方便的，官网有虚拟机安装教程。</p>
+<p>下载 Hadoop 2.3.0 <a class="reference external" href="http://www.apache.org/dyn/closer.cgi/hadoop/core">Hadoop官方下载</a> （我是从Hust镜像站点下的，很快搞定 <a class="reference external" href="http://mirrors.hust.edu.cn/apache/hadoop/core/hadoop-2.3.0/hadoop-2.3.0.tar.gz">hadoop-2.3.0.tar.gz</a> ）。</p>
+<p>后面的步骤在虚拟机Ubuntu中进行。</p>
+</div>
+<div class="section" id="jdk">
+<h3><a class="toc-backref" href="#id13">安装JDK</a></h3>
+<p>Ubuntu for ROS已经集成了JDK8，不需要自己安装，通过下面命令可以看到JDK路径(Thanks <a class="reference external" href="http://my.oschina.net/zarger/blog/120048">http://my.oschina.net/zarger/blog/120048</a>)：</p>
+<div class="highlight"><pre>update-alternatives --config java
+</pre></div>
+<p>显示结果类似：</p>
+<blockquote>
+<a class="reference external" href="mailto:exbot&#64;ubuntu">exbot&#64;ubuntu</a>:~$ update-alternatives --config java
+There is only one alternative in link group java: /usr/lib/jvm/java-8-oracle/jre/bin/java
+Nothing to configure.</blockquote>
+<p>结果中的 <strong>/usr/lib/jvm/java-8-oracle</strong> 就是需要记住的路径，后面配置JDK需要用到。</p>
+<p>如果是其他版本的Ubuntu，需要自己安装JDK，下面是安装JDK8的命令：</p>
+<div class="highlight"><pre>sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+</pre></div>
+</div>
+<div class="section" id="openssh-server">
+<h3><a class="toc-backref" href="#id14">安装openssh-server</a></h3>
+<p>执行下面命令即可：</p>
+<div class="highlight"><pre>sudo apt-get install openssh-server
+</pre></div>
+</div>
+<div class="section" id="hduser-hadoop">
+<h3><a class="toc-backref" href="#id15">添加新的组和用户名hduser:hadoop</a></h3>
+<p>我直接用原组和用户名exbot:exbot，为了跟大多数人（网上）保持一致，还是新建一个组和用户名吧。</p>
+<div class="highlight"><pre>sudo addgroup hadoop
+sudo adduser --ingroup hadoop hduser
+sudo adduser hduser sudo
+</pre></div>
+<p>第1条命令用于创建一个名为hadoop的组；第2条命令用于向hadoop组添加一个名为hduser的用户，此时需要输入用户信息，记住密码即可，其他的随意。第3条看效果是将hduser加入sudo组。</p>
+<p>现在登陆hduser用户，点击Ubuntu右上角的用户下拉菜单，选择hduser登陆。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">直接用 <tt class="docutils literal">su - hduser</tt> 可以在terminal内将环境切换用户到 <em>hduser</em>，但重开terminal还是会恢复原来的用户环境，还是重新登陆为hduser比较安逸。</p>
+</div>
+</div>
+<div class="section" id="ssh">
+<h3><a class="toc-backref" href="#id16">配置SSH</a></h3>
+<p>执行下面的命令：</p>
+<div class="highlight"><pre>ssh-keygen -t rsa
+cat $HOME/.ssh/id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys
+</pre></div>
+<p>第1条命令用于生成一对RSA密钥，全部回车即可，生成的一对名为 <em>id_rsa</em> 的密钥存放在 <em>~/.ssh/</em> 下面。第2条命令用于将RSA密钥对的公钥写进本地SSH授权文件。</p>
+<p>现在尝试SSH本机：</p>
+<div class="highlight"><pre>ssh localhost
+</pre></div>
+<p>会出现下面提示：</p>
+<blockquote>
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is 8f:c9:65:4b:96:a0:6a:7f:73:4f:a6:bb:e8:53:c4:c5.
+Are you sure you want to continue connecting (yes/no)?</blockquote>
+<p>输入 <tt class="docutils literal">yes</tt> 回车即可。提示如下则正常：</p>
+<blockquote>
+<dl class="docutils">
+<dt>Welcome to Ubuntu 12.04.4 LTS (GNU/Linux 3.8.0-37-generic i686)</dt>
+<dd><ul class="first last simple">
+<li>Documentation:  <a class="reference external" href="https://help.ubuntu.com/">https://help.ubuntu.com/</a></li>
+</ul>
+</dd>
+</dl>
+</blockquote>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id17">安装配置Hadoop</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id18">解压hadoop</a></h3>
+<p>把先前下载的 <em>hadoop-2.3.0.tar.gz</em> 拷贝到虚拟机Ubuntu的hduser用户home目录下，如果没有下载，直接在Ubuntu中打开firefox下载也行，中国用户就别依照老外的教程从外网用wget下载了，直接找国内镜像站点下载，瞬间搞定的事情。</p>
+<p>打开terminal，用 <tt class="docutils literal">ls</tt> 命令看看hadoop压缩包在不在，不在就是没拷过来：</p>
+<div class="highlight"><pre>hduser@ubuntu:~$ ls
+Desktop    Downloads         hadoop-2.3.0.tar.gz  Pictures  Templates
+Documents  examples.desktop  Music                Public    Videos
+</pre></div>
+<p>然后执行下面的命令：</p>
+<div class="highlight"><pre>sudo tar vxzf hadoop-2.3.0.tar.gz -C /usr/local
+cd /usr/local
+sudo mv hadoop-2.3.0 hadoop
+sudo chown -R hduser:hadoop hadoop
+</pre></div>
+<p>第1条命令将hadoop压缩包解压到 <em>/usr/local</em> 路径下；第2条命令切换当前路径到 <em>/usr/local</em> 路径；第3条命令将 <em>hadoop-2.3.0</em> 文件名重命名为 <em>hadoop</em>；第4条命令将 <em>hadoop</em> 文件的所有权设置为 hadoop 组的 hduser 用户。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">第4条 <em>chown</em> 的条命令很重要，不更改所有权后面会遇到一系列权限问题！</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id19">设置Hadoop相关环境变量</a></h3>
+<p>gedit打开并编辑 <em>~/.bashrc</em> :</p>
+<div class="highlight"><pre>gedit ~/.bashrc
+</pre></div>
+<p>在弹出来的 <em>.bashrc</em> 文件的末尾添加下面的内容：</p>
+<div class="highlight"><pre><span class="c1">#Hadoop variables</span>
+<span class="n">export</span> <span class="n">JAVA_HOME</span><span class="o">=</span><span class="sr">/usr/</span><span class="n">lib</span><span class="sr">/jvm/</span><span class="n">java</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">oracle</span>
+<span class="n">export</span> <span class="n">HADOOP_INSTALL</span><span class="o">=</span><span class="sr">/usr/</span><span class="nb">local</span><span class="o">/</span><span class="n">hadoop</span>
+<span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:$HADOOP_INSTALL</span><span class="o">/</span><span class="n">bin</span>
+<span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:$HADOOP_INSTALL</span><span class="o">/</span><span class="n">sbin</span>
+<span class="n">export</span> <span class="n">HADOOP_MAPRED_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="n">export</span> <span class="n">HADOOP_COMMON_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="n">export</span> <span class="n">HADOOP_HDFS_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="n">export</span> <span class="n">YARN_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+</pre></div>
+<p>其中 <em>JAVA_HOME</em> 就是你之前查到的系统中JDK的路径。</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last"><em>~/.bashrc</em> 文件在你每次打开terminal的时候都会自动执行，这里就是在打开terminal后，设置Hadoop相关变量，让terminal知道执行hadoop命令的时候应该从哪些路径查找。如果不设置，就会像大多数教程一样自己敲一大串路径去指明hadoop命令的位置。</p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">修改 <em>.bashrc</em> 后，需要重新打开terminal，或者 <tt class="docutils literal">source <span class="pre">~/.bashrc</span></tt> 才会生效。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id20">修改Hadoop配置文件</a></h3>
+<p>主要修改下面几个文件：</p>
+<ul class="simple">
+<li>hadoop-env.sh</li>
+<li>core-site.xml</li>
+<li>yarn-site.xml</li>
+<li>mapred-site.xml</li>
+<li>hdfs-site.xml</li>
+</ul>
+<p>它们被放置在 <em>/usr/local/hadoop/etc/hadoop</em> 路径下。打开terminal，执行命令 <tt class="docutils literal">cd /usr/local/hadoop/etc/hadoop</tt> 来到对应路径。</p>
+<div class="section" id="hadoop-env-sh">
+<h4><a class="toc-backref" href="#id21">hadoop-env.sh</a></h4>
+<p>用 <tt class="docutils literal">gedit <span class="pre">hadoop-env.sh</span></tt> 命令修改环境脚本文件，找到 <em>export JAVA_HOME=${JAVA_HOME}</em> 一行，将 <strong>${JAVA_HOME}</strong> 改为自己的JDK的路径，这里是 <em>/usr/lib/jvm/java-8-oracle</em>。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">一定要改，虽然之前 <em>.bashrc</em> 设置了 <em>JAVA_HOME</em> 变量，但是当远程执行脚本的时候， <em>.bashrc</em> 并不会生效。</p>
+</div>
+<p>下面测试一下，不管在哪个路径下，用 <tt class="docutils literal">hadoop version</tt> 命令测试hadoop环境，都应该能测试成功。如果测试成功，则会显示下面的内容：</p>
+<div class="highlight"><pre>hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ hadoop version
+Hadoop 2.3.0
+Subversion http://svn.apache.org/repos/asf/hadoop/common -r 1567123
+Compiled by jenkins on 2014-02-11T13:40Z
+Compiled with protoc 2.5.0
+From source with checksum dfe46336fbc6a044bc124392ec06b85
+This command was run using /usr/local/hadoop/share/hadoop/common/hadoop-common-2.3.0.jar
+</pre></div>
+</div>
+<div class="section" id="core-site-xml">
+<h4><a class="toc-backref" href="#id22">core-site.xml</a></h4>
+<p>用 <tt class="docutils literal">gedit <span class="pre">core-site.xml</span></tt> 命令打开文件，在 <em>&lt;configuration&gt;</em> 标签中间添加：</p>
+<div class="highlight"><pre><span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>fs.default.name<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>hdfs://localhost:9000<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+<p>hadoop environment variables</p>
+</div>
+<div class="section" id="yarn-site-xml">
+<h4><a class="toc-backref" href="#id23">yarn-site.xml</a></h4>
+<p>用 <tt class="docutils literal">gedit <span class="pre">yarn-site.xml</span></tt> 命令打开文件，在 <em>&lt;configuration&gt;</em> 标签中间添加：</p>
+<div class="highlight"><pre><span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>yarn.nodemanager.aux-services<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>mapreduce_shuffle<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>yarn.nodemanager.aux-services.mapreduce.shuffle.class<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>org.apache.hadoop.mapred.ShuffleHandler<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="mapred-site-xml">
+<h4><a class="toc-backref" href="#id24">mapred-site.xml</a></h4>
+<p>用 <tt class="docutils literal">cp <span class="pre">mapred-site.xml.template</span> <span class="pre">mapred-site.xml</span></tt> 命令将 <em>mapred-site.xml</em> 模板文件拷贝为 <em>mapred-site.xml</em> 文件；然后再用 <tt class="docutils literal">gedit <span class="pre">mapred-site.xml</span></tt> 命令打开文件，在 <em>&lt;configuration&gt;</em> 标签中间添加：</p>
+<div class="highlight"><pre><span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>mapreduce.framework.name<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>yarn<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="hdfs-site-xml">
+<h4><a class="toc-backref" href="#id25">hdfs-site.xml</a></h4>
+<p>用 <tt class="docutils literal">gedit <span class="pre">hdfs-site.xml</span></tt> 命令打开文件，在 <em>&lt;configuration&gt;</em> 标签中间添加：</p>
+<div class="highlight"><pre><span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>dfs.replication<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>dfs.namenode.name.dir<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>file:/home/hduser/mydata/hdfs/namenode<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>dfs.datanode.data.dir<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>file:/home/hduser/mydata/hdfs/datanode<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+</pre></div>
+<p>文件中设置了两个文件夹路径，这里需要执行下面的命令创建这两个文件夹：</p>
+<div class="highlight"><pre>mkdir -p mydata/hdfs/namenode
+mkdir -p mydata/hdfs/datanode
+</pre></div>
+</div>
+<div class="section" id="id7">
+<h4><a class="toc-backref" href="#id26">清理</a></h4>
+<p><tt class="docutils literal">ls</tt> 命令能看到刚才gedit编辑的文件都有个带 <em>~</em> 的副本，强迫症表示需要用 <tt class="docutils literal">rm <span class="pre">-rf</span> *~</tt> 清理一下看着舒服。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id27">试运行</a></h3>
+<div class="section" id="format-namenode">
+<h4><a class="toc-backref" href="#id28">Format namenode</a></h4>
+<p>在测试前使用下面的命令Format namenode，只需要执行一次。</p>
+<div class="highlight"><pre>hdfs namenode -format
+</pre></div>
+<p>如果正常，结尾显示类似：</p>
+<div class="highlight"><pre>14/04/06 22:11:07 INFO util.ExitUtil: Exiting with status 0
+14/04/06 22:11:07 INFO namenode.NameNode: SHUTDOWN_MSG:
+/************************************************************
+SHUTDOWN_MSG: Shutting down NameNode at ubuntu/127.0.1.1
+************************************************************/
+</pre></div>
+</div>
+<div class="section" id="id9">
+<h4><a class="toc-backref" href="#id29">启动服务</a></h4>
+<p>用下面的命令启动hadoop服务：</p>
+<div class="highlight"><pre>start-dfs.sh
+start-yarn.sh
+</pre></div>
+<p>每条命令都会启动一些后台进程，需要稍许等待。启动完成后，输入命令 <tt class="docutils literal">jps</tt> 查看是否正常启动，如果正常，显示如下：</p>
+<div class="highlight"><pre>hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ jps
+5321 NodeManager
+4474 NameNode
+5387 Jps
+5117 ResourceManager
+4957 SecondaryNameNode
+4671 DataNode
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">虽然用 <tt class="docutils literal"><span class="pre">start-all.sh</span></tt> 也能代替上面两个脚本，但是官方里面写了推荐不要用 <tt class="docutils literal"><span class="pre">start-all.sh</span></tt> 来启动。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id30">测试</a></h2>
+<p>测试前先确保Hadoop服务已经启动。</p>
+<div class="section" id="sample-example">
+<h3><a class="toc-backref" href="#id31">Sample example</a></h3>
+<p>不管在哪个路径下，执行下面的命令进行测试：</p>
+<div class="highlight"><pre>hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar pi 2 5
+</pre></div>
+<p>正常启动，显示如下：</p>
+<div class="highlight"><pre>hduser@ubuntu:~$ hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar pi 2 5
+Number of Maps  = 2
+Samples per Map = 5
+Wrote input for Map #0
+Wrote input for Map #1
+Starting Job
+14/04/06 22:25:56 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+14/04/06 22:25:56 INFO input.FileInputFormat: Total input paths to process : 2
+14/04/06 22:25:56 INFO mapreduce.JobSubmitter: number of splits:2
+14/04/06 22:25:57 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1396794116236_0001
+......
+</pre></div>
+</div>
+<div class="section" id="wordcount-example">
+<h3><a class="toc-backref" href="#id32">WordCount example</a></h3>
+<p>WordCount的测试过程主要参考《 <a class="reference external" href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">Running Hadoop on Ubuntu Linux (Single-Node Cluster)</a> 》，虽然命令和过程不一样，但原理都一样。</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">一些老版本的用户命令如 <tt class="docutils literal">hadoop fs ...</tt> 之类已经不推荐使用，由新的命令 <tt class="docutils literal">hdfs dfs ...</tt> 代替。具体用户指令可以参考官方文档 <a class="reference external" href="http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-common/CommandsManual.html">Hadoop Commands Reference</a> 和 <a class="reference external" href="http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-common/FileSystemShell.html">File System Shell</a> 。</p>
+</div>
+<p>用 <tt class="docutils literal">mkdir <span class="pre">-p</span> ~/tmp/wordtest</tt> 命令在用户的home路径下新建 <em>~/tmp/wordtest</em> 文件夹，下载UTF-8格式的测试用数据文件放到这个文件夹下（我用的是朋友给的全英文数据文件P00-1001.txt, P00-1002.txt, P00-1003.txt）。</p>
+<p>用下面的命令，将本地文件拷贝到hadoop HDFS下：</p>
+<div class="highlight"><pre>hdfs dfs -copyFromLocal /home/hduser/tmp/wordtest/ /user/hduser/input
+</pre></div>
+<p>用命令 <tt class="docutils literal">hdfs dfs <span class="pre">-ls</span> input</tt> 可以看到拷贝的内容：</p>
+<div class="highlight"><pre>hduser@ubuntu:~$ hdfs dfs -ls input
+Found 4 items
+-rw-r--r--   1 hduser supergroup      35071 2014-04-06 23:21 input/P00-1001.txt
+-rw-r--r--   1 hduser supergroup      28735 2014-04-06 23:21 input/P00-1002.txt
+-rw-r--r--   1 hduser supergroup       1400 2014-04-06 23:21 input/P00-1003.txt
+drwxr-xr-x   - hduser supergroup          0 2014-04-07 21:17 input/wordtest
+</pre></div>
+<p>下面执行WordCount example任务：</p>
+<div class="highlight"><pre>hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar wordcount /user/hduser/input /user/hduser/output
+</pre></div>
+<p>该命令就是让hadoop执行指定路径的jar包，即官方的 <em>hadoop-mapreduce-examples-2.3.0.jar</em> 运行里面的wordcount程序；数据源为之前拷贝到HDFS的 <em>/user/hduser/input</em> 下的那些文件，输出结果到 <em>/user/hduser/output</em> 。</p>
+<p>运行完后，用命令 <tt class="docutils literal">hdfs dfs <span class="pre">-ls</span> /user/hduser/output</tt> 看看输出的结果：</p>
+<div class="highlight"><pre>hduser@ubuntu:~$ hdfs dfs -ls /user/hduser/output
+Found 2 items
+-rw-r--r--   1 hduser supergroup          0 2014-04-06 23:24 /user/hduser/output/_SUCCESS
+-rw-r--r--   1 hduser supergroup      35210 2014-04-06 23:24 /user/hduser/output/part-r-00000
+</pre></div>
+<p>使用命令 <tt class="docutils literal">hdfs dfs <span class="pre">-cat</span> <span class="pre">/user/hduser/output/part-r-00000</span></tt> 可以查看文件里面的内容：</p>
+<div class="highlight"><pre>......
+witnessed       1
+word    8
+word,   5
+word.   2
+words   10
+words)  1
+words,  3
+work    5
+work,   2
+work-   1
+working 2
+works   1
+world   1
+world&#39;s 1
+worth   1
+would   8
+......
+</pre></div>
+</div>
+<div class="section" id="web-interface">
+<h3><a class="toc-backref" href="#id33">web interface</a></h3>
+<p>通过Hadoop的默认Web界面地址可以获得一些内部信息，打开fierfox，输入 <tt class="docutils literal"><span class="pre">http://localhost:50070/</span></tt> 即可。</p>
+</div>
+</div>
+
+				</div>
+
+				<div id="uyan_frame"></div>
+
+				
+<!-- UJian Button BEGIN -->
+<script type="text/javascript">var ujian_config = {target:1};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1&uid=1803538"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="YOUJIAN" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+
+			</div>
+		</div>
+	</article>
+</div>
+<div class="container-fluid c-section section_ZJJRsu">
+</div>
+	<!-- ENDS MAIN -->
+
+	<div class="container-fluid c-section section_dQA3ox" data-c_act_id="M_e64dbf1efc94f55d09a9cc735f442dc5" data-c_tl_id="M_c56b22ee4c946934">
+		<div class="container c-container container_XtBvb8">
+			<div class="row c-row row_PbZJp1">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							资讯中心
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/news.html" target="_blank">
+							新闻动态
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/lives.html" target="_blank">
+							办公生活
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_okGCpG">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							项目业务
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/business.html" target="_blank">
+							公司业务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/education.html" target="_blank">
+							教育分享
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_vTzKOo">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							服务支持
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/blog/" target="_blank">
+							技术博客
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							咨询服务
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="mailto:service@aicrobo.com">
+							意见反馈
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_ClzrwN">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关于我们
+						</h1>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/about.html" target="_blank">
+							公司简介
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/joinus.html" target="_blank">
+							加入我们
+						</a>
+						<a class="c-textlink textlink_WSs7bO" href="http://www.aicrobo.com/contact.html" target="_blank">
+							联系我们
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 c-column column_S4sJkc">
+					<div class="c-div div_7G6Pr7">
+						<h1 class="c-heading heading_DLT8VL">
+							关注我们
+						</h1>
+						<button class="c-textlink textlink_WSs7bO" data-toggle="modal" data-target="#myModal">
+							官方微信
+						</button>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+										<h3 id="myModalLabel">爱啃萝卜官方微信</h3>
+										<p>打开微信，点击右上角的“+”，选择“扫一扫”功能，用摄像头对准下方二维码即可。</p>
+									</div>
+									<div class="modal-body">
+										<img class="c-image" src="http://www.aicrobo.com/theme/files/ba874f19480ae396b7c1bca3f131f3d8.jpg" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+				<div style="border-top: 2px ridge gray; margin-left: -15px; margin-top: 20px; padding-top: 5px;">
+					<p style="color: white; font-size: 12px;">Copyright &nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp; 2013-2015, AICRobo, All Rights Reserved. 爱啃萝卜机器人技术（深圳）有限责任公司</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var uyan_config = {
+	'du': 'yuanboshe.github.io', 		
+		'su': 'blog/2014-04-config_hadoop_single_node_cluster.html'
+		};
+	</script>
+	<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1803538"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36220570-3', 'phirobot.com');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- ie8 以下版本提示信息 -->
+<!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+<div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;" onclick="hide()">×</button>
+	<p style="text-align: center;">
+		您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+	<span style="margin-left:10px;">
+		<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+		</a>
+		<a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+		</a>
+		<a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+		</a>
+		<a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+			<img src="http://qn.static.epub360.com/site-epub360/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+		</a>
+	</span>
+	</p>
+</div>
+<script type="text/javascript" src="http://www.aicrobo.com/theme/js/pack.built.3a8efe4c.cache.js"></script>
+</html>
