@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python 风格指南 - 内容目录 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="next" title="扉页" href="index.html"/>
+        <link rel="prev" title="Cocoa 模式" href="../google-objc-styleguide/patterns.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python 风格指南 - 内容目录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html">扉页</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background.html">背景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html">Python语言规范</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html">Python风格规范</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parting_words.html">临别赠言</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../google-shell-styleguide/contents.html">Shell 风格指南 - 内容目录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+    <li>Python 风格指南 - 内容目录</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-python-styleguide/contents.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python">
+<span id="python-contents"></span><h1>Python 风格指南 - 内容目录</h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">扉页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">背景</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_language_rules.html">Python语言规范</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#lint">Lint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id1">导入</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id2">包</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id3">异常</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id4">全局变量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id5">嵌套/局部/内部类或函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#list-comprehensions">列表推导(List Comprehensions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id6">默认迭代器和操作符</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id7">生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#lambda">Lambda函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id8">条件表达式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id9">默认参数值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#properties">属性(properties)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#true-false">True/False的求值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id11">过时的语言特性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#lexical-scoping">词法作用域(Lexical Scoping)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id12">函数与方法装饰器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id14">线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_language_rules.html#id15">威力过大的特性</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_style_rules.html">Python风格规范</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id1">分号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#line-length">行长度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id4">括号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#indentation">缩进</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id6">空行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id7">空格</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#shebang">Shebang</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#comments">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id11">类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id12">字符串</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#sockets">文件和sockets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#todo">TODO注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id13">导入格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id14">语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id15">访问控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#id16">命名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_style_rules.html#main">Main</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parting_words.html">临别赠言</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="index.html" class="btn btn-neutral float-right" title="扉页" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../google-objc-styleguide/patterns.html" class="btn btn-neutral" title="Cocoa 模式" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

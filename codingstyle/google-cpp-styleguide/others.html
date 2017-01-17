@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. 其他 C++ 特性 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="C++ 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="6. 命名约定" href="naming.html"/>
+        <link rel="prev" title="4. 来自 Google 的奇技" href="magic.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">C++ 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">0. 扉页</a></li>
+<li class="toctree-l2"><a class="reference internal" href="headers.html">1. 头文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scoping.html">2. 作用域</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html">3. 类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magic.html">4. 来自 Google 的奇技</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 其他 C++ 特性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">5.1. 引用参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">5.2. 右值引用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function-overloading">5.3. 函数重载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5.4. 缺省参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alloca">5.5. 变长数组和 alloca()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">5.6. 友元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">5.7. 异常</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtti">5.8. 运行时类型识别</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5.9. 类型转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">5.10. 流</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">5.11. 前置自增和自减</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#const">5.12. <code class="docutils literal"><span class="pre">const</span></code> 用法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constexpr">5.13. <code class="docutils literal"><span class="pre">constexpr</span></code> 用法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">5.14. 整型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.15. 64 位下的可移植性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessor-macros">5.16. 预处理宏</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nullptr-null">5.17. 0, <code class="docutils literal"><span class="pre">nullptr</span></code> 和 <code class="docutils literal"><span class="pre">NULL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sizeof">5.18. sizeof</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#auto">5.19. auto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#braced-initializer-list">5.20. 列表初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lambda">5.21. Lambda 表达式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.22. 模板元编程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boost">5.23. Boost 库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-11">5.24. C++11</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acgtyrant">译者（acgtyrant）笔记</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="naming.html">6. 命名约定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">7. 注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting.html">8. 格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">9. 规则特例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="end.html">10. 结束语</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-shell-styleguide/contents.html">Shell 风格指南 - 内容目录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">C++ 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>5. 其他 C++ 特性</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-cpp-styleguide/others.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="c">
+<h1>5. 其他 C++ 特性</h1>
+<div class="section" id="id1">
+<h2>5.1. 引用参数</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">所有按引用传递的参数必须加上 <code class="docutils literal"><span class="pre">const</span></code>.</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>在 C 语言中, 如果函数需要修改变量的值, 参数必须为指针, 如 <code class="docutils literal"><span class="pre">int</span> <span class="pre">foo(int</span> <span class="pre">*pval)</span></code>. 在 C++ 中, 函数还可以声明引用参数: <code class="docutils literal"><span class="pre">int</span> <span class="pre">foo(int</span> <span class="pre">&amp;val)</span></code>.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>定义引用参数防止出现 <code class="docutils literal"><span class="pre">(*pval)++</span></code> 这样丑陋的代码. 像拷贝构造函数这样的应用也是必需的. 而且更明确, 不接受 <code class="docutils literal"><span class="pre">NULL</span></code> 指针.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>容易引起误解, 因为引用在语法上是值变量却拥有指针的语义.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>函数参数列表中, 所有引用参数都必须是 <code class="docutils literal"><span class="pre">const</span></code>:</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span> <span class="n">string</span> <span class="o">*</span><span class="n">out</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>事实上这在 Google Code 是一个硬性约定: 输入参数是值参或 <code class="docutils literal"><span class="pre">const</span></code> 引用, 输出参数为指针. 输入参数可以是 <code class="docutils literal"><span class="pre">const</span></code> 指针, 但决不能是非 <code class="docutils literal"><span class="pre">const</span></code> 的引用参数，除非用于交换，比如 <code class="docutils literal"><span class="pre">swap()</span></code>.</p>
+<p>有时候，在输入形参中用 <code class="docutils literal"><span class="pre">const</span> <span class="pre">T*</span></code> 指针比 <code class="docutils literal"><span class="pre">const</span> <span class="pre">T&amp;</span></code> 更明智。比如：</p>
+<ul class="simple">
+<li>您会传 null 指针。</li>
+<li>函数要把指针或对地址的引用赋值给输入形参。</li>
+</ul>
+<p>总之大多时候输入形参往往是 <code class="docutils literal"><span class="pre">const</span> <span class="pre">T&amp;</span></code>. 若用 <code class="docutils literal"><span class="pre">const</span> <span class="pre">T*</span></code> 说明输入另有处理。所以若您要用 <code class="docutils literal"><span class="pre">const</span> <span class="pre">T*</span></code>, 则应有理有据，否则会害得读者误解。</p>
+</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h2>5.2. 右值引用</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">只在定义移动构造函数与移动赋值操作时使用右值引用. 不要使用 <code class="docutils literal"><span class="pre">std::forward</span></code>.</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>右值引用是一种只能绑定到临时对象的引用的一种, 其语法与传统的引用语法相似. 例如, <code class="docutils literal"><span class="pre">void</span> <span class="pre">f(string&amp;&amp;</span> <span class="pre">s)</span></code>; 声明了一个其参数是一个字符串的右值引用的函数.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div><p>用于定义移动构造函数 (使用类的右值引用进行构造的函数) 使得移动一个值而非拷贝之成为可能. 例如, 如果 <code class="docutils literal"><span class="pre">v1</span></code> 是一个 <code class="docutils literal"><span class="pre">vector&lt;string&gt;</span></code>, 则 <code class="docutils literal"><span class="pre">auto</span> <span class="pre">v2(std::move(v1))</span></code> 将很可能不再进行大量的数据复制而只是简单地进行指针操作, 在某些情况下这将带来大幅度的性能提升.</p>
+<p>右值引用使得编写通用的函数封装来转发其参数到另外一个函数成为可能, 无论其参数是否是临时对象都能正常工作.</p>
+<p>右值引用能实现可移动但不可拷贝的类型, 这一特性对那些在拷贝方面没有实际需求, 但有时又需要将它们作为函数参数传递或塞入容器的类型很有用.</p>
+<p>要高效率地使用某些标准库类型, 例如 <code class="docutils literal"><span class="pre">std::unique_ptr</span></code>, <code class="docutils literal"><span class="pre">std::move</span></code> 是必需的.</p>
+</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>右值引用是一个相对比较新的特性 (由 C++11 引入), 它尚未被广泛理解. 类似引用崩溃, 移动构造函数的自动推导这样的规则都是很复杂的.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div>只在定义移动构造函数与移动赋值操作时使用右值引用, 不要使用 <code class="docutils literal"><span class="pre">std::forward</span></code> 功能函数. 你可能会使用 <code class="docutils literal"><span class="pre">std::move</span></code> 来表示将值从一个对象移动而不是复制到另一个对象.</div></blockquote>
+</div>
+<div class="section" id="function-overloading">
+<span id="id3"></span><h2>5.3. 函数重载</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">若要用好函数重载，最好能让读者一看调用点（call site）就胸有成竹，不用花心思猜测调用的重载函数到底是哪一种。该规则适用于构造函数。</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div><p>你可以编写一个参数类型为 <code class="docutils literal"><span class="pre">const</span> <span class="pre">string&amp;</span></code> 的函数, 然后用另一个参数类型为 <code class="docutils literal"><span class="pre">const</span> <span class="pre">char*</span></code> 的函数重载它:</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">Analyze</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">Analyze</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">text</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">textlen</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>通过重载参数不同的同名函数, 令代码更加直观. 模板化代码需要重载, 同时为使用者带来便利.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>如果函数单单靠不同的参数类型而重载（acgtyrant 注：这意味着参数数量不变），读者就得十分熟悉 C++ 五花八门的匹配规则，以了解匹配过程具体到底如何。另外，当派生类只重载了某个函数的部分变体，继承语义容易令人困惑。</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div>如果您打算重载一个函数, 可以试试改在函数名里加上参数信息。例如，用 <code class="docutils literal"><span class="pre">AppendString()</span></code> 和 <code class="docutils literal"><span class="pre">AppendInt()</span></code> 等， 而不是一口气重载多个 <code class="docutils literal"><span class="pre">Append()</span></code>.</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h2>5.4. 缺省参数</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">我们不允许使用缺省函数参数，少数极端情况除外。尽可能改用函数重载。</p>
+</div>
+<p>优点:</p>
+<blockquote>
+<div>当您有依赖缺省参数的函数时，您也许偶尔会修改修改这些缺省参数。通过缺省参数，不用再为个别情况而特意定义一大堆函数了。与函数重载相比，缺省参数语法更为清晰，代码少，也很好地区分了「必选参数」和「可选参数」。</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>缺省参数会干扰函数指针，害得后者的函数签名（function signature）往往对不上所实际要调用的函数签名。即在一个现有函数添加缺省参数，就会改变它的类型，那么调用其地址的代码可能会出错，不过函数重载就没这问题了。此外，缺省参数会造成臃肿的代码，毕竟它们在每一个调用点（call site）都有重复（acgtyrant 注：我猜可能是因为调用函数的代码表面上看来省去了不少参数，但编译器在编译时还是会在每一个调用代码里统统补上所有默认实参信息，造成大量的重复）。函数重载正好相反，毕竟它们所谓的「缺省参数」只会出现在函数定义里。</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>由于缺点并不是很严重，有些人依旧偏爱缺省参数胜于函数重载。所以除了以下情况，我们要求必须显式提供所有参数（acgtyrant 注：即不能再通过缺省参数来省略参数了）。</p>
+<p>其一，位于 <code class="docutils literal"><span class="pre">.cc</span></code> 文件里的静态函数或匿名空间函数，毕竟都只能在局部文件里调用该函数了。</p>
+<p>其二，可以在构造函数里用缺省参数，毕竟不可能取得它们的地址。</p>
+<p>其三，可以用来模拟变长数组。</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="c1">// 通过空 AlphaNum 以支持四个形参</span>
+<span class="n">string</span> <span class="nf">StrCat</span><span class="p">(</span><span class="k">const</span> <span class="n">AlphaNum</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">AlphaNum</span> <span class="o">&amp;</span><span class="n">b</span> <span class="o">=</span> <span class="n">gEmptyAlphaNum</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">AlphaNum</span> <span class="o">&amp;</span><span class="n">c</span> <span class="o">=</span> <span class="n">gEmptyAlphaNum</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">AlphaNum</span> <span class="o">&amp;</span><span class="n">d</span> <span class="o">=</span> <span class="n">gEmptyAlphaNum</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="alloca">
+<h2>5.5. 变长数组和 alloca()</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">我们不允许使用变长数组和 <code class="docutils literal"><span class="pre">alloca()</span></code>.</p>
+</div>
+<p>优点:</p>
+<blockquote>
+<div>变长数组具有浑然天成的语法. 变长数组和 <code class="docutils literal"><span class="pre">alloca()</span></code> 也都很高效.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>变长数组和 <code class="docutils literal"><span class="pre">alloca()</span></code> 不是标准 C++ 的组成部分. 更重要的是, 它们根据数据大小动态分配堆栈内存, 会引起难以发现的内存越界 bugs: &#8220;在我的机器上运行的好好的, 发布后却莫名其妙的挂掉了&#8221;.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div>改用更安全的分配器（allocator），就像 <code class="docutils literal"><span class="pre">std::vector</span></code> 或 <code class="docutils literal"><span class="pre">std::unique_ptr&lt;T[]&gt;</span></code>.</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h2>5.6. 友元</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">我们允许合理的使用友元类及友元函数.</p>
+</div>
+<p>通常友元应该定义在同一文件内, 避免代码读者跑到其它文件查找使用该私有成员的类. 经常用到友元的一个地方是将 <code class="docutils literal"><span class="pre">FooBuilder</span></code> 声明为 <code class="docutils literal"><span class="pre">Foo</span></code> 的友元, 以便 <code class="docutils literal"><span class="pre">FooBuilder</span></code> 正确构造 <code class="docutils literal"><span class="pre">Foo</span></code> 的内部状态, 而无需将该状态暴露出来. 某些情况下, 将一个单元测试类声明成待测类的友元会很方便.</p>
+<p>友元扩大了 (但没有打破) 类的封装边界. 某些情况下, 相对于将类成员声明为 <code class="docutils literal"><span class="pre">public</span></code>, 使用友元是更好的选择, 尤其是如果你只允许另一个类访问该类的私有成员时. 当然, 大多数类都只应该通过其提供的公有成员进行互操作.</p>
+</div>
+<div class="section" id="id6">
+<h2>5.7. 异常</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">我们不使用 C++ 异常.</p>
+</div>
+<p>优点:</p>
+<blockquote>
+<div><ul class="simple">
+<li>异常允许应用高层决定如何处理在底层嵌套函数中「不可能发生」的失败（failures），不用管那些含糊且容易出错的错误代码（acgtyrant 注：error code, 我猜是Ｃ语言函数返回的非零 int 值）。</li>
+<li>很多现代语言都用异常。引入异常使得 C++ 与 Python, Java 以及其它类 C++ 的语言更一脉相承。</li>
+<li>有些第三方 C++ 库依赖异常，禁用异常就不好用了。</li>
+<li>异常是处理构造函数失败的唯一途径。虽然可以用工厂函数（acgtyrant 注：factory function, 出自 C++ 的一种设计模式，即「简单工厂模式」）或 <code class="docutils literal"><span class="pre">Init()</span></code> 方法代替异常, but these require heap allocation or a new &#8220;invalid&#8221; state, respectively.</li>
+<li>在测试框架里很好用。</li>
+</ul>
+</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div><ul class="simple">
+<li>在现有函数中添加 <code class="docutils literal"><span class="pre">throw</span></code> 语句时，您必须检查所有调用点。要么让所有调用点统统具备最低限度的异常安全保证，要么眼睁睁地看异常一路欢快地往上跑，最终中断掉整个程序。举例，<code class="docutils literal"><span class="pre">f()</span></code> 调用 <code class="docutils literal"><span class="pre">g()</span></code>, <code class="docutils literal"><span class="pre">g()</span></code> 又调用 <code class="docutils literal"><span class="pre">h()</span></code>, 且 <code class="docutils literal"><span class="pre">h</span></code> 抛出的异常被 <code class="docutils literal"><span class="pre">f</span></code> 捕获。当心 <code class="docutils literal"><span class="pre">g</span></code>, 否则会没妥善清理好。</li>
+<li>还有更常见的，异常会彻底扰乱程序的执行流程并难以判断，函数也许会在您意料不到的地方返回。您或许会加一大堆何时何处处理异常的规定来降低风险，然而开发者的记忆负担更重了。</li>
+<li>异常安全需要RAII和不同的编码实践. 要轻松编写出正确的异常安全代码需要大量的支持机制. 更进一步地说, 为了避免读者理解整个调用表, 异常安全必须隔绝从持续状态写到 &#8220;提交&#8221; 状态的逻辑. 这一点有利有弊 (因为你也许不得不为了隔离提交而混淆代码). 如果允许使用异常, 我们就不得不时刻关注这样的弊端, 即使有时它们并不值得.</li>
+<li>启用异常会增加二进制文件数据，延长编译时间（或许影响小），还可能加大地址空间的压力。</li>
+<li>滥用异常会变相鼓励开发者去捕捉不合时宜，或本来就已经没法恢复的「伪异常」。比如，用户的输入不符合格式要求时，也用不着抛异常。如此之类的伪异常列都列不完。</li>
+</ul>
+</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>从表面上看来，使用异常利大于弊, 尤其是在新项目中. 但是对于现有代码, 引入异常会牵连到所有相关代码. 如果新项目允许异常向外扩散, 在跟以前未使用异常的代码整合时也将是个麻烦. 因为 Google 现有的大多数 C++ 代码都没有异常处理, 引入带有异常处理的新代码相当困难.</p>
+<p>鉴于 Google 现有代码不接受异常, 在现有代码中使用异常比在新项目中使用的代价多少要大一些. 迁移过程比较慢, 也容易出错. 我们不相信异常的使用有效替代方案, 如错误代码, 断言等会造成严重负担.</p>
+<p>我们并不是基于哲学或道德层面反对使用异常, 而是在实践的基础上. 我们希望在 Google 使用我们自己的开源项目, 但项目中使用异常会为此带来不便, 因此我们也建议不要在 Google 的开源项目中使用异常. 如果我们需要把这些项目推倒重来显然不太现实.</p>
+<p>对于 Windows 代码来说, 有个 <a class="reference internal" href="exceptions.html#windows-code"><span class="std std-ref">特例</span></a>.</p>
+</div></blockquote>
+<p>(YuleFox 注: 对于异常处理, 显然不是短短几句话能够说清楚的, 以构造函数为例, 很多 C++ 书籍上都提到当构造失败时只有异常可以处理, Google 禁止使用异常这一点, 仅仅是为了自身的方便, 说大了, 无非是基于软件管理成本上, 实际使用中还是自己决定)</p>
+</div>
+<div class="section" id="rtti">
+<span id="id7"></span><h2>5.8. 运行时类型识别</h2>
+<blockquote>
+<div>TODO</div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">我们禁止使用 RTTI.</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>RTTI 允许程序员在运行时识别 C++ 类对象的类型. 它通过使用 <code class="docutils literal"><span class="pre">typeid</span></code> 或者 <code class="docutils literal"><span class="pre">dynamic_cast</span></code> 完成.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div><p>RTTI 的标准替代 (下面将描述) 需要对有问题的类层级进行修改或重构. 有时这样的修改并不是我们所想要的, 甚至是不可取的, 尤其是在一个已经广泛使用的或者成熟的代码中.</p>
+<p>RTTI 在某些单元测试中非常有用. 比如进行工厂类测试时, 用来验证一个新建对象是否为期望的动态类型. RTTI 对于管理对象和派生对象的关系也很有用.</p>
+<p>在考虑多个抽象对象时 RTTI 也很好用. 例如:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">Base</span><span class="o">::</span><span class="n">Equal</span><span class="p">(</span><span class="n">Base</span><span class="o">*</span> <span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">Derived</span><span class="o">::</span><span class="n">Equal</span><span class="p">(</span><span class="n">Base</span><span class="o">*</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Derived</span><span class="o">*</span> <span class="n">that</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">that</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div><p>在运行时判断类型通常意味着设计问题. 如果你需要在运行期间确定一个对象的类型, 这通常说明你需要考虑重新设计你的类.</p>
+<p>随意地使用 RTTI 会使你的代码难以维护. 它使得基于类型的判断树或者 switch 语句散布在代码各处. 如果以后要进行修改, 你就必须检查它们.</p>
+</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>RTTI 有合理的用途但是容易被滥用, 因此在使用时请务必注意. 在单元测试中可以使用 RTTI, 但是在其他代码中请尽量避免. 尤其是在新代码中, 使用 RTTI 前务必三思. 如果你的代码需要根据不同的对象类型执行不同的行为的话, 请考虑用以下的两种替代方案之一查询类型:</p>
+<p>虚函数可以根据子类类型的不同而执行不同代码. 这是把工作交给了对象本身去处理.</p>
+<p>如果这一工作需要在对象之外完成, 可以考虑使用双重分发的方案, 例如使用访问者设计模式. 这就能够在对象之外进行类型判断.</p>
+<p>如果程序能够保证给定的基类实例实际上都是某个派生类的实例, 那么就可以自由使用 dynamic_cast. 在这种情况下, 使用 dynamic_cast 也是一种替代方案.</p>
+<p>基于类型的判断树是一个很强的暗示, 它说明你的代码已经偏离正轨了. 不要像下面这样:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="k">typeid</span><span class="p">(</span><span class="n">D1</span><span class="p">))</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="k">typeid</span><span class="p">(</span><span class="n">D2</span><span class="p">))</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="k">typeid</span><span class="p">(</span><span class="n">D3</span><span class="p">))</span> <span class="p">{</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>一旦在类层级中加入新的子类, 像这样的代码往往会崩溃. 而且, 一旦某个子类的属性改变了, 你很难找到并修改所有受影响的代码块.</p>
+<p>不要去手工实现一个类似 RTTI 的方案. 反对 RTTI 的理由同样适用于这些方案, 比如带类型标签的类继承体系. 而且, 这些方案会掩盖你的真实意图.</p>
+</div></blockquote>
+</div>
+<div class="section" id="id8">
+<h2>5.9. 类型转换</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用 C++ 的类型转换, 如 <code class="docutils literal"><span class="pre">static_cast&lt;&gt;()</span></code>. 不要使用 <code class="docutils literal"><span class="pre">int</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">(int)x</span></code> 或 <code class="docutils literal"><span class="pre">int</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">int(x)</span></code> 等转换方式;</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>C++ 采用了有别于 C 的类型转换机制, 对转换操作进行归类.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>C 语言的类型转换问题在于模棱两可的操作; 有时是在做强制转换 (如 <code class="docutils literal"><span class="pre">(int)3.5</span></code>), 有时是在做类型转换 (如 <code class="docutils literal"><span class="pre">(int)&quot;hello&quot;</span></code>). 另外, C++ 的类型转换在查找时更醒目.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>恶心的语法.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>不要使用 C 风格类型转换. 而应该使用 C++ 风格.</p>
+<blockquote>
+<div><ul class="simple">
+<li>用 <code class="docutils literal"><span class="pre">static_cast</span></code> 替代 C 风格的值转换, 或某个类指针需要明确的向上转换为父类指针时.</li>
+<li>用 <code class="docutils literal"><span class="pre">const_cast</span></code> 去掉 <code class="docutils literal"><span class="pre">const</span></code> 限定符.</li>
+<li>用 <code class="docutils literal"><span class="pre">reinterpret_cast</span></code> 指针类型和整型或其它指针之间进行不安全的相互转换. 仅在你对所做一切了然于心时使用.</li>
+</ul>
+</div></blockquote>
+<p>至于 <code class="docutils literal"><span class="pre">dynamic_cast</span></code> 参见 <a class="reference internal" href="#rtti"><span class="std std-ref">5.8. 运行时类型识别</span></a>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="id9">
+<h2>5.10. 流</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">只在记录日志时使用流.</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>流用来替代 <code class="docutils literal"><span class="pre">printf()</span></code> 和 <code class="docutils literal"><span class="pre">scanf()</span></code>.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>有了流, 在打印时不需要关心对象的类型. 不用担心格式化字符串与参数列表不匹配 (虽然在 gcc 中使用 <code class="docutils literal"><span class="pre">printf</span></code> 也不存在这个问题). 流的构造和析构函数会自动打开和关闭对应的文件.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>流使得 <code class="docutils literal"><span class="pre">pread()</span></code> 等功能函数很难执行. 如果不使用 <code class="docutils literal"><span class="pre">printf</span></code> 风格的格式化字符串, 某些格式化操作 (尤其是常用的格式字符串 <code class="docutils literal"><span class="pre">%.*s</span></code>) 用流处理性能是很低的. 流不支持字符串操作符重新排序 (%1s), 而这一点对于软件国际化很有用.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>不要使用流, 除非是日志接口需要. 使用 <code class="docutils literal"><span class="pre">printf</span></code> 之类的代替.</p>
+<p>使用流还有很多利弊, 但代码一致性胜过一切. 不要在代码中使用流.</p>
+</div></blockquote>
+<p>拓展讨论:</p>
+<blockquote>
+<div><p>对这一条规则存在一些争论, 这儿给出点深层次原因. 回想一下唯一性原则 (Only One Way): 我们希望在任何时候都只使用一种确定的 I/O 类型, 使代码在所有 I/O 处都保持一致. 因此, 我们不希望用户来决定是使用流还是 <code class="docutils literal"><span class="pre">printf</span> <span class="pre">+</span> <span class="pre">read/write</span></code>. 相反, 我们应该决定到底用哪一种方式. 把日志作为特例是因为日志是一个非常独特的应用, 还有一些是历史原因.</p>
+<p>流的支持者们主张流是不二之选, 但观点并不是那么清晰有力. 他们指出的流的每个优势也都是其劣势. 流最大的优势是在输出时不需要关心打印对象的类型. 这是一个亮点. 同时, 也是一个不足: 你很容易用错类型, 而编译器不会报警. 使用流时容易造成的这类错误:</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">this</span><span class="p">;</span>   <span class="c1">// 输出地址</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>  <span class="c1">// 输出值</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>由于 <code class="docutils literal"><span class="pre">&lt;&lt;</span></code> 被重载, 编译器不会报错. 就因为这一点我们反对使用操作符重载.</p>
+<p>有人说 <code class="docutils literal"><span class="pre">printf</span></code> 的格式化丑陋不堪, 易读性差, 但流也好不到哪儿去. 看看下面两段代码吧, 实现相同的功能, 哪个更清晰?</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error connecting to &#39;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">foo</span><span class="o">-&gt;</span><span class="n">bar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hostname</span><span class="p">.</span><span class="n">first</span>
+     <span class="o">&lt;&lt;</span> <span class="s">&quot;:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">foo</span><span class="o">-&gt;</span><span class="n">bar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hostname</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">);</span>
+
+<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Error connecting to &#39;%s:%u: %s&quot;</span><span class="p">,</span>
+        <span class="n">foo</span><span class="o">-&gt;</span><span class="n">bar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hostname</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">foo</span><span class="o">-&gt;</span><span class="n">bar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hostname</span><span class="p">.</span><span class="n">second</span><span class="p">,</span>
+        <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>你可能会说, &#8220;把流封装一下就会比较好了&#8221;, 这儿可以, 其他地方呢? 而且不要忘了, 我们的目标是使语言更紧凑, 而不是添加一些别人需要学习的新装备.</p>
+<p>每一种方式都是各有利弊, &#8220;没有最好, 只有更适合&#8221;. 简单性原则告诫我们必须从中选择其一, 最后大多数决定采用 <code class="docutils literal"><span class="pre">printf</span> <span class="pre">+</span> <span class="pre">read/write</span></code>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="id10">
+<h2>5.11. 前置自增和自减</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">对于迭代器和其他模板对象使用前缀形式 (<code class="docutils literal"><span class="pre">++i</span></code>) 的自增, 自减运算符.</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>对于变量在自增 (<code class="docutils literal"><span class="pre">++i</span></code> 或 <code class="docutils literal"><span class="pre">i++</span></code>) 或自减 (<code class="docutils literal"><span class="pre">--i</span></code> 或 <code class="docutils literal"><span class="pre">i--</span></code>) 后表达式的值又没有没用到的情况下, 需要确定到底是使用前置还是后置的自增 (自减).</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>不考虑返回值的话, 前置自增 (<code class="docutils literal"><span class="pre">++i</span></code>) 通常要比后置自增 (<code class="docutils literal"><span class="pre">i++</span></code>) 效率更高. 因为后置自增 (或自减) 需要对表达式的值 <code class="docutils literal"><span class="pre">i</span></code> 进行一次拷贝. 如果 <code class="docutils literal"><span class="pre">i</span></code> 是迭代器或其他非数值类型, 拷贝的代价是比较大的. 既然两种自增方式实现的功能一样, 为什么不总是使用前置自增呢?</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>在 C 开发中, 当表达式的值未被使用时, 传统的做法是使用后置自增, 特别是在 <code class="docutils literal"><span class="pre">for</span></code> 循环中. 有些人觉得后置自增更加易懂, 因为这很像自然语言, 主语 (<code class="docutils literal"><span class="pre">i</span></code>) 在谓语动词 (<code class="docutils literal"><span class="pre">++</span></code>) 前.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div>对简单数值 (非对象), 两种都无所谓. 对迭代器和模板类型, 使用前置自增 (自减).</div></blockquote>
+</div>
+<div class="section" id="const">
+<h2>5.12. <code class="docutils literal"><span class="pre">const</span></code> 用法</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">我们强烈建议你在任何可能的情况下都要使用 <code class="docutils literal"><span class="pre">const</span></code>. 此外有时改用 C++11 推出的 constexpr 更好。</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>在声明的变量或参数前加上关键字 <code class="docutils literal"><span class="pre">const</span></code> 用于指明变量值不可被篡改 (如 <code class="docutils literal"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">foo</span></code> ). 为类中的函数加上 <code class="docutils literal"><span class="pre">const</span></code> 限定符表明该函数不会修改类成员变量的状态 (如 <code class="docutils literal"><span class="pre">class</span> <span class="pre">Foo</span> <span class="pre">{</span> <span class="pre">int</span> <span class="pre">Bar(char</span> <span class="pre">c)</span> <span class="pre">const;</span> <span class="pre">};</span></code>).</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>大家更容易理解如何使用变量. 编译器可以更好地进行类型检测, 相应地, 也能生成更好的代码. 人们对编写正确的代码更加自信, 因为他们知道所调用的函数被限定了能或不能修改变量值. 即使是在无锁的多线程编程中, 人们也知道什么样的函数是安全的.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">const</span></code> 是入侵性的: 如果你向一个函数传入 <code class="docutils literal"><span class="pre">const</span></code> 变量, 函数原型声明中也必须对应 <code class="docutils literal"><span class="pre">const</span></code> 参数 (否则变量需要 <code class="docutils literal"><span class="pre">const_cast</span></code> 类型转换), 在调用库函数时显得尤其麻烦.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">const</span></code> 变量, 数据成员, 函数和参数为编译时类型检测增加了一层保障; 便于尽早发现错误. 因此, 我们强烈建议在任何可能的情况下使用 <code class="docutils literal"><span class="pre">const</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>如果函数不会修改传你入的引用或指针类型参数, 该参数应声明为 <code class="docutils literal"><span class="pre">const</span></code>.</li>
+<li>尽可能将函数声明为 <code class="docutils literal"><span class="pre">const</span></code>. 访问函数应该总是 <code class="docutils literal"><span class="pre">const</span></code>. 其他不会修改任何数据成员, 未调用非 <code class="docutils literal"><span class="pre">const</span></code> 函数, 不会返回数据成员非 <code class="docutils literal"><span class="pre">const</span></code> 指针或引用的函数也应该声明成 <code class="docutils literal"><span class="pre">const</span></code>.</li>
+<li>如果数据成员在对象构造之后不再发生变化, 可将其定义为 <code class="docutils literal"><span class="pre">const</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>然而, 也不要发了疯似的使用 <code class="docutils literal"><span class="pre">const</span></code>. 像 <code class="docutils literal"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">*</span> <span class="pre">const</span> <span class="pre">*</span> <span class="pre">const</span> <span class="pre">x;</span></code> 就有些过了, 虽然它非常精确的描述了常量 <code class="docutils literal"><span class="pre">x</span></code>. 关注真正有帮助意义的信息: 前面的例子写成 <code class="docutils literal"><span class="pre">const</span> <span class="pre">int**</span> <span class="pre">x</span></code> 就够了.</p>
+<p>关键字 <code class="docutils literal"><span class="pre">mutable</span></code> 可以使用, 但是在多线程中是不安全的, 使用时首先要考虑线程安全.</p>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">const</span></code> 的位置:</p>
+<blockquote>
+<div><p>有人喜欢 <code class="docutils literal"><span class="pre">int</span> <span class="pre">const</span> <span class="pre">*foo</span></code> 形式, 不喜欢 <code class="docutils literal"><span class="pre">const</span> <span class="pre">int*</span> <span class="pre">foo</span></code>, 他们认为前者更一致因此可读性也更好: 遵循了 <code class="docutils literal"><span class="pre">const</span></code> 总位于其描述的对象之后的原则. 但是一致性原则不适用于此, &#8220;不要过度使用&#8221; 的声明可以取消大部分你原本想保持的一致性. 将 <code class="docutils literal"><span class="pre">const</span></code> 放在前面才更易读, 因为在自然语言中形容词 (<code class="docutils literal"><span class="pre">const</span></code>) 是在名词 (<code class="docutils literal"><span class="pre">int</span></code>) 之前.</p>
+<p>这是说, 我们提倡但不强制 <code class="docutils literal"><span class="pre">const</span></code> 在前. 但要保持代码的一致性! (Yang.Y 注: 也就是不要在一些地方把 <code class="docutils literal"><span class="pre">const</span></code> 写在类型前面, 在其他地方又写在后面, 确定一种写法, 然后保持一致.)</p>
+</div></blockquote>
+</div>
+<div class="section" id="constexpr">
+<h2>5.13. <code class="docutils literal"><span class="pre">constexpr</span></code> 用法</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">在 C++11 里，用 constexpr 来定义真正的常量，或实现常量初始化。</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>变量可以被声明成 constexpr 以表示它是真正意义上的常量，即在编译时和运行时都不变。函数或构造函数也可以被声明成 constexpr, 以用来定义 constexpr 变量。</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>如今 constexpr 就可以定义浮点式的真・常量，不用再依赖字面值了；也可以定义用户自定义类型上的常量；甚至也可以定义函数调用所返回的常量。</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>若过早把变量优化成 constexpr 变量，将来又要把它改为常规变量时，挺麻烦的；当前对constexpr函数和构造函数中允许的限制可能会导致这些定义中解决的方法模糊。</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div>靠 constexpr 特性，方才实现了 C++ 在接口上打造真正常量机制的可能。好好用 constexpr 来定义真・常量以及支持常量的函数。避免复杂的函数定义，以使其能够与constexpr一起使用。 千万别痴心妄想地想靠 constexpr 来强制代码「内联」。</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h2>5.14. 整型</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">C++ 内建整型中, 仅使用 <code class="docutils literal"><span class="pre">int</span></code>. 如果程序中需要不同大小的变量, 可以使用 <code class="docutils literal"><span class="pre">&lt;stdint.h&gt;</span></code> 中长度精确的整型, 如 <code class="docutils literal"><span class="pre">int16_t</span></code>.如果您的变量可能不小于 2^31 (2GiB), 就用 64 位变量比如 <code class="docutils literal"><span class="pre">int64_t</span></code>. 此外要留意，哪怕您的值并不会超出 int 所能够表示的范围，在计算过程中也可能会溢出。所以拿不准时，干脆用更大的类型。</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div>C++ 没有指定整型的大小. 通常人们假定 <code class="docutils literal"><span class="pre">short</span></code> 是 16 位, <code class="docutils literal"><span class="pre">int</span></code> 是 32 位, <code class="docutils literal"><span class="pre">long</span></code> 是 32 位, <code class="docutils literal"><span class="pre">long</span> <span class="pre">long</span></code> 是 64 位.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>保持声明统一.</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>C++ 中整型大小因编译器和体系结构的不同而不同.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">&lt;stdint.h&gt;</span></code> 定义了 <code class="docutils literal"><span class="pre">int16_t</span></code>, <code class="docutils literal"><span class="pre">uint32_t</span></code>, <code class="docutils literal"><span class="pre">int64_t</span></code> 等整型, 在需要确保整型大小时可以使用它们代替 <code class="docutils literal"><span class="pre">short</span></code>, <code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">long</span> <span class="pre">long</span></code> 等. 在 C 整型中, 只使用 <code class="docutils literal"><span class="pre">int</span></code>. 在合适的情况下, 推荐使用标准类型如 <code class="docutils literal"><span class="pre">size_t</span></code> 和 <code class="docutils literal"><span class="pre">ptrdiff_t</span></code>.</p>
+<p>如果已知整数不会太大, 我们常常会使用 <code class="docutils literal"><span class="pre">int</span></code>, 如循环计数. 在类似的情况下使用原生类型 <code class="docutils literal"><span class="pre">int</span></code>. 你可以认为 <code class="docutils literal"><span class="pre">int</span></code> 至少为 32 位, 但不要认为它会多于 <code class="docutils literal"><span class="pre">32</span></code> 位. 如果需要 64 位整型, 用 <code class="docutils literal"><span class="pre">int64_t</span></code> 或 <code class="docutils literal"><span class="pre">uint64_t</span></code>.</p>
+<p>对于大整数, 使用 <code class="docutils literal"><span class="pre">int64_t</span></code>.</p>
+<p>不要使用 <code class="docutils literal"><span class="pre">uint32_t</span></code> 等无符号整型, 除非你是在表示一个位组而不是一个数值, 或是你需要定义二进制补码溢出. 尤其是不要为了指出数值永不会为负, 而使用无符号类型. 相反, 你应该使用断言来保护数据.</p>
+<p>如果您的代码涉及容器返回的大小（size），确保其类型足以应付容器各种可能的用法。拿不准时，类型越大越好。</p>
+<p>小心整型类型转换和整型提升（acgtyrant 注：integer promotions, 比如 <code class="docutils literal"><span class="pre">int</span></code> 与 <code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></code> 运算时，前者被提升为 <code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></code> 而有可能溢出），总有意想不到的后果。</p>
+</div></blockquote>
+<p>关于无符号整数:</p>
+<blockquote>
+<div><p>有些人, 包括一些教科书作者, 推荐使用无符号类型表示非负数. 这种做法试图达到自我文档化. 但是, 在 C 语言中, 这一优点被由其导致的 bug 所淹没. 看看下面的例子:</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">foo</span><span class="p">.</span><span class="n">Length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>上述循环永远不会退出! 有时 gcc 会发现该 bug 并报警, 但大部分情况下都不会. 类似的 bug 还会出现在比较有符合变量和无符号变量时. 主要是 C 的类型提升机制会致使无符号类型的行为出乎你的意料.</p>
+<p>因此, 使用断言来指出变量为非负数, 而不是使用无符号型!</p>
+</div></blockquote>
+</div>
+<div class="section" id="id12">
+<h2>5.15. 64 位下的可移植性</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">代码应该对 64 位和 32 位系统友好. 处理打印, 比较, 结构体对齐时应切记:</p>
+</div>
+<ul>
+<li><p class="first">对于某些类型, <code class="docutils literal"><span class="pre">printf()</span></code> 的指示符在 32 位和 64 位系统上可移植性不是很好. C99 标准定义了一些可移植的格式化指示符. 不幸的是, MSVC 7.1 并非全部支持, 而且标准中也有所遗漏, 所以有时我们不得不自己定义一个丑陋的版本 (头文件 <code class="docutils literal"><span class="pre">inttypes.h</span></code> 仿标准风格):</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="c1">// printf macros for size_t, in the style of inttypes.h</span>
+<span class="cp">#ifdef _LP64</span>
+<span class="cp">#define __PRIS_PREFIX &quot;z&quot;</span>
+<span class="cp">#else</span>
+<span class="cp">#define __PRIS_PREFIX</span>
+<span class="cp">#endif</span>
+
+<span class="c1">// Use these macros after a % in a printf format string</span>
+<span class="c1">// to get correct 32/64 bit behavior, like this:</span>
+<span class="c1">// size_t size = records.size();</span>
+<span class="c1">// printf(&quot;%&quot;PRIuS&quot;\n&quot;, size);</span>
+<span class="cp">#define PRIdS __PRIS_PREFIX &quot;d&quot;</span>
+<span class="cp">#define PRIxS __PRIS_PREFIX &quot;x&quot;</span>
+<span class="cp">#define PRIuS __PRIS_PREFIX &quot;u&quot;</span>
+<span class="cp">#define PRIXS __PRIS_PREFIX &quot;X&quot;</span>
+<span class="cp">#define PRIoS __PRIS_PREFIX &quot;o&quot;</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="25%" />
+<col width="31%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">类型</th>
+<th class="head">不要使用</th>
+<th class="head">使用</th>
+<th class="head">备注</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">void</span> <span class="pre">*</span></code>
+(或其他指针类型)</td>
+<td><code class="docutils literal"><span class="pre">%lx</span></code></td>
+<td><code class="docutils literal"><span class="pre">%p</span></code></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">int64_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">%qd,</span> <span class="pre">%lld</span></code></td>
+<td><code class="docutils literal"><span class="pre">%&quot;PRId64&quot;</span></code></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">uint64_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">%qu,</span> <span class="pre">%llu,</span> <span class="pre">%llx</span></code></td>
+<td><code class="docutils literal"><span class="pre">%&quot;PRIu64&quot;,</span> <span class="pre">%&quot;PRIx64&quot;</span></code></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">size_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">%u</span></code></td>
+<td><code class="docutils literal"><span class="pre">%&quot;PRIuS&quot;,</span> <span class="pre">%&quot;PRIxS&quot;</span></code></td>
+<td>C99 规定 <code class="docutils literal"><span class="pre">%zu</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ptrdiff_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">%d</span></code></td>
+<td><code class="docutils literal"><span class="pre">%&quot;PRIdS&quot;</span></code></td>
+<td>C99 规定 <code class="docutils literal"><span class="pre">%zd</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>注意 <code class="docutils literal"><span class="pre">PRI*</span></code> 宏会被编译器扩展为独立字符串. 因此如果使用非常量的格式化字符串, 需要将宏的值而不是宏名插入格式中. 使用 <code class="docutils literal"><span class="pre">PRI*</span></code> 宏同样可以在 <code class="docutils literal"><span class="pre">%</span></code> 后包含长度指示符. 例如, <code class="docutils literal"><span class="pre">printf(&quot;x</span> <span class="pre">=</span> <span class="pre">%30&quot;PRIuS&quot;\n&quot;,</span> <span class="pre">x)</span></code> 在 32 位 Linux 上将被展开为 <code class="docutils literal"><span class="pre">printf(&quot;x</span> <span class="pre">=</span> <span class="pre">%30&quot;</span> <span class="pre">&quot;u&quot;</span> <span class="pre">&quot;\n&quot;,</span> <span class="pre">x)</span></code>, 编译器当成 <code class="docutils literal"><span class="pre">printf(&quot;x</span> <span class="pre">=</span> <span class="pre">%30u\n&quot;,</span> <span class="pre">x)</span></code> 处理 (Yang.Y 注: 这在 MSVC 6.0 上行不通, VC 6 编译器不会自动把引号间隔的多个字符串连接一个长字符串).</p>
+</div></blockquote>
+</li>
+<li><p class="first">记住 <code class="docutils literal"><span class="pre">sizeof(void</span> <span class="pre">*)</span> <span class="pre">!=</span> <span class="pre">sizeof(int)</span></code>. 如果需要一个指针大小的整数要用 <code class="docutils literal"><span class="pre">intptr_t</span></code>.</p>
+</li>
+<li><p class="first">你要非常小心的对待结构体对齐, 尤其是要持久化到磁盘上的结构体 (Yang.Y 注: 持久化 - 将数据按字节流顺序保存在磁盘文件或数据库中). 在 64 位系统中, 任何含有 <code class="docutils literal"><span class="pre">int64_t</span></code>/<code class="docutils literal"><span class="pre">uint64_t</span></code> 成员的类/结构体, 缺省都以 8 字节在结尾对齐. 如果 32 位和 64 位代码要共用持久化的结构体, 需要确保两种体系结构下的结构体对齐一致. 大多数编译器都允许调整结构体对齐. gcc 中可使用 <code class="docutils literal"><span class="pre">__attribute__((packed))</span></code>. MSVC 则提供了 <code class="docutils literal"><span class="pre">#pragma</span> <span class="pre">pack()</span></code> 和 <code class="docutils literal"><span class="pre">__declspec(align())</span></code> (YuleFox 注, 解决方案的项目属性里也可以直接设置).</p>
+</li>
+<li><p class="first">创建 64 位常量时使用 LL 或 ULL 作为后缀, 如:</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span></span>int64_t my_value = 0×123456789LL;
+uint64_t my_mask = 3ULL &lt;&lt; 48;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">如果你确实需要 32 位和 64 位系统具有不同代码, 可以使用 <code class="docutils literal"><span class="pre">#ifdef</span> <span class="pre">_LP64</span></code> 指令来切分 32/64 位代码. (尽量不要这么做, 如果非用不可, 尽量使修改局部化)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="preprocessor-macros">
+<span id="id13"></span><h2>5.16. 预处理宏</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用宏时要非常谨慎, 尽量以内联函数, 枚举和常量代替之.</p>
+</div>
+<p>宏意味着你和编译器看到的代码是不同的. 这可能会导致异常行为, 尤其因为宏具有全局作用域.</p>
+<p>值得庆幸的是, C++ 中, 宏不像在 C 中那么必不可少. 以往用宏展开性能关键的代码, 现在可以用内联函数替代. 用宏表示常量可被 <code class="docutils literal"><span class="pre">const</span></code> 变量代替. 用宏 &#8220;缩写&#8221; 长变量名可被引用代替. 用宏进行条件编译... 这个, 千万别这么做, 会令测试更加痛苦 (<code class="docutils literal"><span class="pre">#define</span></code> 防止头文件重包含当然是个特例).</p>
+<p>宏可以做一些其他技术无法实现的事情, 在一些代码库 (尤其是底层库中) 可以看到宏的某些特性 (如用 <code class="docutils literal"><span class="pre">#</span></code> 字符串化, 用 <code class="docutils literal"><span class="pre">##</span></code> 连接等等). 但在使用前, 仔细考虑一下能不能不使用宏达到同样的目的.</p>
+<p>下面给出的用法模式可以避免使用宏带来的问题; 如果你要宏, 尽可能遵守:</p>
+<blockquote>
+<div><ul class="simple">
+<li>不要在 <code class="docutils literal"><span class="pre">.h</span></code> 文件中定义宏.</li>
+<li>在马上要使用时才进行 <code class="docutils literal"><span class="pre">#define</span></code>, 使用后要立即 <code class="docutils literal"><span class="pre">#undef</span></code>.</li>
+<li>不要只是对已经存在的宏使用#undef，选择一个不会冲突的名称；</li>
+<li>不要试图使用展开后会导致 C++ 构造不稳定的宏, 不然也至少要附上文档说明其行为.</li>
+<li>不要用 <code class="docutils literal"><span class="pre">##</span></code> 处理函数，类和变量的名字。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="nullptr-null">
+<h2>5.17. 0, <code class="docutils literal"><span class="pre">nullptr</span></code> 和 <code class="docutils literal"><span class="pre">NULL</span></code></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>整数用 <code class="docutils literal"><span class="pre">0</span></code>, 实数用 <code class="docutils literal"><span class="pre">0.0</span></code>, 指针用 <code class="docutils literal"><span class="pre">nullptr</span></code> 或 <code class="docutils literal"><span class="pre">NULL</span></code>, 字符 (串) 用 <code class="docutils literal"><span class="pre">'\0'</span></code>.</p>
+<p>整数用 <code class="docutils literal"><span class="pre">0</span></code>, 实数用 <code class="docutils literal"><span class="pre">0.0</span></code>, 这一点是毫无争议的.</p>
+<p>对于指针 (地址值), 到底是用 <code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">NULL</span></code> 还是 <code class="docutils literal"><span class="pre">nullptr</span></code>. C++11 项目用 <code class="docutils literal"><span class="pre">nullptr</span></code>; C++03 项目则用 <code class="docutils literal"><span class="pre">NULL</span></code>, 毕竟它看起来像指针。实际上，一些 C++ 编译器对 <code class="docutils literal"><span class="pre">NULL</span></code> 的定义比较特殊，可以输出有用的警告，特别是 <code class="docutils literal"><span class="pre">sizeof(NULL)</span></code> 就和 <code class="docutils literal"><span class="pre">sizeof(0)</span></code> 不一样。</p>
+<p class="last">字符 (串) 用 <code class="docutils literal"><span class="pre">'\0'</span></code>, 不仅类型正确而且可读性好.</p>
+</div>
+</div>
+<div class="section" id="sizeof">
+<h2>5.18. sizeof</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>尽可能用 <code class="docutils literal"><span class="pre">sizeof(varname)</span></code> 代替 <code class="docutils literal"><span class="pre">sizeof(type)</span></code>.</p>
+<p>使用 <code class="docutils literal"><span class="pre">sizeof(varname)</span></code> 是因为当代码中变量类型改变时会自动更新. 您或许会用 <code class="docutils literal"><span class="pre">sizeof(type)</span></code> 处理不涉及任何变量的代码，比如处理来自外部或内部的数据格式，这时用变量就不合适了。</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">Struct</span> <span class="n">data</span><span class="p">;</span>
+<span class="n">Struct</span> <span class="n">data</span><span class="p">;</span> <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<div class="last highlight-c++"><div class="highlight"><pre><span></span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Struct</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="last highlight-c++"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">raw_size</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">ERROR</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;compressed record not big enough for count: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">raw_size</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="auto">
+<h2>5.19. auto</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">用 <code class="docutils literal"><span class="pre">auto</span></code> 绕过烦琐的类型名，只要可读性好就继续用，别用在局部变量之外的地方。</p>
+</div>
+<p>定义：</p>
+<blockquote>
+<div><p>C++11 中，若变量被声明成 <code class="docutils literal"><span class="pre">auto</span></code>, 那它的类型就会被自动匹配成初始化表达式的类型。您可以用 <code class="docutils literal"><span class="pre">auto</span></code> 来复制初始化或绑定引用。</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">auto</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="c1">// 创建一份 v[0] 的拷贝。</span>
+<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="c1">// s2 是 v[0] 的一个引用。</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>优点：</p>
+<blockquote>
+<div><p>C++ 类型名有时又长又臭，特别是涉及模板或命名空间的时候。就像：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">sparse_hash_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>返回类型好难读，代码目的也不够一目了然。重构其：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>好多了。</p>
+<p>没有 <code class="docutils literal"><span class="pre">auto</span></code> 的话，我们不得不在同一个表达式里写同一个类型名两次，无谓的重复，就像：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">diagnostics</span><span class="o">::</span><span class="n">ErrorStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="k">new</span> <span class="n">diagnostics</span><span class="o">::</span><span class="n">ErrorStatus</span><span class="p">(</span><span class="s">&quot;xyz&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>有了 auto, 可以更方便地用中间变量，显式编写它们的类型轻松点。</p>
+</div></blockquote>
+<p>缺点：</p>
+<blockquote>
+<div><p>类型够明显时，特别是初始化变量时，代码才会够一目了然。但以下就不一样了：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">Lookup</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>看不出其类型是啥，x 的类型声明恐怕远在几百行之外了。</p>
+<p>程序员必须会区分 <code class="docutils literal"><span class="pre">auto</span></code> 和 <code class="docutils literal"><span class="pre">const</span> <span class="pre">auto&amp;</span></code> 的不同之处，否则会复制错东西。</p>
+<p>auto 和 C++11 列表初始化的合体令人摸不着头脑：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">x</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>  <span class="c1">// 圆括号。</span>
+<span class="k">auto</span> <span class="n">y</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span>  <span class="c1">// 大括号。</span>
+</pre></div>
+</div>
+<p>它们不是同一回事——<code class="docutils literal"><span class="pre">x</span></code> 是 <code class="docutils literal"><span class="pre">int</span></code>, <code class="docutils literal"><span class="pre">y</span></code> 则是 <code class="docutils literal"><span class="pre">std::initializer_list&lt;int&gt;</span></code>. 其它一般不可见的代理类型（acgtyrant 注：normally-invisible proxy types, 它涉及到 C++ 鲜为人知的坑：<a class="reference external" href="http://stackoverflow.com/a/17794965/1546088">Why is vector&lt;bool&gt; not a STL container?</a>）也有大同小异的陷阱。</p>
+<p>如果在接口里用 <code class="docutils literal"><span class="pre">auto</span></code>, 比如声明头文件里的一个常量，那么只要仅仅因为程序员一时修改其值而导致类型变化的话——API 要翻天覆地了。</p>
+</div></blockquote>
+<p>结论：</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">auto</span></code> 只能用在局部变量里用。别用在文件作用域变量，命名空间作用域变量和类数据成员里。永远别列表初始化 <code class="docutils literal"><span class="pre">auto</span></code> 变量。</p>
+<p><code class="docutils literal"><span class="pre">auto</span></code> 还可以和 C++11 特性「尾置返回类型（trailing return type）」一起用，不过后者只能用在 lambda 表达式里。</p>
+</div></blockquote>
+</div>
+<div class="section" id="braced-initializer-list">
+<span id="id14"></span><h2>5.20. 列表初始化</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>你可以用列表初始化。</p>
+<p>早在 C++03 里，聚合类型（aggregate types）就已经可以被列表初始化了，比如数组和不自带构造函数的结构体：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Point</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="kt">int</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>C++11 中，该特性得到进一步的推广，任何对象类型都可以被列表初始化。示范如下：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="c1">// Vector 接收了一个初始化列表。</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">};</span>
+
+<span class="c1">// 不考虑细节上的微妙差别，大致上相同。</span>
+<span class="c1">// 您可以任选其一。</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">};</span>
+
+<span class="c1">// 可以配合 new 一起用。</span>
+<span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">};</span>
+
+<span class="c1">// map 接收了一些 pair, 列表初始化大显神威。</span>
+<span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;one&quot;</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">}};</span>
+
+<span class="c1">// 初始化列表也可以用在返回类型上的隐式转换。</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">test_function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span> <span class="p">}</span>
+
+<span class="c1">// 初始化列表可迭代。</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">i</span> <span class="p">:</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">})</span> <span class="p">{}</span>
+
+<span class="c1">// 在函数调用里用列表初始化。</span>
+<span class="kt">void</span> <span class="n">TestFunction2</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{}</span>
+<span class="n">TestFunction2</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>用户自定义类型也可以定义接收 <code class="docutils literal"><span class="pre">std::initializer_list&lt;T&gt;</span></code> 的构造函数和赋值运算符，以自动列表初始化：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyType</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="c1">// std::initializer_list 专门接收 init 列表。</span>
+  <span class="c1">// 得以值传递。</span>
+  <span class="n">MyType</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">init_list</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">init_list</span><span class="p">)</span> <span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">MyType</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">init_list</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">clear</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">init_list</span><span class="p">)</span> <span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="n">MyType</span> <span class="n">m</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>最后，列表初始化也适用于常规数据类型的构造，哪怕没有接收 <code class="docutils literal"><span class="pre">std::initializer_list&lt;T&gt;</span></code> 的构造函数。</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">d</span><span class="p">{</span><span class="mf">1.23</span><span class="p">};</span>
+<span class="c1">// MyOtherType 没有 std::initializer_list 构造函数，</span>
+ <span class="c1">// 直接上接收常规类型的构造函数。</span>
+<span class="k">class</span> <span class="nc">MyOtherType</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">MyOtherType</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+  <span class="n">MyOtherType</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="n">MyOtherType</span> <span class="n">m</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">};</span>
+<span class="c1">// 不过如果构造函数是显式的（explict），您就不能用 `= {}` 了。</span>
+<span class="n">MyOtherType</span> <span class="n">m</span><span class="p">{</span><span class="s">&quot;b&quot;</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>千万别直接列表初始化 auto 变量，看下一句，估计没人看得懂：</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<div class="last highlight-c++"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mf">1.23</span><span class="p">};</span>        <span class="c1">// d 即是 std::initializer_list&lt;double&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="kt">double</span><span class="p">{</span><span class="mf">1.23</span><span class="p">};</span>  <span class="c1">// 善哉 -- d 即为 double, 并非 std::initializer_list.</span>
+</pre></div>
+</div>
+<p class="last">至于格式化，参见 <span class="xref std std-ref">braced-initializer-list-format</span>.</p>
+</div>
+</div>
+<div class="section" id="lambda">
+<h2>5.21. Lambda 表达式</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">适当使用 lambda 表达式。别用默认 lambda 捕获，所有捕获都要显式写出来。</p>
+</div>
+<p>定义：</p>
+<blockquote>
+<div><p>Lambda 表达式是创建匿名函数对象的一种简易途径，常用于把函数当参数传，例如：</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[](</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Weight</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Weight</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>C++11 首次提出 Lambdas, 还提供了一系列处理函数对象的工具，比如多态包装器（polymorphic wrapper） <code class="docutils literal"><span class="pre">std::function</span></code>.</p>
+</div></blockquote>
+<p>优点：</p>
+<blockquote>
+<div><ul class="simple">
+<li>传函数对象给 STL 算法，Lambdas 最简易，可读性也好。</li>
+<li>Lambdas, <code class="docutils literal"><span class="pre">std::functions</span></code> 和 <code class="docutils literal"><span class="pre">std::bind</span></code> 可以搭配成通用回调机制（general purpose callback mechanism）；写接收有界函数为参数的函数也很容易了。</li>
+</ul>
+</div></blockquote>
+<p>缺点：</p>
+<blockquote>
+<div><ul class="simple">
+<li>Lambdas 的变量捕获略旁门左道，可能会造成悬空指针。</li>
+<li>Lambdas 可能会失控；层层嵌套的匿名函数难以阅读。</li>
+</ul>
+</div></blockquote>
+<p>结论：</p>
+<blockquote>
+<div><ul class="simple">
+<li>按 format 小用 lambda 表达式怡情。</li>
+<li>禁用默认捕获，捕获都要显式写出来。打比方，比起 <code class="docutils literal"><span class="pre">[=](int</span> <span class="pre">x)</span> <span class="pre">{return</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">n;}</span></code>, 您该写成 <code class="docutils literal"><span class="pre">[n](int</span> <span class="pre">x)</span> <span class="pre">{return</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">n;}</span></code> 才对，这样读者也好一眼看出 <code class="docutils literal"><span class="pre">n</span></code> 是被捕获的值。</li>
+<li>匿名函数始终要简短，如果函数体超过了五行，那么还不如起名（acgtyrant 注：即把 lambda 表达式赋值给对象），或改用函数。</li>
+<li>如果可读性更好，就显式写出 lambd 的尾置返回类型，就像auto.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id15">
+<h2>5.22. 模板元编程</h2>
+<blockquote>
+<div>TODO</div></blockquote>
+</div>
+<div class="section" id="boost">
+<span id="id16"></span><h2>5.23. Boost 库</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">只使用 Boost 中被认可的库.</p>
+</div>
+<p>定义:</p>
+<blockquote>
+<div><a class="reference external" href="http://www.boost.org/">Boost 库集</a> 是一个广受欢迎, 经过同行鉴定, 免费开源的 C++ 库集.</div></blockquote>
+<p>优点:</p>
+<blockquote>
+<div>Boost代码质量普遍较高, 可移植性好, 填补了 C++ 标准库很多空白, 如型别的特性, 更完善的绑定器, 更好的智能指针。</div></blockquote>
+<p>缺点:</p>
+<blockquote>
+<div>某些 Boost 库提倡的编程实践可读性差, 比如元编程和其他高级模板技术, 以及过度 &#8220;函数化&#8221; 的编程风格.</div></blockquote>
+<p>结论:</p>
+<blockquote>
+<div><p>为了向阅读和维护代码的人员提供更好的可读性, 我们只允许使用 Boost 一部分经认可的特性子集. 目前允许使用以下库:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.boost.org/doc/libs/1_58_0/libs/utility/call_traits.htm">Call Traits</a> : <code class="docutils literal"><span class="pre">boost/call_traits.hpp</span></code></li>
+<li><a class="reference external" href="http://www.boost.org/libs/utility/compressed_pair.htm">Compressed Pair</a> : <code class="docutils literal"><span class="pre">boost/compressed_pair.hpp</span></code></li>
+<li><a class="reference external" href="http://www.boost.org/doc/libs/1_58_0/libs/graph/doc/index.html">&lt;The Boost Graph Library (BGL)</a> : <code class="docutils literal"><span class="pre">boost/graph</span></code>, except serialization (<code class="docutils literal"><span class="pre">adj_list_serialize.hpp</span></code>) and parallel/distributed algorithms and data structures(<code class="docutils literal"><span class="pre">boost/graph/parallel/*</span></code> and <code class="docutils literal"><span class="pre">boost/graph/distributed/*</span></code>)</li>
+<li><a class="reference external" href="http://www.boost.org/libs/property_map/">Property Map</a> : <code class="docutils literal"><span class="pre">boost/property_map.hpp</span></code></li>
+<li>The part of <a class="reference external" href="http://www.boost.org/libs/iterator/">Iterator</a> that deals with defining iterators: <code class="docutils literal"><span class="pre">boost/iterator/iterator_adaptor.hpp</span></code>, <code class="docutils literal"><span class="pre">boost/iterator/iterator_facade.hpp</span></code>, and <code class="docutils literal"><span class="pre">boost/function_output_iterator.hpp</span></code></li>
+<li>The part of <a class="reference external" href="http://www.boost.org/libs/polygon/">Polygon</a> that deals with Voronoi diagram construction and doesn&#8217;t depend on the rest of Polygon: <code class="docutils literal"><span class="pre">boost/polygon/voronoi_builder.hpp</span></code>, <code class="docutils literal"><span class="pre">boost/polygon/voronoi_diagram.hpp</span></code>, and <code class="docutils literal"><span class="pre">boost/polygon/voronoi_geometry_type.hpp</span></code></li>
+<li><a class="reference external" href="http://www.boost.org/libs/bimap/">Bimap</a> : <code class="docutils literal"><span class="pre">boost/bimap</span></code></li>
+<li><a class="reference external" href="http://www.boost.org/libs/math/doc/html/dist.html">Statistical Distributions and Functions</a> : <code class="docutils literal"><span class="pre">boost/math/distributions</span></code></li>
+<li><a class="reference external" href="http://www.boost.org/libs/multi_index/">Multi-index</a> : <code class="docutils literal"><span class="pre">boost/multi_index</span></code></li>
+<li><a class="reference external" href="http://www.boost.org/libs/heap/">Heap</a> : <code class="docutils literal"><span class="pre">boost/heap</span></code></li>
+<li>The flat containers from <a class="reference external" href="http://www.boost.org/libs/container/">Container</a>: <code class="docutils literal"><span class="pre">boost/container/flat_map</span></code>, and <code class="docutils literal"><span class="pre">boost/container/flat_set</span></code></li>
+</ul>
+</div></blockquote>
+<p>我们正在积极考虑增加其它 Boost 特性, 所以列表中的规则将不断变化.</p>
+<p>以下库可以用，但由于如今已经被 C++ 11 标准库取代，不再鼓励：</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.boost.org/libs/ptr_container/">Pointer Container</a> : <code class="docutils literal"><span class="pre">boost/ptr_container</span></code>, 改用 <a class="reference external" href="http://en.cppreference.com/w/cpp/memory/unique_ptr">std::unique_ptr</a></li>
+<li><a class="reference external" href="http://www.boost.org/libs/array/">Array</a> : <code class="docutils literal"><span class="pre">boost/array.hpp</span></code>, 改用 <a class="reference external" href="http://en.cppreference.com/w/cpp/container/array">std::array</a></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="c-11">
+<h2>5.24. C++11</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">适当用 C++11（前身是 C++0x）的库和语言扩展，在贵项目用 C++11 特性前三思可移植性。</p>
+</div>
+<p>定义：</p>
+<blockquote>
+<div>C++11 有众多语言和库上的`变革 &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/C%2B%2B11">https://en.wikipedia.org/wiki/C%2B%2B11</a>&gt;`_ 。</div></blockquote>
+<p>优点：</p>
+<blockquote>
+<div>在二〇一四年八月之前，C++11 一度是官方标准，被大多 C++ 编译器支持。它标准化很多我们早先就在用的 C++ 扩展，简化了不少操作，大大改善了性能和安全。</div></blockquote>
+<p>缺点：</p>
+<blockquote>
+<div><p>C++11 相对于前身，复杂极了：1300 页 vs 800 页！很多开发者也不怎么熟悉它。于是从长远来看，前者特性对代码可读性以及维护代价难以预估。我们说不准什么时候采纳其特性，特别是在被迫依赖老实工具的项目上。</p>
+<p>和 <a class="reference internal" href="#boost"><span class="std std-ref">5.23. Boost 库</span></a> 一样，有些 C++11 扩展提倡实则对可读性有害的编程实践——就像去除冗余检查（比如类型名）以帮助读者，或是鼓励模板元编程等等。有些扩展在功能上与原有机制冲突，容易招致困惑以及迁移代价。</p>
+</div></blockquote>
+<p>缺点：</p>
+<blockquote>
+<div><p>C++11 特性除了个别情况下，可以用一用。除了本指南会有不少章节会加以讨若干 C++11 特性之外，以下特性最好不要用：</p>
+<ul class="simple">
+<li>尾置返回类型，比如用 <code class="docutils literal"><span class="pre">auto</span> <span class="pre">foo()</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> 代替 <code class="docutils literal"><span class="pre">int</span> <span class="pre">foo()</span></code>. 为了兼容于现有代码的声明风格。</li>
+<li>编译时合数 <code class="docutils literal"><span class="pre">&lt;ratio&gt;</span></code>, 因为它涉及一个重模板的接口风格。</li>
+<li><code class="docutils literal"><span class="pre">&lt;cfenv&gt;</span></code> 和 <code class="docutils literal"><span class="pre">&lt;fenv.h&gt;</span></code> 头文件，因为编译器尚不支持。</li>
+<li>默认 lambda 捕获。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="acgtyrant">
+<h2>译者（acgtyrant）笔记</h2>
+<ol class="arabic simple">
+<li>实际上，<a class="reference external" href="http://www.zhihu.com/question/24439516/answer/27858964">缺省参数会改变函数签名的前提是改变了它接收的参数数量</a>，比如把 <code class="docutils literal"><span class="pre">void</span> <span class="pre">a()</span></code> 改成 <code class="docutils literal"><span class="pre">void</span> <span class="pre">a(int</span> <span class="pre">b</span> <span class="pre">=</span> <span class="pre">0)</span></code>, 开发者改变其代码的初衷也许是，在不改变「代码兼容性」的同时，又提供了可选 int 参数的余地，然而这终究会破坏函数指针上的兼容性，毕竟函数签名确实变了。</li>
+<li>此外把自带缺省参数的函数地址赋值给指针时，会丢失缺省参数信息。</li>
+<li>我还发现 <a class="reference external" href="http://www.zhihu.com/question/24439516/answer/27896004">滥用缺省参数会害得读者光只看调用代码的话，会误以为其函数接受的参数数量比实际上还要少。</a></li>
+<li><code class="docutils literal"><span class="pre">friend</span></code> 实际上只对函数／类赋予了对其所在类的访问权限，并不是有效的声明语句。所以除了在头文件类内部写 friend 函数／类，还要在类作用域之外正式地声明一遍，最后在对应的 <code class="docutils literal"><span class="pre">.cc</span></code> 文件加以定义。</li>
+<li>本风格指南都强调了「友元应该定义在同一文件内，避免代码读者跑到其它文件查找使用该私有成员的类」。那么可以把其声明放在类声明所在的头文件，定义也放在类定义所在的文件。</li>
+<li>由于友元函数／类并不是类的一部分，自然也不会是类可调用的公有接口，于是我主张全集中放在类的尾部，即的数据成员之后，参考 <a class="reference internal" href="classes.html#declaration-order"><span class="std std-ref">声明顺序</span></a> 。</li>
+<li><a class="reference external" href="http://www.zhihu.com/question/22889420">对使用 C++ 异常处理应具有怎样的态度？</a> 非常值得一读。</li>
+<li>注意初始化 const 对象时，必须在初始化的同时值初始化。</li>
+<li>用断言代替无符号整型类型，深有启发。</li>
+<li>auto 在涉及迭代器的循环语句里挺常用。</li>
+<li><a class="reference external" href="http://stackoverflow.com/questions/11215227/should-the-trailing-return-type-syntax-style-become-the-default-for-new-c11-pr">Should the trailing return type syntax style become the default for new C++11 programs?</a> 讨论了 auto 与尾置返回类型一起用的全新编码风格，值得一看。</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="naming.html" class="btn btn-neutral float-right" title="6. 命名约定" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="magic.html" class="btn btn-neutral" title="4. 来自 Google 的奇技" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

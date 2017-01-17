@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>调用命令 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Shell 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="结论" href="conclusion.html"/>
+        <link rel="prev" title="命名转换" href="naming_conventions.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Shell 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">扉页</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background.html">背景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell_files_and_interpreter_invocation.html">Shell文件和解释器调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting.html">格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features_and_bugs.html">特性及错误</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">命名转换</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">调用命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">检查返回值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">内建命令和外部命令</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">结论</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Shell 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>调用命令</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-shell-styleguide/calling_commands.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>调用命令</h1>
+<div class="section" id="id2">
+<h2>检查返回值</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">总是检查返回值，并给出信息返回值。</p>
+</div>
+<p>对于非管道命令，使用 <code class="docutils literal"><span class="pre">$?</span></code> 或直接通过一个 <code class="docutils literal"><span class="pre">if</span></code> 语句来检查以保持其简洁。</p>
+<p>例如：</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="k">if</span> ! mv <span class="s2">&quot;</span><span class="si">${</span><span class="nv">file_list</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">dest_dir</span><span class="si">}</span><span class="s2">/&quot;</span> <span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Unable to move </span><span class="si">${</span><span class="nv">file_list</span><span class="si">}</span><span class="s2"> to </span><span class="si">${</span><span class="nv">dest_dir</span><span class="si">}</span><span class="s2">&quot;</span> &gt;<span class="p">&amp;</span>2
+  <span class="nb">exit</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">E_BAD_MOVE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Or</span>
+mv <span class="s2">&quot;</span><span class="si">${</span><span class="nv">file_list</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">dest_dir</span><span class="si">}</span><span class="s2">/&quot;</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$?</span><span class="s2">&quot;</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Unable to move </span><span class="si">${</span><span class="nv">file_list</span><span class="si">}</span><span class="s2"> to </span><span class="si">${</span><span class="nv">dest_dir</span><span class="si">}</span><span class="s2">&quot;</span> &gt;<span class="p">&amp;</span>2
+  <span class="nb">exit</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">E_BAD_MOVE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>Bash也有 <code class="docutils literal"><span class="pre">PIPESTATUS</span></code> 变量，允许检查从管道所有部分返回的代码。如果仅仅需要检查整个管道是成功还是失败，以下的方法是可以接受的：</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>tar -cf - ./* <span class="p">|</span> <span class="o">(</span> <span class="nb">cd</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> tar -xf - <span class="o">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PIPESTATUS</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span> -ne <span class="m">0</span> <span class="o">||</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PIPESTATUS</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Unable to tar files to </span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&quot;</span> &gt;<span class="p">&amp;</span>2
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>可是，只要你运行任何其他命令， <code class="docutils literal"><span class="pre">PIPESTATUS</span></code> 将会被覆盖。如果你需要基于管道中发生的错误执行不同的操作，那么你需要在运行命令后立即将 <code class="docutils literal"><span class="pre">PIPESTATUS</span></code> 赋值给另一个变量（别忘了 <code class="docutils literal"><span class="pre">[</span></code> 是一个会将 <code class="docutils literal"><span class="pre">PIPESTATUS</span></code> 擦除的命令）。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>tar -cf - ./* <span class="p">|</span> <span class="o">(</span> <span class="nb">cd</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DIR</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> tar -xf - <span class="o">)</span>
+<span class="nv">return_codes</span><span class="o">=(</span><span class="si">${</span><span class="nv">PIPESTATUS</span><span class="p">[*]</span><span class="si">}</span><span class="o">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">return_codes</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">return_codes</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something_else
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>内建命令和外部命令</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">可以在调用shell内建命令和调用另外的程序之间选择，请选择内建命令。</p>
+</div>
+<p>我们更喜欢使用内建命令，如在 <code class="docutils literal"><span class="pre">bash(1)</span></code> 中参数扩展函数。因为它更强健和便携（尤其是跟像 <code class="docutils literal"><span class="pre">sed</span></code> 这样的命令比较）</p>
+<p>例如：</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Prefer this:</span>
+<span class="nv">addition</span><span class="o">=</span><span class="k">$((</span><span class="si">${</span><span class="nv">X</span><span class="si">}</span> <span class="o">+</span> <span class="si">${</span><span class="nv">Y</span><span class="si">}</span><span class="k">))</span>
+<span class="nv">substitution</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">string</span><span class="p">/#foo/bar</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Instead of this:</span>
+<span class="nv">addition</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>expr <span class="si">${</span><span class="nv">X</span><span class="si">}</span> + <span class="si">${</span><span class="nv">Y</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">substitution</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">string</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/^foo/bar/&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="conclusion.html" class="btn btn-neutral float-right" title="结论" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="naming_conventions.html" class="btn btn-neutral" title="命名转换" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

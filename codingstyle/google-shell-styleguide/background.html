@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>背景 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Shell 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="Shell文件和解释器调用" href="shell_files_and_interpreter_invocation.html"/>
+        <link rel="prev" title="扉页" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Shell 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">扉页</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">背景</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shell">使用哪一种Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">什么时候使用Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shell_files_and_interpreter_invocation.html">Shell文件和解释器调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting.html">格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features_and_bugs.html">特性及错误</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">命名转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calling_commands.html">调用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">结论</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Shell 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>背景</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-shell-styleguide/background.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>背景</h1>
+<div class="section" id="shell">
+<h2>使用哪一种Shell</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Bash是唯一被允许执行的shell脚本语言。</p>
+</div>
+<p>可执行文件必须以 <code class="docutils literal"><span class="pre">#!/bin/bash</span></code> 和最小数量的标志开始。请使用 <code class="docutils literal"><span class="pre">set</span></code> 来设置shell的选项，使得用 <code class="docutils literal"><span class="pre">bash</span> <span class="pre">&lt;script_name&gt;</span></code> 调用你的脚本时不会破坏其功能。</p>
+<p>限制所有的可执行shell脚本为bash使得我们安装在所有计算机中的shell语言保持一致性。</p>
+<p>无论你是为什么而编码，对此唯一例外的是当你被迫时可以不这么做的。其中一个例子是Solaris SVR4包，编写任何脚本都需要用纯Bourne shell。</p>
+</div>
+<div class="section" id="id2">
+<h2>什么时候使用Shell</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Shell应该仅仅被用于小功能或者简单的包装脚本。</p>
+</div>
+<p>尽管Shell脚本不是一种开发语言，但在整个谷歌它被用于编写多种实用工具的脚本。这个风格指南更多的是认同它的使用，而不是一个建议，即它可被用于广泛部署。</p>
+<p>以下是一些准则：</p>
+<ul class="simple">
+<li>如果你主要是在调用其他的工具并且做一些相对很小数据量的操作，那么使用shell来完成任务是一种可接受的选择。</li>
+<li>如果你在乎性能，那么请选择其他工具，而不是使用shell。</li>
+<li>如果你发现你需要使用数据而不是变量赋值（如 <code class="docutils literal"><span class="pre">${PHPESTATUS}</span></code> ），那么你应该使用Python脚本。</li>
+<li>如果你将要编写的脚本会超过100行，那么你可能应该使用Python来编写，而不是Shell。请记住，当脚本行数增加，尽早使用另外一种语言重写你的脚本，以避免之后花更多的时间来重写。</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shell_files_and_interpreter_invocation.html" class="btn btn-neutral float-right" title="Shell文件和解释器调用" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="扉页" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cocoa 模式 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Objective-C 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="Python 风格指南 - 内容目录" href="../google-python-styleguide/contents.html"/>
+        <link rel="prev" title="Cocoa 和 Objective-C 特性" href="features.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Objective-C 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">Google Objective-C Style Guide 中文版</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spacing.html">留白和格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming.html">命名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Cocoa 和 Objective-C 特性</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cocoa 模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">委托模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mvc">模型/视图/控制器（MVC）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-shell-styleguide/contents.html">Shell 风格指南 - 内容目录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Objective-C 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>Cocoa 模式</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-objc-styleguide/patterns.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cocoa">
+<h1>Cocoa 模式</h1>
+<div class="section" id="id1">
+<h2>委托模式</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">委托对象不应该被 <code class="docutils literal"><span class="pre">retain</span></code></p>
+</div>
+<p>实现委托模式的类应：</p>
+<ol class="arabic simple">
+<li>拥有一个名为 <code class="docutils literal"><span class="pre">delegate_</span></code> 的实例变量来引用委托。</li>
+<li>因此，访问器方法应该命名为 <code class="docutils literal"><span class="pre">delegate</span></code> 和 <code class="docutils literal"><span class="pre">setDelegate:</span></code>。</li>
+<li><code class="docutils literal"><span class="pre">delegate_</span></code> 对象不应该被 <code class="docutils literal"><span class="pre">retain</span></code>。</li>
+</ol>
+</div>
+<div class="section" id="mvc">
+<h2>模型/视图/控制器（MVC）</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">分离模型与视图。分离控制器与视图、模型。回调 API 使用 <code class="docutils literal"><span class="pre">&#64;protocol</span></code>。</p>
+</div>
+<ul class="simple">
+<li>分离模型与视图：不要假设模型或者数据源的表示方法。保持数据源与表示层之间的接口抽象。视图不需要了解模型的逻辑（主要的规则是问问你自己，对于数据源的一个实例，有没有可能有多种不同状态的表示方法）。</li>
+<li>分离控制器与模型、视图：不要把所有的 “业务逻辑” 放进跟视图有关的类中。这使代码非常难以复用。使用控制器类来处理这些代码，但保证控制器不需要了解太多表示层的逻辑。</li>
+<li>使用 <code class="docutils literal"><span class="pre">&#64;protocol</span></code> 来定义回调 API，如果不是所有的方法都必须实现，使用 <code class="docutils literal"><span class="pre">&#64;optional``（特例：使用</span> <span class="pre">Objective-C</span> <span class="pre">1.0</span> <span class="pre">时，``&#64;optional</span></code> 不可用，可使用类别来定义一个 “非正规的协议”）。</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../google-python-styleguide/contents.html" class="btn btn-neutral float-right" title="Python 风格指南 - 内容目录" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="features.html" class="btn btn-neutral" title="Cocoa 和 Objective-C 特性" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

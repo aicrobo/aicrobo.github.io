@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>特性及错误 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Shell 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="命名转换" href="naming_conventions.html"/>
+        <link rel="prev" title="格式" href="formatting.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Shell 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">扉页</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background.html">背景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell_files_and_interpreter_invocation.html">Shell文件和解释器调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting.html">格式</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">特性及错误</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">命令替换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test">test，[和[[</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">测试字符串</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">文件名的通配符扩展</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eval">Eval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#while">管道导向while循环</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">命名转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calling_commands.html">调用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">结论</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Shell 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>特性及错误</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-shell-styleguide/features_and_bugs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>特性及错误</h1>
+<div class="section" id="id2">
+<h2>命令替换</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用 <code class="docutils literal"><span class="pre">$(command)</span></code> 而不是反引号。</p>
+</div>
+<p>嵌套的反引号要求用反斜杠转义内部的反引号。而 <code class="docutils literal"><span class="pre">$(command)</span></code> 形式嵌套时不需要改变，而且更易于阅读。</p>
+<p>例如：</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># This is preferred:</span>
+<span class="nv">var</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">command</span> <span class="s2">&quot;</span><span class="k">$(</span>command1<span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># This is not:</span>
+<span class="nv">var</span><span class="o">=</span><span class="s2">&quot;`command \`command1\``&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test">
+<h2>test，[和[[</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">推荐使用 <code class="docutils literal"><span class="pre">[[</span> <span class="pre">...</span> <span class="pre">]]</span></code> ，而不是 <code class="docutils literal"><span class="pre">[</span></code> , <code class="docutils literal"><span class="pre">test</span></code> , 和 <code class="docutils literal"><span class="pre">/usr/bin/</span> <span class="pre">[</span></code> 。</p>
+</div>
+<p>因为在 <code class="docutils literal"><span class="pre">[[</span></code> 和 <code class="docutils literal"><span class="pre">]]</span></code> 之间不会有路径名称扩展或单词分割发生，所以使用 <code class="docutils literal"><span class="pre">[[</span> <span class="pre">...</span> <span class="pre">]]</span></code> 能够减少错误。而且 <code class="docutils literal"><span class="pre">[[</span> <span class="pre">...</span> <span class="pre">]]</span></code> 允许正则表达式匹配，而 <code class="docutils literal"><span class="pre">[</span> <span class="pre">...</span> <span class="pre">]</span></code> 不允许。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># This ensures the string on the left is made up of characters in the</span>
+<span class="c1"># alnum character class followed by the string name.</span>
+<span class="c1"># Note that the RHS should not be quoted here.</span>
+<span class="c1"># For the gory details, see</span>
+<span class="c1"># E14 at http://tiswww.case.edu/php/chet/bash/FAQ</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;filename&quot;</span> <span class="o">=</span>~ ^<span class="o">[[</span>:alnum:<span class="o">]]</span>+name <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Match&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># This matches the exact pattern &quot;f*&quot; (Does not match in this case)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;filename&quot;</span> <span class="o">==</span> <span class="s2">&quot;f*&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Match&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># This gives a &quot;too many arguments&quot; error as f* is expanded to the</span>
+<span class="c1"># contents of the current directory</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;filename&quot;</span> <span class="o">==</span> f* <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Match&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>测试字符串</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">尽可能使用引用，而不是过滤字符串。</p>
+</div>
+<p>Bash足以在测试中处理空字符串。所以，请使用空（非空）字符串测试，而不是过滤字符，使得代码更易于阅读。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Do this:</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">my_var</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;some_string&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+
+<span class="c1"># -z (string length is zero) and -n (string length is not zero) are</span>
+<span class="c1"># preferred over testing for an empty string</span>
+<span class="k">if</span> <span class="o">[[</span> -z <span class="s2">&quot;</span><span class="si">${</span><span class="nv">my_var</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+
+<span class="c1"># This is OK (ensure quotes on the empty side), but not preferred:</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">my_var</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+
+<span class="c1"># Not this:</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">my_var</span><span class="si">}</span><span class="s2">X&quot;</span> <span class="o">=</span> <span class="s2">&quot;some_stringX&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>为了避免对你测试的目的产生困惑，请明确使用`-z`或者`-n`</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Use this</span>
+<span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&quot;</span><span class="si">${</span><span class="nv">my_var</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+
+<span class="c1"># Instead of this as errors can occur if ${my_var} expands to a test</span>
+<span class="c1"># flag</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">my_var</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  do_something
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>文件名的通配符扩展</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">当进行文件名的通配符扩展时，请使用明确的路径。</p>
+</div>
+<p>因为文件名可能以 <code class="docutils literal"><span class="pre">-</span></code> 开头，所以使用扩展通配符 <code class="docutils literal"><span class="pre">./*</span></code> 比 <code class="docutils literal"><span class="pre">*</span></code> 来得安全得多。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Here&#39;s the contents of the directory:</span>
+<span class="c1"># -f  -r  somedir  somefile</span>
+
+<span class="c1"># This deletes almost everything in the directory by force</span>
+psa@bilby$ rm -v *
+removed directory: <span class="sb">`</span>somedir<span class="s1">&#39;</span>
+<span class="s1">removed `somefile&#39;</span>
+
+<span class="c1"># As opposed to:</span>
+psa@bilby$ rm -v ./*
+removed <span class="sb">`</span>./-f<span class="s1">&#39;</span>
+<span class="s1">removed `./-r&#39;</span>
+rm: cannot remove <span class="sb">`</span>./somedir<span class="s1">&#39;: Is a directory</span>
+<span class="s1">removed `./somefile&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="eval">
+<h2>Eval</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">应该避免使用eval。</p>
+</div>
+<p>当用于给变量赋值时，Eval解析输入，并且能够设置变量，但无法检查这些变量是什么。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># What does this set?</span>
+<span class="c1"># Did it succeed? In part or whole?</span>
+<span class="nb">eval</span> <span class="k">$(</span>set_my_variables<span class="k">)</span>
+
+<span class="c1"># What happens if one of the returned values has a space in it?</span>
+<span class="nv">variable</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">eval</span> some_function<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="while">
+<h2>管道导向while循环</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">请使用过程替换或者for循环，而不是管道导向while循环。在while循环中被修改的变量是不能传递给父shell的，因为循环命令是在一个子shell中运行的。</p>
+</div>
+<p>管道导向while循环中的隐式子shell使得追踪bug变得很困难。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="nv">last_line</span><span class="o">=</span><span class="s1">&#39;NULL&#39;</span>
+your_command <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> line<span class="p">;</span> <span class="k">do</span>
+  <span class="nv">last_line</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># This will output &#39;NULL&#39;</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">last_line</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>如果你确定输入中不包含空格或者特殊符号（通常意味着不是用户输入的），那么可以使用一个for循环。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="nv">total</span><span class="o">=</span>0
+<span class="c1"># Only do this if there are no spaces in return values.</span>
+<span class="k">for</span> value in <span class="k">$(</span><span class="nb">command</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+  total+<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">value</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>使用过程替换允许重定向输出，但是请将命令放入一个显式的子shell中，而不是bash为while循环创建的隐式子shell。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="nv">total</span><span class="o">=</span>0
+<span class="nv">last_file</span><span class="o">=</span>
+<span class="k">while</span> <span class="nb">read</span> count filename<span class="p">;</span> <span class="k">do</span>
+  total+<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">count</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nv">last_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">done</span> &lt; &lt;<span class="o">(</span>your_command <span class="p">|</span> uniq -c<span class="o">)</span>
+
+<span class="c1"># This will output the second field of the last line of output from</span>
+<span class="c1"># the command.</span>
+<span class="nb">echo</span> <span class="s2">&quot;Total = </span><span class="si">${</span><span class="nv">total</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Last one = </span><span class="si">${</span><span class="nv">last_file</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>当不需要传递复杂的结果给父shell时可以使用while循环。这通常需要一些更复杂的“解析”。请注意简单的例子使用如awk这类工具可能更容易完成。当你特别不希望改变父shell的范围变量时这可能也是有用的。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Trivial implementation of awk expression:</span>
+<span class="c1">#   awk &#39;$3 == &quot;nfs&quot; { print $2 &quot; maps to &quot; $1 }&#39; /proc/mounts</span>
+cat /proc/mounts <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> src dest <span class="nb">type</span> opts rest<span class="p">;</span> <span class="k">do</span>
+  <span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">type</span><span class="si">}</span> <span class="o">==</span> <span class="s2">&quot;nfs&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;NFS </span><span class="si">${</span><span class="nv">dest</span><span class="si">}</span><span class="s2"> maps to </span><span class="si">${</span><span class="nv">src</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">fi</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="naming_conventions.html" class="btn btn-neutral float-right" title="命名转换" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="formatting.html" class="btn btn-neutral" title="格式" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

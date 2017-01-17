@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>css样式规则 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-shell-styleguide/contents.html">Shell 风格指南 - 内容目录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+    <li>css样式规则</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-html-css-styleguide/css_style_rules.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="css">
+<h1>css样式规则</h1>
+<div class="section" id="id1">
+<h2>CSS有效性</h2>
+<p>尽可能使用有效的CSS。</p>
+<p>使用有效的CSS代码，除非在处理css验证器bug或者是专有的语法时。</p>
+<p>使用诸如 <a class="reference external" href="http://jigsaw.w3.org/css-validator/">W3C CSS validator</a> 等工具验证测试。</p>
+<p>使用有效的CSS代码是一个可衡量CSS代码质量的指标，可帮你找出不起作用可被删除的CSS代码，从而确保CSS的合理使用。</p>
+</div>
+<div class="section" id="idclass">
+<h2>id与class的命名</h2>
+<p>使用有意义的或者通用的id和class名称</p>
+<p>用能反映出元素目的或者通用的id、class名称，代替那些很表象的、难懂的名称。</p>
+<p>如果名称需要是易懂的，或不容易被修改，应该首选特定的或者能反映出元素目的的名称。</p>
+<p>通用的名称适用于非特殊元素或与兄弟元素无区别的元素。他们常被称为“辅助元素”。</p>
+<p>使用功能性或者通用的名称，可减少不必要的文档或者模板变化。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="c">/* 不推荐：无意义 */</span>
+<span class="nn">#yee-1901</span> <span class="p">{}</span>
+
+
+<span class="c">/* 不推荐：表象 */</span>
+<span class="nc">.button-green</span> <span class="p">{}</span>
+<span class="nc">.clear</span> <span class="p">{}</span>
+
+<span class="c">/* 推荐：具体的 */</span>
+<span class="nn">#gallery</span> <span class="p">{}</span>
+<span class="nn">#login</span> <span class="p">{}</span>
+<span class="nc">.video</span> <span class="p">{}</span>
+
+<span class="c">/* 推荐：通用的 */</span>
+<span class="nc">.aux</span> <span class="p">{}</span>
+<span class="nc">.alt</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>id与class的命名规范</h2>
+<p>ID和class命名要尽可能简短，但必要的话就别怕长。</p>
+<p>尽可能简洁地传达id或者class名称的含义。</p>
+<p>使用简洁的id或者class名称有助于提高可读性和代码效率。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="c">/* 不推荐 */</span>
+<span class="nn">#navigation</span> <span class="p">{}</span>
+<span class="nc">.atr</span> <span class="p">{}</span>
+
+<span class="c">/* 推荐 */</span>
+<span class="nn">#nav</span> <span class="p">{}</span>
+<span class="nc">.author</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>选择器的类型</h2>
+<p>应当避免在id和class前添加类型选择器。</p>
+<p>除了必要情况下（例如辅助的类），不要将元素与id或class名称结合做为选择器。</p>
+<p>避免不必要的祖先选择器也是出于 <a class="reference external" href="http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/">性能原因</a> 的考虑。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="c">/* 不推荐 */</span>
+<span class="nt">ul</span><span class="nn">#example</span> <span class="p">{}</span>
+<span class="nt">div</span><span class="nc">.error</span> <span class="p">{}</span>
+
+<span class="c">/* 推荐 */</span>
+<span class="nn">#example</span> <span class="p">{}</span>
+<span class="nc">.error</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>简写属性</h2>
+<p>尽可能使用简写的属性书写方式。</p>
+<p>CSS提供了多种属性 <a class="reference external" href="http://www.w3.org/TR/CSS21/about.html#shorthand">简写</a> 的方式（如 <code class="docutils literal"><span class="pre">font</span></code> ），即使只显式设置一个值，也应该尽可能地使用。</p>
+<p>使用简写属性有助于提高代码效率及可读性。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="c">/* 不推荐 */</span>
+<span class="nt">border-top-style</span><span class="o">:</span> <span class="nt">none</span><span class="o">;</span>
+<span class="nt">font-family</span><span class="o">:</span> <span class="nt">palatino</span><span class="o">,</span> <span class="nt">georgia</span><span class="o">,</span> <span class="nt">serif</span><span class="o">;</span>
+<span class="nt">font-size</span><span class="o">:</span> <span class="nt">100</span><span class="o">%;</span>
+<span class="nt">line-height</span><span class="o">:</span> <span class="nt">1</span><span class="nc">.6</span><span class="o">;</span>
+<span class="nt">padding-bottom</span><span class="o">:</span> <span class="nt">2em</span><span class="o">;</span>
+<span class="nt">padding-left</span><span class="o">:</span> <span class="nt">1em</span><span class="o">;</span>
+<span class="nt">padding-right</span><span class="o">:</span> <span class="nt">1em</span><span class="o">;</span>
+<span class="nt">padding-top</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span>
+
+<span class="c">/* 推荐 */</span>
+<span class="nt">border-top</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span>
+<span class="nt">font</span><span class="o">:</span> <span class="nt">100</span><span class="o">%/</span><span class="nt">1</span><span class="nc">.6</span> <span class="nt">palatino</span><span class="o">,</span> <span class="nt">georgia</span><span class="o">,</span> <span class="nt">serif</span><span class="o">;</span>
+<span class="nt">padding</span><span class="o">:</span> <span class="nt">0</span> <span class="nt">1em</span> <span class="nt">2em</span><span class="o">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>0与单位</h2>
+<p>省略“0”后的单位。</p>
+<p>除非必需，否则0后不要加单位。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="nt">margin</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span>
+<span class="nt">padding</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>前导0</h2>
+<p>省略前导“0”值。</p>
+<p>在-1至1之间的值无需保留整数位的0。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="nt">font-size</span><span class="o">:</span> <span class="nc">.8em</span><span class="o">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>十六进制表示法</h2>
+<p>在可能的情况下使用3个字符的十六进制表示法。</p>
+<p>对于可用3字符十六进制表示的颜色值，按此规则书写更短、更简洁。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="c">/* 不推荐 */</span>
+<span class="nt">color</span><span class="o">:</span> <span class="nn">#eebbcc</span><span class="o">;</span>
+
+<span class="c">/* 推荐 */</span>
+<span class="nt">color</span><span class="o">:</span> <span class="nn">#ebc</span><span class="o">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>前缀选择器</h2>
+<p>加特定应用前缀（可选）</p>
+<p>大型项目中以及嵌入在其它项目或外部网站上的代码需要给id和class添加前缀（命名空间）。使用短的、独特的标识符，并在其后跟一个破折号。
+使用命名空间有助于防止命名冲突，可以让维护变得简单，例如在搜索和替换操作时。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="nc">.adw-help</span> <span class="p">{}</span> <span class="c">/* AdWords */</span>
+<span class="nn">#maia-note</span> <span class="p">{}</span> <span class="c">/* Maia */</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>id与class名称分隔符</h2>
+<p>用连字符分隔ID和类名中的单词。</p>
+<p>选择器中的词语和缩写中不要使用除了连字符以外的任何字符（包括空字符），以提高可理解性和可读性。</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="c">/* 不推荐: 单词未分开 */</span>
+<span class="nc">.demoimage</span> <span class="p">{}</span>
+
+<span class="c">/* 不推荐：使用下划线而不是连字符 */</span>
+<span class="nc">.error_status</span> <span class="p">{}</span>
+
+<span class="c">/* 推荐 */</span>
+<span class="nn">#video-id</span> <span class="p">{}</span>
+<span class="nc">.ads-sample</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hacks">
+<h2>Hacks</h2>
+<p>请先尝试其他的方法，避免用户代理检测以及CSS的“hacks”。</p>
+<p>进行用户代理检测或使用特殊的CSS选择器及hacks看起来是处理样式差异的捷径。但为了实现和保持高效性以及代码的可维护性，这两种方案应该放到最后考虑。换句话说，用户代理检测和使用hacks会增大项目推进的阻力，所以从项目的长远利益考虑应尽力避免。一旦允许并无顾忌地使用用户代理检测和hacks便很容易滥用，最终一发而不可收。</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

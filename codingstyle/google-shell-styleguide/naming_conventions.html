@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>命名转换 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Shell 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="调用命令" href="calling_commands.html"/>
+        <link rel="prev" title="特性及错误" href="features_and_bugs.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-objc-styleguide/contents.html">Objective-C 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Shell 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">扉页</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background.html">背景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell_files_and_interpreter_invocation.html">Shell文件和解释器调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting.html">格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features_and_bugs.html">特性及错误</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">命名转换</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">函数名</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">变量名</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">常量和环境变量名</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">源文件名</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">只读变量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">使用本地变量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">函数位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main">主函数main</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calling_commands.html">调用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">结论</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Shell 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>命名转换</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-shell-styleguide/naming_conventions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>命名转换</h1>
+<div class="section" id="id2">
+<h2>函数名</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用小写字母，并用下划线分隔单词。使用双冒号 <code class="docutils literal"><span class="pre">::</span></code> 分隔库。函数名之后必须有圆括号。关键词 <code class="docutils literal"><span class="pre">function</span></code> 是可选的，但必须在一个项目中保持一致。</p>
+</div>
+<p>如果你正在写单个函数，请用小写字母来命名，并用下划线分隔单词。如果你正在写一个包，使用双冒号 <code class="docutils literal"><span class="pre">::</span></code> 来分隔包名。大括号必须和函数名位于同一行（就像在Google的其他语言一样），并且函数名和圆括号之间没有空格。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Single function</span>
+my_func<span class="o">()</span> <span class="o">{</span>
+  ...
+<span class="o">}</span>
+
+<span class="c1"># Part of a package</span>
+mypackage::my_func<span class="o">()</span> <span class="o">{</span>
+  ...
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>当函数名后存在 <code class="docutils literal"><span class="pre">()</span></code> 时，关键词 <code class="docutils literal"><span class="pre">function</span></code> 是多余的。但是其促进了函数的快速辨识。</p>
+</div>
+<div class="section" id="id3">
+<h2>变量名</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">如函数名。</p>
+</div>
+<p>循环的变量名应该和循环的任何变量同样命名。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="k">for</span> zone in <span class="si">${</span><span class="nv">zones</span><span class="si">}</span><span class="p">;</span> <span class="k">do</span>
+  something_with <span class="s2">&quot;</span><span class="si">${</span><span class="nv">zone</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>常量和环境变量名</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">全部大写，用下划线分隔，声明在文件的顶部。</p>
+</div>
+<p>常量和任何导出到环境中的都应该大写。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Constant</span>
+<span class="nb">readonly</span> <span class="nv">PATH_TO_FILES</span><span class="o">=</span><span class="s1">&#39;/some/path&#39;</span>
+
+<span class="c1"># Both constant and environment</span>
+<span class="nb">declare</span> -xr <span class="nv">ORACLE_SID</span><span class="o">=</span><span class="s1">&#39;PROD&#39;</span>
+</pre></div>
+</div>
+<p>第一次设置时有一些就变成了常量（例如，通过getopts）。因此，可以在getopts中或基于条件来设定常量，但之后应该立即设置其为只读。值得注意的是，在函数中 <code class="docutils literal"><span class="pre">declare</span></code> 不会对全局变量进行操作。所以推荐使用 <code class="docutils literal"><span class="pre">readonly</span></code> 和 <code class="docutils literal"><span class="pre">export</span></code> 来代替。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="nv">VERBOSE</span><span class="o">=</span><span class="s1">&#39;false&#39;</span>
+<span class="k">while</span> <span class="nb">getopts</span> <span class="s1">&#39;v&#39;</span> flag<span class="p">;</span> <span class="k">do</span>
+  <span class="k">case</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">flag</span><span class="si">}</span><span class="s2">&quot;</span> in
+    v<span class="o">)</span> <span class="nv">VERBOSE</span><span class="o">=</span><span class="s1">&#39;true&#39;</span> <span class="p">;;</span>
+  <span class="k">esac</span>
+<span class="k">done</span>
+<span class="nb">readonly</span> VERBOSE
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>源文件名</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">小写，如果需要的话使用下划线分隔单词。</p>
+</div>
+<p>这是为了和在Google中的其他代码风格保持一致： <code class="docutils literal"><span class="pre">maketemplate</span></code> 或者 <code class="docutils literal"><span class="pre">make_template</span></code> ，而不是 <code class="docutils literal"><span class="pre">make-template</span></code> 。</p>
+</div>
+<div class="section" id="id6">
+<h2>只读变量</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用 <code class="docutils literal"><span class="pre">readonly</span></code> 或者 <code class="docutils literal"><span class="pre">declare</span> <span class="pre">-r</span></code> 来确保变量只读。</p>
+</div>
+<p>因为全局变量在shell中广泛使用，所以在使用它们的过程中捕获错误是很重要的。当你声明了一个变量，希望其只读，那么请明确指出。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="nv">zip_version</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>dpkg --status zip <span class="p">|</span> grep Version: <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f 2<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">if</span> <span class="o">[[</span> -z <span class="s2">&quot;</span><span class="si">${</span><span class="nv">zip_version</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  error_message
+<span class="k">else</span>
+  <span class="nb">readonly</span> zip_version
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>使用本地变量</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用 <code class="docutils literal"><span class="pre">local</span></code> 声明特定功能的变量。声明和赋值应该在不同行。</p>
+</div>
+<p>使用 <code class="docutils literal"><span class="pre">local</span></code> 来声明局部变量以确保其只在函数内部和子函数中可见。这避免了污染全局命名空间和不经意间设置可能具有函数之外重要性的变量。</p>
+<p>当赋值的值由命令替换提供时，声明和赋值必须分开。因为内建的 <code class="docutils literal"><span class="pre">local</span></code> 不会从命令替换中传递退出码。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>my_func2<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+
+  <span class="c1"># Separate lines for declaration and assignment:</span>
+  <span class="nb">local</span> my_var
+  <span class="nv">my_var</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>my_func<span class="k">)</span><span class="s2">&quot;</span> <span class="o">||</span> <span class="k">return</span>
+
+  <span class="c1"># DO NOT do this: $? contains the exit code of &#39;local&#39;, not my_func</span>
+  <span class="nb">local</span> <span class="nv">my_var</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>my_func<span class="k">)</span><span class="s2">&quot;</span>
+  <span class="o">[[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]]</span> <span class="o">||</span> <span class="k">return</span>
+
+  ...
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>函数位置</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">将文件中所有的函数一起放在常量下面。不要在函数之间隐藏可执行代码。</p>
+</div>
+<p>如果你有函数，请将他们一起放在文件头部。只有includes， <code class="docutils literal"><span class="pre">set</span></code> 声明和常量设置可能在函数声明之前完成。不要在函数之间隐藏可执行代码。如果那样做，会使得代码在调试时难以跟踪并出现意想不到的讨厌结果。</p>
+</div>
+<div class="section" id="main">
+<h2>主函数main</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">对于包含至少一个其他函数的足够长的脚本，需要称为 <code class="docutils literal"><span class="pre">main</span></code> 的函数。</p>
+</div>
+<p>为了方便查找程序的开始，将主程序放入一个称为 <code class="docutils literal"><span class="pre">main</span></code> 的函数，作为最下面的函数。这使其和代码库的其余部分保持一致性，同时允许你定义更多变量为局部变量（如果主代码不是一个函数就不能这么做）。文件中最后的非注释行应该是对 <code class="docutils literal"><span class="pre">main</span></code> 函数的调用。</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>main <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>显然，对于仅仅是线性流的短脚本， <code class="docutils literal"><span class="pre">main</span></code> 是矫枉过正，因此是不需要的。</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="calling_commands.html" class="btn btn-neutral float-right" title="调用命令" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="features_and_bugs.html" class="btn btn-neutral" title="特性及错误" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

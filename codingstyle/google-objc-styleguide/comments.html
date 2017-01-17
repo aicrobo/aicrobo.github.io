@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>注释 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Objective-C 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="Cocoa 和 Objective-C 特性" href="features.html"/>
+        <link rel="prev" title="命名" href="naming.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Objective-C 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">Google Objective-C Style Guide 中文版</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spacing.html">留白和格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming.html">命名</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">注释</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">文件注释</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">版权信息及作者</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">声明部分的注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">实现部分的注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">对象所有权</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Cocoa 和 Objective-C 特性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patterns.html">Cocoa 模式</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-shell-styleguide/contents.html">Shell 风格指南 - 内容目录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Objective-C 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>注释</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-objc-styleguide/comments.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>注释</h1>
+<p>虽然写起来很痛苦，但注释是保证代码可读性的关键。下面的规则给出了你应该什么时候、在哪进行注释。记住：尽管注释很重要，但最好的代码应该自成文档。与其给类型及变量起一个晦涩难懂的名字，再为它写注释，不如直接起一个有意义的名字。</p>
+<p>当你写注释的时候，记得你是在给你的听众写，即下一个需要阅读你所写代码的贡献者。大方一点，下一个读代码的人可能就是你！</p>
+<p>记住所有 C++ 风格指南里的规则在这里也同样适用，不同的之处后续会逐步指出。</p>
+<div class="section" id="id2">
+<h2>文件注释</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">每个文件的开头以文件内容的简要描述起始，紧接着是作者，最后是版权声明和/或许可证样板。</p>
+</div>
+<div class="section" id="id3">
+<h3>版权信息及作者</h3>
+<p>每个文件应该按顺序包括如下项：</p>
+<ul class="simple">
+<li>文件内容的简要描述</li>
+<li>代码作者</li>
+<li>版权信息声明（如：<code class="docutils literal"><span class="pre">Copyright</span> <span class="pre">2008</span> <span class="pre">Google</span> <span class="pre">Inc.</span></code>）</li>
+<li>必要的话，加上许可证样板。为项目选择一个合适的授权样板（例如，<code class="docutils literal"><span class="pre">Apache</span> <span class="pre">2.0,</span> <span class="pre">BSD,</span> <span class="pre">LGPL,</span> <span class="pre">GPL</span></code>）。</li>
+</ul>
+<p>如果你对其他人的原始代码作出重大的修改，请把你自己的名字添加到作者里面。当另外一个代码贡献者对文件有问题时，他需要知道怎么联系你，这十分有用。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>声明部分的注释</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">每个接口、类别以及协议应辅以注释，以描述它的目的及与整个项目的关系。</p>
+</div>
+<div class="highlight-objc"><div class="highlight"><pre><span></span><span class="c1">// A delegate for NSApplication to handle notifications about app</span>
+<span class="c1">// launch and shutdown. Owned by the main app controller.</span>
+<span class="k">@interface</span> <span class="nc">MyAppDelegate</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+<span class="k">@end</span>
+</pre></div>
+</div>
+<p>如果你已经在文件头部详细描述了接口，可以直接说明 “完整的描述请参见文件头部”，但是一定要有这部分注释。</p>
+<p>另外，公共接口的每个方法，都应该有注释来解释它的作用、参数、返回值以及其它影响。</p>
+<p>为类的线程安全性作注释，如果有的话。如果类的实例可以被多个线程访问，记得注释多线程条件下的使用规则。</p>
+</div>
+<div class="section" id="id5">
+<h2>实现部分的注释</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">使用 <code class="docutils literal"><span class="pre">|</span></code> 来引用注释中的变量名及符号名而不是使用引号。</p>
+</div>
+<p>这会避免二义性，尤其是当符号是一个常用词汇，这使用语句读起来很糟糕。例如，对于符号 <code class="docutils literal"><span class="pre">count</span></code> ：</p>
+<div class="highlight-objc"><div class="highlight"><pre><span></span><span class="c1">// Sometimes we need |count| to be less than zero.</span>
+</pre></div>
+</div>
+<p>或者当引用已经包含引号的符号：</p>
+<div class="highlight-objc"><div class="highlight"><pre><span></span><span class="c1">// Remember to call |StringWithoutSpaces(&quot;foo bar baz&quot;)|</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>对象所有权</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">当与 Objective-C 最常规的作法不同时，尽量使指针的所有权模型尽量明确。</p>
+</div>
+<p>继承自 <code class="docutils literal"><span class="pre">NSObject</span></code> 的对象的实例变量指针，通常被假定是强引用关系（retained），某些情况下也可以注释为弱引用（weak）或使用 <code class="docutils literal"><span class="pre">__weak</span></code> 生命周期限定符。同样，声明的属性如果没有被类 <code class="docutils literal"><span class="pre">retained</span></code>，必须指定是弱引用或赋予 <code class="docutils literal"><span class="pre">&#64;property</span></code> 属性。然而，Mac 软件中标记上 <code class="docutils literal"><span class="pre">IBOutlets</span></code> 的实例变量，被认为是不会被类 <code class="docutils literal"><span class="pre">retained</span></code> 的。</p>
+<p>当实例变量指向 <code class="docutils literal"><span class="pre">CoreFoundation</span></code>、C++ 或者其它非 Objective-C 对象时，不论指针是否会被 <code class="docutils literal"><span class="pre">retained</span></code>，都需要使用 <code class="docutils literal"><span class="pre">__strong</span></code> 和 <code class="docutils literal"><span class="pre">__weak</span></code> 类型修饰符明确指明。<code class="docutils literal"><span class="pre">CoreFoundation</span></code> 和其它非 Objective-C 对象指针需要显式的内存管理，即便使用了自动引用计数或垃圾回收机制。当不允许使用 <code class="docutils literal"><span class="pre">__weak</span></code> 类型修饰符（比如，使用 clang 编译时的 C++ 成员变量），应使用注释替代说明。</p>
+<p>注意：Objective-C 对象中的 C++ 对象的自动封装，缺省是不允许的，参见 <a class="reference external" href="http://chanson.livejournal.com/154253.html">这里</a> 的说明。</p>
+<p>强引用及弱引用声明的例子：</p>
+<div class="highlight-objc"><div class="highlight"><pre><span></span><span class="k">@interface</span> <span class="nc">MyDelegate</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+ <span class="k">@private</span>
+  <span class="kt">IBOutlet</span> <span class="n">NSButton</span> <span class="o">*</span><span class="n">okButton_</span><span class="p">;</span>  <span class="c1">// normal NSControl; implicitly weak on Mac only</span>
+
+  <span class="n">AnObjcObject</span><span class="o">*</span> <span class="n">doohickey_</span><span class="p">;</span>  <span class="c1">// my doohickey</span>
+  <span class="k">__weak</span> <span class="n">MyObjcParent</span> <span class="o">*</span><span class="n">parent_</span><span class="p">;</span>  <span class="c1">// so we can send msgs back (owns me)</span>
+
+  <span class="c1">// non-NSObject pointers...</span>
+  <span class="k">__strong</span> <span class="n">CWackyCPPClass</span> <span class="o">*</span><span class="n">wacky_</span><span class="p">;</span>  <span class="c1">// some cross-platform object</span>
+  <span class="k">__strong</span> <span class="n">CFDictionaryRef</span> <span class="o">*</span><span class="n">dict_</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">strong</span><span class="p">,</span> <span class="k">nonatomic</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">doohickey</span><span class="p">;</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">weak</span><span class="p">,</span> <span class="k">nonatomic</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span>
+<span class="k">@end</span>
+</pre></div>
+</div>
+<p>（译注：强引用 - 对象被类 <code class="docutils literal"><span class="pre">retained</span></code>。弱引用 - 对象没有被类 <code class="docutils literal"><span class="pre">retained</span></code>，如委托）</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="features.html" class="btn btn-neutral float-right" title="Cocoa 和 Objective-C 特性" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="naming.html" class="btn btn-neutral" title="命名" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

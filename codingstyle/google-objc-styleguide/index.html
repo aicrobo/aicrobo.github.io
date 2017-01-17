@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Google Objective-C Style Guide 中文版 &mdash; Google 开源项目风格指南</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Google 开源项目风格指南" href="../index.html"/>
+        <link rel="up" title="Objective-C 风格指南 - 内容目录" href="contents.html"/>
+        <link rel="next" title="留白和格式" href="spacing.html"/>
+        <link rel="prev" title="Objective-C 风格指南 - 内容目录" href="contents.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../contents.html" class="icon icon-home"> Google 开源项目风格指南
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../google-cpp-styleguide/contents.html">C++ 风格指南 - 内容目录</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Objective-C 风格指南 - 内容目录</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Google Objective-C Style Guide 中文版</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">译者的话</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ewanke">ewanke</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Yang.Y</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">背景介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">例子</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spacing.html">留白和格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming.html">命名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comments.html">注释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Cocoa 和 Objective-C 特性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patterns.html">Cocoa 模式</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../google-python-styleguide/contents.html">Python 风格指南 - 内容目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../google-shell-styleguide/contents.html">Shell 风格指南 - 内容目录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../contents.html">Google 开源项目风格指南</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../contents.html">Docs</a> &raquo;</li>
+      
+          <li><a href="contents.html">Objective-C 风格指南 - 内容目录</a> &raquo;</li>
+      
+    <li>Google Objective-C Style Guide 中文版</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/google-objc-styleguide/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="google-objective-c-style-guide">
+<h1>Google Objective-C Style Guide 中文版</h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">版本:</th><td class="field-body"><p class="first">2.36</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">原作者:</th><td class="field-body"><div class="first line-block">
+<div class="line">Mike Pinkerton</div>
+<div class="line">Greg Miller</div>
+<div class="line">Dave MacLachlan</div>
+</div>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">翻译:</th><td class="field-body"><div class="first line-block">
+<div class="line"><a class="reference external" href="http://ke.indiebros.com/">ewangke</a></div>
+<div class="line"><a class="reference external" href="https://github.com/yangyubo">Yang.Y</a></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">项目主页:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://google-styleguide.googlecode.com">Google Style Guide</a></li>
+<li><a class="reference external" href="http://github.com/zh-google-styleguide/zh-google-styleguide">Google 开源项目风格指南 - 中文版</a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h2>译者的话</h2>
+<div class="section" id="ewanke">
+<h3>ewanke</h3>
+<p>一直想翻译这个 <a class="reference external" href="http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml">style guide</a> ，终于在周末花了7个小时的时间用vim敲出了HTML。很多术语的翻译很难，平时看的中文技术类书籍有限，对很多术语的中文译法不是很清楚，难免有不恰当之处，请读者指出并帮我改进：王轲 ”ewangke at gmail.com” 2011.03.27</p>
+</div>
+<div class="section" id="id2">
+<h3>Yang.Y</h3>
+<p>对 Objective-C 的了解有限，凭着感觉和 C/C++ 方面的理解：</p>
+<ul class="simple">
+<li>把指南更新到 2.36 版本</li>
+<li>调整了一些术语和句子</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>背景介绍</h2>
+<p>Objective-C 是 C 语言的扩展，增加了动态类型和面对对象的特性。它被设计成具有易读易用的，支持复杂的面向对象设计的编程语言。它是 Mac OS X 以及 iPhone 的主要开发语言。</p>
+<p>Cocoa 是 Mac OS X 上主要的应用程序框架之一。它由一组 Objective-C 类组成，为快速开发出功能齐全的 Mac OS X 应用程序提供支持。</p>
+<p>苹果公司已经有一份非常全面的 Objective-C 编码指南。Google 为 C++ 也写了一份类似的编码指南。而这份 Objective-C 指南则是苹果和 Google 常规建议的最佳结合。因此，在阅读本指南之前，请确定你已经阅读过：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://developer.apple.com/documentation/Cocoa/Conceptual/CodingGuidelines/index.html">Apple’s Cocoa Coding Guidelines</a></li>
+<li><a class="reference external" href="http://codinn.com/projects/google-cpp-styleguide/">Google’s Open Source C++ Style Guide</a></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有在 Google 的 C++ 风格指南中所禁止的事情，如未明确说明，也同样不能在Objective-C++ 中使用。</p>
+</div>
+<p>本文档的目的在于为所有的 Mac OS X 的代码提供编码指南及实践。许多准则是在实际的项目和小组中经过长期的演化、验证的。Google 开发的开源项目遵从本指南的要求。</p>
+<p>Google 已经发布了遵守本指南开源代码，它们属于 <a class="reference external" href="http://code.google.com/p/google-toolbox-for-mac/">Google Toolbox for Mac project</a> 项目（本文以缩写 GTM 指代）。GTM 代码库中的代码通常为了可以在不同项目中复用。</p>
+<p>注意，本指南不是 Objective-C 教程。我们假定读者对 Objective-C 非常熟悉。如果你刚刚接触 Objective-C 或者需要温习，请阅读 <a class="reference external" href="http://developer.apple.com/documentation/Cocoa/Conceptual/ObjectiveC/index.html">The Objective-C Programming Language</a> 。</p>
+</div>
+<div class="section" id="id4">
+<h2>例子</h2>
+<p>都说一个例子顶上一千句话，我们就从一个例子开始，来感受一下编码的风格、留白以及命名等等。</p>
+<p>一个头文件的例子，展示了在 <code class="docutils literal"><span class="pre">&#64;interface</span></code> 声明中如何进行正确的注释以及留白。</p>
+<div class="highlight-objc"><div class="highlight"><pre><span></span><span class="c1">//  Foo.h</span>
+<span class="c1">//  AwesomeProject</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Greg Miller on 6/13/08.</span>
+<span class="c1">//  Copyright 2008 Google, Inc. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="c1">// A sample class demonstrating good Objective-C style. All interfaces,</span>
+<span class="c1">// categories, and protocols (read: all top-level declarations in a header)</span>
+<span class="c1">// MUST be commented. Comments must also be adjacent to the object they&#39;re</span>
+<span class="c1">// documenting.</span>
+<span class="c1">//</span>
+<span class="c1">// (no blank line between this comment and the interface)</span>
+<span class="k">@interface</span> <span class="nc">Foo</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+ <span class="k">@private</span>
+  <span class="bp">NSString</span> <span class="o">*</span><span class="n">bar_</span><span class="p">;</span>
+  <span class="bp">NSString</span> <span class="o">*</span><span class="n">bam_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns an autoreleased instance of Foo. See -initWithBar: for details</span>
+<span class="c1">// about |bar|.</span>
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">fooWithBar:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">bar</span><span class="p">;</span>
+
+<span class="c1">// Designated initializer. |bar| is a thing that represents a thing that</span>
+<span class="c1">// does a thing.</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithBar:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">bar</span><span class="p">;</span>
+
+<span class="c1">// Gets and sets |bar_|.</span>
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">bar</span><span class="p">;</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBar:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">bar</span><span class="p">;</span>
+
+<span class="c1">// Does some work with |blah| and returns YES if the work was completed</span>
+<span class="c1">// successfully, and NO otherwise.</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">doWorkWithBlah:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">blah</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</pre></div>
+</div>
+<p>一个源文件的例子，展示了 <code class="docutils literal"><span class="pre">&#64;implementation</span></code> 部分如何进行正确的注释、留白。同时也包括了基于引用实现的一些重要方法，如 <code class="docutils literal"><span class="pre">getters</span></code> 、 <code class="docutils literal"><span class="pre">setters</span></code> 、 <code class="docutils literal"><span class="pre">init</span></code> 以及 <code class="docutils literal"><span class="pre">dealloc</span></code> 。</p>
+<div class="highlight-objc"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">//  Foo.m</span>
+<span class="c1">//  AwesomeProject</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Greg Miller on 6/13/08.</span>
+<span class="c1">//  Copyright 2008 Google, Inc. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;Foo.h&quot;</span>
+
+
+<span class="k">@implementation</span> <span class="nc">Foo</span>
+
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">fooWithBar:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">bar</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBar</span><span class="p">:</span><span class="n">bar</span><span class="p">]</span> <span class="n">autorelease</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Must always override super&#39;s designated initializer.</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="nl">initWithBar</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithBar:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">bar</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="n">bar_</span> <span class="o">=</span> <span class="p">[</span><span class="n">bar</span> <span class="k">copy</span><span class="p">];</span>
+    <span class="n">bam_</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat</span><span class="p">:</span><span class="s">@&quot;hi %d&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span> <span class="p">{</span>
+  <span class="p">[</span><span class="n">bar_</span> <span class="k">release</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">bam_</span> <span class="k">release</span><span class="p">];</span>
+  <span class="p">[</span><span class="nb">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">bar</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">bar_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBar:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">bar</span> <span class="p">{</span>
+  <span class="p">[</span><span class="n">bar_</span> <span class="n">autorelease</span><span class="p">];</span>
+  <span class="n">bar_</span> <span class="o">=</span> <span class="p">[</span><span class="n">bar</span> <span class="k">copy</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">doWorkWithBlah:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">blah</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">return</span> <span class="nb">NO</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</pre></div>
+</div>
+<p>不要求在 <code class="docutils literal"><span class="pre">&#64;interface</span></code>、<code class="docutils literal"><span class="pre">&#64;implementation</span></code> 和 <code class="docutils literal"><span class="pre">&#64;end</span></code> 前后空行。如果你在 <code class="docutils literal"><span class="pre">&#64;interface</span></code> 声明了实例变量，则须在关括号 <code class="docutils literal"><span class="pre">}</span></code> 之后空一行。</p>
+<p>除非接口和实现非常短，比如少量的私有方法或桥接类，空行方有助于可读性。</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spacing.html" class="btn btn-neutral float-right" title="留白和格式" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral" title="Objective-C 风格指南 - 内容目录" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright .
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
